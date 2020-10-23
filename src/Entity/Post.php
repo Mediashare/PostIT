@@ -100,7 +100,7 @@ class Post
         $markdown = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $markdown);
         $markdown = preg_replace('#<script(.*?)>(.*?)</script(.*?)>#is', '', $markdown);
         $markdown = preg_replace('/<script\b[^>]*>/is', "", $markdown);
-        $markdown = \htmlspecialchars_decode($markdown);
+        // $markdown = \htmlspecialchars_decode($markdown);
         return $markdown ?? '';
     }
 
