@@ -13,10 +13,9 @@
     <script>
         markdownify('.markdownify');
         function markdownify(selector) {
-            var content = $(selector).html();
+            var content = $(selector).text();
             $.post('{{ path("markdownify") }}', {content: content}, function (data) {
                 $(selector).html(data);
-                console.log(data);
                 document.querySelectorAll('.markdownify pre code').forEach((block) => {
                     hljs.highlightBlock(block);
                 });
