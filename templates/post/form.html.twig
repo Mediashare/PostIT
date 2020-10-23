@@ -10,14 +10,14 @@
             </div>
             <div class="col-lg-3 p-0">
                 <div class="float-left w-50 border-top">
-                    <a class="btn btn-cancel" title="Cancel"
+                    <a tabindex="-1" class="btn btn-cancel" title="Cancel"
                         {% if post is defined %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
                     >
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
                 <div class="float-right w-50 border-top">
-                    <button form="post_form" type="submit" class="btn btn-submit" title="Submit">
+                    <button tabindex="-1" form="post_form" type="submit" class="btn btn-submit" title="Submit">
                         <i class="fa fa-check"></i>
                     </button>
                 </div>
