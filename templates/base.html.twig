@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {# SEO #}
+        <title>{% block title %}Mediashare{% endblock %}</title>
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="{% block description %}Publish your article and share it with your friends and family.{% endblock %}">
+        <meta name="author" content="{% block author %}Mediashare{% endblock %}">
+        {# SEO OG:* #}
+        <meta property="og:title" content="{% block title_og %}Mediashare{% endblock %}">
+        <meta property="og:description" content="{% block description_og %}Publish your article and share it with your friends and family.{% endblock %}">
+        <meta property="og:type" content="{% block type_og %}article{% endblock %}">
+        <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
+        
+        {# Css #}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/retro.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/highlight.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        {% block stylesheets %}{% endblock %}
+        
+        {# Javascripts #}
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/highlight.min.js') }}"></script>
+        <script src="https://kit.fontawesome.com/15a8f6574f.js" crossorigin="anonymous"></script>
+        
+        <link rel="icon" href="{{ asset('image/favicon.ico') }}">
+    </head>
+    <body>
+        <div class="container-fluid">
+            {% if app.request.get('_route') != 'post_new' and app.request.get('_route') != 'post_edit' %}
+                <div class="row">
+                    <div id="content" class="col-lg-9 p-0 shadow-lg rounded">
+                        {% include '_flash.html.twig' %}
+                        {% block content %}{% endblock %}
+                        {% block comments %}{% endblock %}
+                    </div>
+                    <div class="col-lg-3 p-0">
+                        {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null})) }}
+                    </div>
+                </div>
+            {% else %}
+                {% include '_flash.html.twig' %}
+                {% block editor %}{% endblock %}
+            {% endif %}
+        </div>
+        <script>
+            {# HighLight Synthax #}
+            document.querySelectorAll('.markdown-body pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        </script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

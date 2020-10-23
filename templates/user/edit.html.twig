@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.user.username }}{% endblock %}
+
+{% block content %}
+    <div class="row m-1">
+        <div class="col-lg-6 mt-1">
+            <div class="card bg-main shadow">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        Edit Profile
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <form id="edit_profile" method="POST">
+                        <div class="form-group">
+                            <label for="inputUsername">Username</label>
+                            <input type="text" value="{{ app.user.username }}" name="username" id="inputUsername" class="form-control border" required>    
+                        </div>
+                            <div class="form-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" value="{{ app.user.email }}" name="email" id="inputEmail" class="form-control border" required>    
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control border" minlength="6">    
+                        </div>
+                            <div class="form-group">
+                            <label for="inputPasswordRepeat">Repeat Password</label>
+                            <input type="password" name="passwordRepeat" id="inputPasswordRepeat" class="form-control border" minlength="6">    
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button form="edit_profile" class="btn btn-lg btn-primary" type="submit">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 mt-1">
+            <div class="card bg-main shadow">
+                <div class="card-header">
+                    <h2 class="card-title">
+                        ApiKey
+                    </h2>
+                </div>
+                <div class="card-body">
+                    <p>
+                        You can use Http API with your <code>ApiKey</code> to sign the publication.
+                    </p>
+                    <input type="text" value="{{ app.user.apikey }}" id="inputApikey" class="form-control border" readonly>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('profile_apikey_reset') }}" class="btn btn-lg btn-primary float-right">
+                        Reset
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var password = $('form#edit_profile input#inputPassword');
+            passwordRepeat = $('form#edit_profile input#inputPasswordRepeat');
+
+        password.on('change', function () {
+            if (password.val().length > 0) {
+                password.attr('required', 'true');
+                passwordRepeat.attr('required', 'true');
+            } else if (passwordRepeat.val().length < 1) {
+                password.removeAttr('required');
+                passwordRepeat.removeAttr('required');
+            }        
+        });
+        passwordRepeat.on('change', function () {
+            console.log(passwordRepeat.val().length);
+            if (passwordRepeat.val().length > 0) {
+                passwordRepeat.attr('required', 'true');
+                password.attr('required', 'true');
+            } else if (password.val().length < 1) {
+                password.removeAttr('required');
+                passwordRepeat.removeAttr('required');
+            } 
+        });
+    </script>
+{% endblock %}

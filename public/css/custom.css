@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --main-bg-color: #5e5b6c;
+    --main-text-color: #cac4c4;
+    --main-link-color: #3b97ff;
+}
+html, body {
+    font-family: 'Recursive';
+}
+body {
+    height: 100vh;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    word-wrap: normal;
+}
+strong {
+    color: white;
+}
+/* Macro */
+.d-none {
+    display: none!important;
+}
+.h-100 {
+    height: 100vh!important;
+}
+.bg-info {
+    color: white;
+}
+.bg-main {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+}
+.border-top {
+    border-top: 1px solid #4d4184 !important;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 22px 22px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+div#content {
+    height: 100vh;
+    overflow: auto;
+}
+.markdown-body {
+    /* height: 100vh; */
+    overflow: auto;
+    padding: 1rem;
+}
+input {
+    background-color: var(--main-bg-color)!important;
+    border-color: var(--main-bg-color)!important;
+    color: var(--main-text-color)!important;
+    height: 50px!important;
+    font-size: 2.5em!important;
+    padding-left: 1rem!important;
+    padding-right: 1rem!important;
+}
+
+/* New Post Creation */
+.btn-trash {
+    background-color: var(--main-bg-color);
+    color: #face0a;
+    width: 100%;
+    padding: 12px;
+}
+.btn-cancel {
+    background-color: var(--main-bg-color);
+    color: #d94d23;
+    width: 100%;
+    padding: 12px;
+}
+.btn-submit {
+    background-color: var(--main-bg-color);
+    color: #0aff0a;
+    width: 100%;
+    padding: 12px;
+}
+.btn-comment {
+    background-color: var(--main-bg-color);
+    padding: 15px;
+}
+.btn-trash:hover {
+    color: #face0a;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+.btn-cancel:hover {
+    color: #ff3c00;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+.btn-submit:hover {
+    color: #0aff0a;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+.btn-comment:hover {
+    background-color: #877ac1;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    #content {
+        max-width: 100vw!important;
+    }
+}

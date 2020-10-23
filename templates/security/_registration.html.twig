@@ -1,0 +1,10 @@
+{% for flashError in app.flashes('verify_email_error') %}
+    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+{% endfor %}
+{{ form_start(registrationForm, {'attr': {'action': path('register'), 'id': 'form_registration'}}) }}
+    {{ form_row(registrationForm.username) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.plainPassword, {
+        label: 'Password'
+    }) }}
+{{ form_end(registrationForm) }}

@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+    nginx:
+        container_name: nginx
+        image: nginx:1.19.0-alpine
+        restart: on-failure
+        volumes:
+            - ./:/var/www/project
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./var/log/nginx:/var/log/nginx
+        ports:
+            - '80:80' 
+        depends_on:
+            - php
+
+    php:
+        container_name: php
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        volumes: 
+            - ./:/var/www/project
+        restart: on-failure
+        env_file:
+            - .env
+        user: 1000:1000
+        

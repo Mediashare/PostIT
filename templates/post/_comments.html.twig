@@ -1,0 +1,35 @@
+<div class="col-12 p-0">
+    <div class="card bg-main text-right">
+        <div class="card-header">
+            <h4 class="card-title m-0">Comments</h4>
+        </div>
+        <div class="card-content shadow-lg">
+            {% if app.user %}
+                <form action="{{ path('comment', {'slug': post.slug}) }}" method="POST" class="d-flex">
+                    <button type="submit" class="btn-comment list-group-item bg-main post_link d-flex float-left text-center text-white" title="Search">
+                        <i class="fa fa-send"></i>
+                    </button>
+                    <input type="text" name="comment" id="input_comment" class="form-control bg-main d-flex float-right" placeholder="Comment..." required>
+                </form>
+            {% else %}
+                <p class="lead m-1">
+                    You must <a href="{{ path('account') }}" title="Login page">login</a> to send a comment.
+                </p>
+            {% endif %}
+        </div>
+        <div class="card-content">
+            <ul class="list-group text-right bg-main">
+                {% for comment in post.comments %}
+                    <li id="comment_{{ comment.id }} {% if loop.index == 1 %}last_comment{% endif %}" class="list-group-item bg-main"> 
+                        <strong>{{ comment.content }}</strong> 
+                        <br>
+                        <span class="float-right">
+                            {% if app.user and (app.user == comment.author or app.user.isAdmin) %}<a href="{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}" class="text-danger">Delete</a> |{% endif %}
+                            <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - <span class="text-info">{{ comment.author.username }}</span>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

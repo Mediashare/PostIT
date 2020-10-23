@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block title_og %}{{ post.title }}{% endblock %}
+{% block description %}{{ post.markdown|striptags|slice(0.156) }}...{% endblock %}
+{% block description_og %}{{ post.markdown|striptags|slice(0.156) }}...{% endblock %}
+{% block type_og %}article{% endblock %}
+{% block author %}{{ post.author ?? 'Anonyme' }}{% endblock %}
+{% block author_og %}{{ post.author ?? 'Anonyme' }}{% endblock %}
+
+{% block content %}
+    {% include 'post/_content.html.twig' %}
+{% endblock %}
+{% block comments %}
+    {% include 'post/_comments.html.twig' %}
+{% endblock %}

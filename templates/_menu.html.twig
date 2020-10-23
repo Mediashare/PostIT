@@ -1,0 +1,127 @@
+<div id="menu_header" class="d-lg-flex bg-main shadow-lg rounded">
+    <a href="{{ path('index') }}" class="list-group-item bg-main post_link float-left text-center text-primary {% if request.get('_route') == 'index' %}active{% endif %}" title="Homepage">
+        <i class="fa fa-home"></i>
+    </a>
+    <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="New Post">
+        <i class="fa fa-plus"></i>
+    </a>
+    <a onclick="searchDisplay();" class="btn-search list-group-item bg-main post_link float-left text-center text-white" title="Search">
+        <i class="fa fa-search"></i>
+    </a>
+    {% if app.user is defined and app.user %}
+        <a href="{{ path('profile', {'username': app.user.username}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+            <i class="fa fa-user"></i>
+        </a>
+        {% if app.user.isAdmin %}
+            <a href="{{ path('admin') }}" class="list-group-item bg-main post_link float-left text-center bg-info text-white {% if request.get('_route') == 'admin' %}active{% endif %}" title="Administration">
+                <i class="fa fa-cogs"></i>
+            </a>
+        {% endif %}
+        <a href="{{ path('logout') }}" class="list-group-item bg-main post_link float-left text-center text-danger" title="Logout">
+            <i class="fa fa-sign-out-alt"></i>
+        </a>
+    {% else %}
+        <a href="{{ path('account') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'account' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+            <i class="fa fa-user"></i>
+        </a>
+    {% endif %}
+</div>
+<ul id="menu" class="list-group text-right bg-main">
+    {% for post in posts %}
+        <a name="{{ post.slug }}" href="{{ path('post', {'slug': post.slug}) }}" class="list-group-item bg-main post_link {% if currentPost == post %}active{% endif %}" title="{{ post.title }}"> 
+            <strong>{{ post.title }}</strong> 
+            <br>
+            <span class="float-right">
+                <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em> - {% if post.author %}<span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
+            </span>
+        </a>
+    {% endfor %}
+</ul>
+<div id="menu_footer" class="d-lg-flex bg-main shadow-lg rounded">
+    <div id="menu_actions" class="">
+        {% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}
+            <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning {% if request.get('_route') == 'post_edit' %}active{% endif %}" title="Edit Post">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a href="{{ path('post_delete', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-danger" title="Delete Post">
+                <i class="fa fa-trash"></i>
+            </a>
+        {% endif %}
+        {% if app.user and request.get('_route') starts with 'profile' %}
+            <a href="{{ path('profile_edit', {'username': app.user.username}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+                <i class="fa fa-user-cog"></i>
+            </a>
+        {% endif %}
+    </div>
+    <div id="menu_search" class="d-none w-100" data-displayed="false">
+         <input type="text" id="input_search" class="form-control bg-main" onkeyup="search()" placeholder="Search...">
+    </div>
+</div>
+{# Responsive #}
+<button class="btn btn-burger btn-burger-open btn-xl btn-circle bg-white" onclick="openMenuBurger();">
+    <i class="fa fa-hamburger"></i>
+</button>
+<button class="btn btn-burger btn-burger-close btn-xl btn-circle bg-white d-none" onclick="closeMenuBurger();">
+    <i class="fa fa-times"></i>
+</button>
+<script>
+    function searchDisplay() {
+        var input = $('#menu_search');
+        if (input.attr('data-displayed') == "true") {
+            input.attr('data-displayed', "false").addClass('d-none');
+            $('#menu_actions').attr('data-displayed', "true").removeClass('d-none');
+            $('.btn-search').removeClass('active');
+            input.find('input').val('');
+            search();
+        } else {
+            $('.btn-search').addClass('active');
+            input.attr('data-displayed', "true").removeClass('d-none');
+            input.find('input').focus();
+            $('#menu_actions').attr('data-displayed', "false").addClass('d-none');
+        }
+    }
+    function search() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('input_search');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("menu");
+        link = ul.getElementsByTagName('a');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < link.length; i++) {
+            txtValue = link[i].textContent || link[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                link[i].style.display = "";
+            } else {
+                link[i].style.display = "none";
+            }
+        }
+    }
+    function openMenuBurger() {
+        $('div#menu_header').css('display', 'flex');
+        $('div#menu_header').removeClass('d-none');
+        $('div#menu_footer').css('display', 'flex');
+        $('div#menu_footer').removeClass('d-none');
+        $('ul#menu').css('display', 'flex');
+        $('ul#menu').removeClass('d-none');
+        $('button.btn-burger-open').addClass('d-none');
+        $('button.btn-burger-close').removeClass('d-none');
+    }
+    function closeMenuBurger() {
+        $('div#menu_header').removeClass('d-flex');
+        $('div#menu_header').css('display', 'none');
+        $('div#menu_footer').removeClass('d-flex');
+        $('div#menu_footer').css('display', 'none');
+        $('ul#menu').addClass('d-none');
+        $('button.btn-burger-close').addClass('d-none');
+        $('button.btn-burger-open').removeClass('d-none');
+    }
+    function scrollToAnchor(aid){
+        var aTag = $("a[name='"+ aid +"']");
+        $('ul#menu').animate({scrollTop: aTag.offset().top - 50},'slow');
+    }
+    {% if currentPost.slug is defined %}
+        scrollToAnchor('{{ currentPost.slug }}');
+    {% endif %}
+</script>

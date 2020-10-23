@@ -1,0 +1,27 @@
+<form id="form_login" action="{{ path('account') }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user is defined and app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control border" required autofocus>    
+    </div>
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control border" required>
+        <small><a href="{{ path('account_password_forget') }}">Password forget?</a></small>
+    </div>
+    <div class="checkbox mb-3 float-right">
+        <label>
+            <input type="checkbox" name="_remember_me" style="height: auto !important;"> Remember me
+        </label>
+    </div>
+</form>
