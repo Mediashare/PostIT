@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="{{ preload(asset('image/favicon.ico')) }}">
+        <link rel="icon" href="{{ preload(asset('image/favicon.ico'), { as: 'image' }) }}">
         {# SEO #}
         <title>{% block title %}Mediashare{% endblock %}</title>
         <meta name="robots" content="index, follow">
@@ -16,18 +16,18 @@
         
         {# Css #}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ preload(asset('css/bootstrap.min.css')) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/menu.css')) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/retro.css')) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/highlight.min.css')) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/custom.css')) }}">
+        <link rel="stylesheet" href="{{ preload(asset('css/bootstrap.min.css'), { as: 'style' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('css/menu.css'), { as: 'style' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('css/retro.css'), { as: 'style' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('css/highlight.min.css'), { as: 'style' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('css/custom.css'), { as: 'style' }) }}">
         {% block stylesheets %}{% endblock %}
         
         {# Javascripts #}
-        <script src="{{ preload('https://code.jquery.com/jquery-2.2.4.min.js')}}" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-        <script src="{{ preload(asset('js/bootstrap.min.js')) }}"></script>
-        <script src="{{ preload(asset('js/highlight.min.js')) }}"></script>
-        <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js')}}" crossorigin="anonymous"></script>
+        <script src="{{ preload('https://code.jquery.com/jquery-2.2.4.min.js', { as: 'script' }) }}" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="{{ preload(asset('js/bootstrap.min.js'), { as: 'script' }) }}"></script>
+        <script src="{{ preload(asset('js/highlight.min.js'), { as: 'script' }) }}"></script>
+        <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js', { as: 'worker' }) }}" crossorigin="anonymous"></script>
         
         {# Google Analytics #}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>

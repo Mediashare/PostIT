@@ -1,18 +1,18 @@
 {# Dependencies #}
-<script src="{{ preload(asset('codemirror/lib/codemirror.js')) }}"></script>
-<link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css')) }}">
-<script src="{{ preload(asset('codemirror/mode/markdown/markdown.js')) }}"></script>
+<script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script' }) }}"></script>
+<link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
+<script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
 
 {# AutoCompletion #}
-<script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/addon/hint/css-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/addon/hint/html-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/addon/hint/javascript-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/addon/hint/show-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js')) }}"></script>
-<script src="{{ preload(asset('codemirror/keymap/sublime.js')) }}"></script>
-<link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css')) }}">
+<script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/addon/hint/html-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/addon/hint/javascript-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/addon/hint/show-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
+<script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
+<link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
 
 <div id="codemirror" class="shadow-lg rounded"></div>
 <textarea name="content" id="content_mirror" class="d-none" required></textarea>
