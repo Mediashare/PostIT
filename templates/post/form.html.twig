@@ -36,6 +36,8 @@
 
 {% block javascripts %}
     <script>
+        {# TextArea Macro #}
+        $('#post_content').height('calc(100vh - 51px)');
         $(window).bind('keydown', function(event) {
             if (event.ctrlKey || event.metaKey) {
                 switch (String.fromCharCode(event.which).toLowerCase()) {

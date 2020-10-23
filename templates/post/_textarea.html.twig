@@ -27,7 +27,7 @@
             extraKeys: {"Ctrl-Space": "autocomplete"},
             keyMap: "sublime"
     });
-    myCodeMirror.setSize('100%', '100vh');
+    myCodeMirror.setSize('100%', 'calc(100vh - 51px)');
     $('textarea#content_mirror').val(myCodeMirror.getValue());
 
     refreshPreview(myCodeMirror.getValue());
