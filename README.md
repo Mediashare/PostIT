@@ -1,4 +1,3 @@
-
 # Welcome to Mediashare
 
 <blockquote>
@@ -23,5 +22,5 @@ bin/console doctrine:schema:update --force # Create database and tables
 
 ```bash
 echo "# LoremIpsum is beautiful" > LoremIpsum.md
-curl {% if app.user is defined and app.user %}-H "ApiKey: {{ app.user.apikey }}"{% endif %} -F "title=Lorem Ipsum" -F "content=@./LoremIpsum.md" {{ url('upload') }}
+curl -F "title=Lorem Ipsum" -F "content=@./LoremIpsum.md" {{ url('upload') }}
 ```
