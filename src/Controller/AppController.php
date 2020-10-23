@@ -13,7 +13,9 @@ class AppController extends AbstractController
      * @Route("/", name="index")
      */
     public function index() {
-        return $this->render('app/index.html.twig');
+        $content = new Post();
+        $content->setContent($this->render('app/_content.md.twig')->getContent());
+        return $this->render('app/index.html.twig', ['content' => $content->getMarkdown()]);
     }
 
     public function menu(Request $request, ?Post $post) {

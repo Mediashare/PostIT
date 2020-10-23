@@ -1,25 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Mediashare{% endblock %}
-{% block description %}Publish your article and share it with your friends and family.{% endblock %}
+{% block description %}Publish your article and share it with your audience.{% endblock %}
 
 {% block content %}
     <div class="col-12 markdownify markdown-body shadow-lg rounded">
-        {% include 'app/_content.md.twig' %}
+        {# {% include 'app/_content.md.twig' %} #}
+        {{ content|raw }}
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    <script>
-        markdownify('.markdownify');
-        function markdownify(selector) {
-            var content = $(selector).text();
-            $.post('{{ path("markdownify") }}', {content: content}, function (data) {
-                $(selector).html(data);
-                document.querySelectorAll('.markdownify pre code').forEach((block) => {
-                    hljs.highlightBlock(block);
-                });
-            });
-        }
-    </script>
 {% endblock %}
