@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="icon" href="{{ asset('image/favicon.ico') }}">
         {# SEO #}
         <title>{% block title %}Mediashare{% endblock %}</title>
         <meta name="robots" content="index, follow">
@@ -28,7 +29,15 @@
         <script src="{{ asset('js/highlight.min.js') }}"></script>
         <script src="https://kit.fontawesome.com/15a8f6574f.js" crossorigin="anonymous"></script>
         
-        <link rel="icon" href="{{ asset('image/favicon.ico') }}">
+        {# Google Analytics #}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-101987237-1');
+        </script>
+
     </head>
     <body>
         <div class="container-fluid">
