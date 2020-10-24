@@ -67,6 +67,16 @@ class User implements UserInterface
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $signature;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $avatar;
+
     public function __toString(): string {
         return $this->getUsername() ?? 'Anonyme';
     }
@@ -268,6 +278,33 @@ class User implements UserInterface
                 $comment->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSignature(): ?string
+    {
+        return $this->signature;
+    }
+
+    public function setSignature(?string $signature): self
+    {
+        $this->signature = $signature;
+
+        return $this;
+    }
+
+    public function getAvatar()
+    {
+        if (!$this->avatar):
+            return 'https://eu.ui-avatars.com/api/?size=120&bold=true&color=cac4c4&background=4d4184&name='.\urlencode($this->getUsername());
+        endif;
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

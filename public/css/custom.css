@@ -60,7 +60,7 @@ div#content {
     overflow: auto;
     padding: 1rem;
 }
-input {
+input, textarea {
     background-color: var(--main-bg-color)!important;
     border-color: var(--main-bg-color)!important;
     color: var(--main-text-color)!important;
@@ -68,6 +68,10 @@ input {
     font-size: 2.5em!important;
     padding-left: 1rem!important;
     padding-right: 1rem!important;
+}
+textarea {
+    font-size: 1.5em!important;
+    height: auto!important;
 }
 
 /* New Post Creation */
@@ -108,6 +112,19 @@ input {
 .btn-comment:hover {
     background-color: #877ac1;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* Avatar */
+.avatar {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+
+.avatar_min {
+    border-radius: 50%;
+    width: 50px!important;
+    height: 50px!important;
 }
 
 /* Responsive */

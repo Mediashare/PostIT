@@ -32,7 +32,7 @@
             <strong>{{ post.title }}</strong> 
             <br>
             <span class="float-right">
-                <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em> - {% if post.author %}<span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
+                <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em>{% if post.author %} - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
             </span>
         </a>
     {% endfor %}
@@ -40,7 +40,7 @@
 <div id="menu_footer" class="d-lg-flex bg-main shadow-lg rounded">
     <div id="menu_actions" class="">
         {% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}
-            <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning {% if request.get('_route') == 'post_edit' %}active{% endif %}" title="Edit Post">
+            <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Post">
                 <i class="fa fa-edit"></i>
             </a>
             <a href="{{ path('post_delete', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-danger" title="Delete Post">

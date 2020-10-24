@@ -22,6 +22,7 @@
                 {% for comment in post.comments %}
                     <li id="comment_{{ comment.id }} {% if loop.index == 1 %}last_comment{% endif %}" class="list-group-item bg-main"> 
                         <strong>{{ comment.content }}</strong> 
+                        <img src="{{ asset('images/avatars/' ~ post.author.avatar) }}" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px">
                         <br>
                         <span class="float-right">
                             {% if app.user and (app.user == comment.author or app.user.isAdmin) %}<a href="{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}" class="text-danger">Delete</a> |{% endif %}

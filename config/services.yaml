@@ -6,6 +6,7 @@
 parameters:
     mailer.from: '%env(resolve:MAILER_FROM)%'
     mailer.from_name: '%env(resolve:MAILER_FROM_NAME)%'
+    avatars_directory: '%kernel.project_dir%/public/images/avatars'
 services:
     # default configuration for services in *this* file
     _defaults:

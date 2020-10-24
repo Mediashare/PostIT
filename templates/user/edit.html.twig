@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.username }}{% endblock %}
+{% block title %}{{ app.user.username }} - Edit{% endblock %}
 
 {% block content %}
     <div class="row m-1">
-        <div class="col-lg-6 mt-1">
+        <div class="col-lg-12 mt-1">
             <div class="card bg-main shadow">
                 <div class="card-header">
                     <h2 class="card-title">
@@ -12,7 +12,7 @@
                     </h2>
                 </div>
                 <div class="card-body">
-                    <form id="edit_profile" method="POST">
+                    <form id="edit_profile" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
                             <input type="text" value="{{ app.user.username }}" name="username" id="inputUsername" class="form-control border" required>    
@@ -29,6 +29,17 @@
                             <label for="inputPasswordRepeat">Repeat Password</label>
                             <input type="password" name="passwordRepeat" id="inputPasswordRepeat" class="form-control border" minlength="6">    
                         </div>
+                        <div class="form-group">
+                            <label>Avatar</label> <br/>
+                            <label for="file" class="btn btn-lg btn-outline-info">Select Image</label>
+                            <input id="file" class="d-none" type="file" name="avatar" accept="image/*">
+                            <p id="filename"><p>
+                            <img src="{{ asset('images/avatars/' ~ app.user.avatar) }}" id="image_preview" class="img-fluid avatar">
+                        </div>
+                        <div class="form-group">
+                            <label for="textSignature">Signature</label>
+                            <textarea rows="auto" name="signature" id="textSignature" class="form-control border">{{ app.user.signature }}</textarea>
+                        </div>
                     </form>
                 </div>
                 <div class="card-footer">
@@ -38,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 mt-1">
+        <div class="col-lg-12 mt-1">
             <div class="card bg-main shadow">
                 <div class="card-header">
                     <h2 class="card-title">
@@ -62,6 +73,18 @@
 {% endblock %}
 
 {% block javascripts %}
+    {# Avatar upload #}
+    <script>
+        $("#file").change(function() {
+            file = this.files[0];
+            filename = file.name
+            $('#filename').html(filename);
+            var oFReader = new FileReader();
+            oFReader.readAsDataURL(file);
+            oFReader.onload = function (oFREvent) {$('#image_preview').attr('src', oFREvent.target.result)};
+        });
+    </script>
+    {# Verify Password #}
     <script>
         var password = $('form#edit_profile input#inputPassword');
             passwordRepeat = $('form#edit_profile input#inputPasswordRepeat');

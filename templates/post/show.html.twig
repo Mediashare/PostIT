@@ -10,6 +10,9 @@
 
 {% block content %}
     {% include 'post/_content.html.twig' %}
+    {% if post.author %}
+        {% include 'post/_signature.html.twig' %}
+    {% endif %}
 {% endblock %}
 {% block comments %}
     {% include 'post/_comments.html.twig' %}
