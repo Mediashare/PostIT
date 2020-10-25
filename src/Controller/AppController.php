@@ -27,4 +27,8 @@ class AppController extends AbstractController
             'request' => $request
         ]);
     }
+
+    public function pageNotFound() {
+        return $this->redirectToRoute('index');
+    }
 }
