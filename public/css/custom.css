@@ -74,9 +74,11 @@ div#content {
     vertical-align: middle;
     line-height: 50px;
 }
-input {
+.form-control {
     background-color: var(--main-bg-color)!important;
     border-color: var(--main-bg-color)!important;
+}
+input {
     color: var(--main-text-color)!important;
     height: 50px!important;
     font-size: 2.5em!important;
@@ -84,8 +86,6 @@ input {
     padding-right: 1rem!important;
 }
 textarea {
-    background-color: var(--main-bg-color)!important;
-    border-color: var(--main-bg-color)!important;
     color: var(--main-text-color)!important;
     padding-left: 1rem!important;
     padding-right: 1rem!important;
