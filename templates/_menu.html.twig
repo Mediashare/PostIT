@@ -26,7 +26,7 @@
         </a>
     {% endif %}
 </div>
-<ul id="menu_postss" class="list-group text-right bg-main">
+<ul id="menu_posts" class="list-group text-right bg-main">
     {% for post in posts %}
         <a name="{{ post.slug }}" href="{{ path('post', {'slug': post.slug}) }}" class="list-group-item bg-main post_link {% if currentPost == post %}active{% endif %}" title="{{ post.title }}"> 
             <strong>{{ post.title }}</strong> 
