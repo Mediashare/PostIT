@@ -12,7 +12,7 @@
             </div>
             <div class="card-content" style="max-height: 50vh;overflow: auto;">
                 <ul class="list-group text-right bg-main">
-                    {% for post in user.posts %}
+                    {% for post in user.posts|reverse %}
                         <li class="list-group-item bg-main post_link"> 
                             <span class="float-left">
                                 <a href="{{ path('post', {'slug': post.slug}) }}" class="text-primary">Show</a>
@@ -42,7 +42,7 @@
             </div>
             <div class="card-content" style="max-height: 50vh;overflow: auto;">
                 <ul class="list-group text-right bg-main">
-                    {% for comment in user.comments %}
+                    {% for comment in user.comments|reverse %}
                         <li class="list-group-item bg-main post_link" > 
                             <span class="float-left">
                                 <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}" class="text-primary">Show</a>
