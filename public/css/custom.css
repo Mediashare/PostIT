@@ -65,7 +65,7 @@ div#content {
     overflow: auto;
     padding: 1rem;
 }
-.comment {
+.comment, .signature {
     white-space: pre-line;
 }
 .comment_info {
