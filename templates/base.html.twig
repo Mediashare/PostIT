@@ -25,7 +25,7 @@
         {% block stylesheets %}{% endblock %}
         
         {# Javascripts #}
-        <script src="{{ preload('https://code.jquery.com/jquery-2.2.4.min.js', { as: 'script' }) }}" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script src="{{ preload(asset('js/jquery.min.js'), { as: 'script' }) }}"></script>
         <script src="{{ preload(asset('js/bootstrap.min.js'), { as: 'script' }) }}"></script>
         <script src="{{ preload(asset('js/highlight.min.js'), { as: 'script' }) }}"></script>
         <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js', { as: 'worker' }) }}" crossorigin="anonymous"></script>
