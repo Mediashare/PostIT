@@ -34,7 +34,7 @@
                             <label for="file" class="btn btn-lg btn-outline-info">Select Image</label>
                             <input id="file" class="d-none" type="file" name="avatar" accept="image/*">
                             <p id="filename"><p>
-                            <img src="{{ asset('images/avatars/' ~ app.user.avatar) }}" id="image_preview" class="img-fluid avatar">
+                            <img src="{{ preload(asset('images/avatars/' ~ app.user.avatar), { as: 'image' }) }}" id="image_preview" class="img-fluid avatar">
                         </div>
                         <div class="form-group">
                             <label for="textSignature">Signature</label>

@@ -296,10 +296,7 @@ class User implements UserInterface
 
     public function getAvatar()
     {
-        if (!$this->avatar):
-            return 'https://eu.ui-avatars.com/api/?size=120&bold=true&color=cac4c4&background=4d4184&name='.\urlencode($this->getUsername());
-        endif;
-        return $this->avatar;
+        return $this->avatar ?? 'default.png';
     }
 
     public function setAvatar($avatar)

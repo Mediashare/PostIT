@@ -51,6 +51,11 @@ strong {
     line-height: 1.33;
 }
 
+/* Content */
+a.username:hover {
+    text-decoration: none;
+    font-weight: 600;
+}
 div#content {
     height: 100vh;
     overflow: auto;
@@ -60,7 +65,16 @@ div#content {
     overflow: auto;
     padding: 1rem;
 }
-input, textarea {
+.comment {
+    white-space: pre-line;
+}
+.comment_info {
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 50px;
+}
+input {
     background-color: var(--main-bg-color)!important;
     border-color: var(--main-bg-color)!important;
     color: var(--main-text-color)!important;
@@ -70,8 +84,12 @@ input, textarea {
     padding-right: 1rem!important;
 }
 textarea {
+    background-color: var(--main-bg-color)!important;
+    border-color: var(--main-bg-color)!important;
+    color: var(--main-text-color)!important;
+    padding-left: 1rem!important;
+    padding-right: 1rem!important;
     font-size: 1.5em!important;
-    height: auto!important;
 }
 
 /* New Post Creation */
@@ -96,6 +114,13 @@ textarea {
 .btn-comment {
     background-color: var(--main-bg-color);
     padding: 15px;
+    min-width: 55px;
+}
+.btn-comment > i {
+    position: absolute;
+    top: 50%;
+    left: 47%;
+    transform: translate(-50%, -50%);
 }
 .btn-trash:hover {
     color: #face0a;

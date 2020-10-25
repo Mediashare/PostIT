@@ -47,7 +47,7 @@ class CommentController extends AbstractController
         if (!$post): return $this->redirectToRoute('index'); endif;
         $comment = $em->getRepository(Comment::class)->findOneBy(['post' => $post, 'id' => $id]);
         if (!$comment): return $this->redirectToRoute('post', ['slug' => $post->getSlug()]); endif;
-        if (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
+        if (!$this->getUser() || ($this->getUser() != $comment->getAuthor() && !$this->getUser()->isAdmin())):
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
 

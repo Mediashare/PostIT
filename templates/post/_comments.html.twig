@@ -1,15 +1,15 @@
-<div class="col-12 p-0">
+<div class="col-12 p-0 shadow-lg">
     <div class="card bg-main text-right">
         <div class="card-header">
             <h4 class="card-title m-0">Comments</h4>
         </div>
-        <div class="card-content shadow-lg">
+        <div class="card-content">
             {% if app.user %}
-                <form action="{{ path('comment', {'slug': post.slug}) }}" method="POST" class="d-flex">
+                <form id="form_comment" action="{{ path('comment', {'slug': post.slug}) }}" method="POST" class="d-flex">
                     <button type="submit" class="btn-comment list-group-item bg-main post_link d-flex float-left text-center text-white" title="Search">
                         <i class="fa fa-send"></i>
                     </button>
-                    <input type="text" name="comment" id="input_comment" class="form-control bg-main d-flex float-right" placeholder="Comment..." required>
+                    <textarea name="comment" id="input_comment" class="form-control bg-main d-flex float-right" placeholder="Comment..." required></textarea>
                 </form>
             {% else %}
                 <p class="lead m-1">
@@ -18,19 +18,38 @@
             {% endif %}
         </div>
         <div class="card-content">
-            <ul class="list-group text-right bg-main">
-                {% for comment in post.comments %}
-                    <li id="comment_{{ comment.id }} {% if loop.index == 1 %}last_comment{% endif %}" class="list-group-item bg-main"> 
-                        <strong>{{ comment.content }}</strong> 
-                        <img src="{{ asset('images/avatars/' ~ post.author.avatar) }}" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px">
-                        <br>
-                        <span class="float-right">
-                            {% if app.user and (app.user == comment.author or app.user.isAdmin) %}<a href="{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}" class="text-danger">Delete</a> |{% endif %}
-                            <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - <span class="text-info">{{ comment.author.username }}</span>
-                        </span>
+            <ul class="list-group bg-main">
+                {% for comment in post.comments|reverse %}
+                    <li id="comment_{{ comment.id }} {% if loop.index == 1 %}last_comment{% endif %}" class="list-group-item bg-main text-left p-2"> 
+                        <strong class="comment">{{ comment.content }}</strong> 
+                        <div class="text-right">
+                            <a href="{{ path('profile', {'username': comment.author.username}) }}" title="Profile {{ comment.author.username }}">
+                                <img src="{{ preload(asset('images/avatars/' ~ comment.author.avatar), { as: 'image' }) }}" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px">
+                            </a>
+                            <p class="comment_info">
+                                {% if app.user and (app.user == comment.author or app.user.isAdmin) %}<a href="{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}" class="text-danger">Delete</a> |{% endif %}
+                                <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - 
+                                <a href="{{ path('profile', {'username': comment.author.username}) }}" title="Profile {{ comment.author.username }}" class="username">
+                                    <span class="text-info">{{ comment.author.username }}</span>
+                                </a>
+                            </p>
+                        </div>
                     </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
 </div>
+
+<script>
+    {# Comment Macro #}
+    $(window).bind('keydown', function(event) {
+        if ($('form#form_comment textarea#input_comment').val().length > 0 &&
+            (event.ctrlKey || event.metaKey)) {
+            if (event.which == "13") {
+                event.preventDefault();
+                $('form#form_comment').submit();
+            }
+        }
+    });
+</script>

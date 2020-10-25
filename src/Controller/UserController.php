@@ -76,7 +76,8 @@ class UserController extends AbstractController
             $avatar = $request->files->get('avatar');
             if ($avatar):
                 $directory = $this->getParameter('avatars_directory');
-                if (\file_exists($old_avatar = $directory . '/' .$user->getAvatar())):
+                if ($user->getAvatar() != 'default.png' && 
+                    \file_exists($old_avatar = $directory . '/' . $user->getAvatar())):
                     \unlink($old_avatar);
                 endif;
                 $originalFilename = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);
