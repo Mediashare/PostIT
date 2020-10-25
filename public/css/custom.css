@@ -74,18 +74,18 @@ div#content {
     vertical-align: middle;
     line-height: 50px;
 }
-.form-control {
-    background-color: var(--main-bg-color)!important;
-    border-color: var(--main-bg-color)!important;
-}
 input {
+    border-color: var(--main-bg-color)!important;
+    background-color: var(--main-bg-color)!important;
     color: var(--main-text-color)!important;
-    height: 50px!important;
-    font-size: 2.5em!important;
     padding-left: 1rem!important;
     padding-right: 1rem!important;
+    font-size: 2.5em!important;
+    height: 50px!important;
 }
 textarea {
+    border-color: var(--main-bg-color)!important;
+    background-color: var(--main-bg-color)!important;
     color: var(--main-text-color)!important;
     padding-left: 1rem!important;
     padding-right: 1rem!important;
