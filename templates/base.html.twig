@@ -49,7 +49,7 @@
                         {% block content %}{% endblock %}
                         {% block comments %}{% endblock %}
                     </div>
-                    <div class="col-lg-3 p-0">
+                    <div id="menu" class="col-lg-3 p-0">
                         {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null})) }}
                     </div>
                 </div>
@@ -63,6 +63,11 @@
             document.querySelectorAll('.markdown-body pre code').forEach((block) => {
                 hljs.highlightBlock(block);
             });
+        </script>
+        <script>
+            {# $('#menu_content').animate({'left': '25%'})
+            $('#content').css('flex', '0 0 100%');
+            $('#content').css('max-width', '100%'); #}
         </script>
         {# Google Adsense #}
         <script data-ad-client="ca-pub-5281743992366973" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

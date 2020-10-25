@@ -1,7 +1,7 @@
 nav {
     overflow: auto;
 }
-ul#menu {
+ul#menu_posts {
     max-height: calc(100vh - 50px - 50px);
     overflow-x: auto;
     z-index: 20;
@@ -15,7 +15,7 @@ div#menu_footer {
     height: 50px;
     /* bottom: 0; */
 }
-ul#menu a.post_link:hover,
+ul#menu_posts a.post_link:hover,
 div#menu_header a:hover,
 div#menu_footer a:hover {
     color: white!important;
@@ -24,7 +24,7 @@ div#menu_footer a:hover {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
     background-color: #877ac1;
 }
-ul#menu a.active,
+ul#menu_posts a.active,
 div#menu_header a.active,
 div#menu_footer a.active {
     color: white!important;
@@ -32,12 +32,12 @@ div#menu_footer a.active {
     border-color: #4d4184;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
-ul#menu a.active:hover {
+ul#menu_posts a.active:hover {
     color: white;
 }
 
 /* Responsive */
-ul#menu {
+ul#menu_posts {
     display: flex;
 }
 .btn-burger {
@@ -45,7 +45,7 @@ ul#menu {
     z-index: 30;
 }
 @media (min-width: 991px) {
-    ul#menu {
+    ul#menu_posts {
         display: flex!important;
     }
 }
@@ -59,7 +59,7 @@ ul#menu {
         top: 0;
         text-align: right;
     }
-    ul#menu {
+    ul#menu_posts {
         margin-top: 50px!important;
         padding-bottom: 50px!important;
         display: none;
