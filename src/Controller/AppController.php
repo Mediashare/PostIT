@@ -29,6 +29,9 @@ class AppController extends AbstractController
     }
 
     public function pageNotFound(Request $request) {
-        return $this->redirectToRoute('index');
+        $app_env = $this->getParameter('appenv');
+        if ($app_env === "dev"):
+            dd($request->attributes->get('exception'));
+        else: return $this->redirectToRoute('index'); endif;
     }
 }

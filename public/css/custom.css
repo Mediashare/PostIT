@@ -52,9 +52,12 @@ strong {
 }
 
 /* Content */
+a:hover {
+    text-decoration: none!important;
+}
 a.username:hover {
-    text-decoration: none;
     font-weight: 600;
+    color: #73daea!important;
 }
 div#content {
     height: 100vh;
