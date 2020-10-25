@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -13,14 +14,14 @@ class UserController extends AbstractController
 {
 
     /**
-     * @Route("/profile/{username}", name="profile")
+     * @Route("/user/{username}", name="profile")
      */
-    public function profile(?string $username = "") {
+    public function user(?string $username = null) {
         if (!$username): 
             $user = $this->getUser(); 
         else:
             $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+            $user = $em->getRepository(User::class)->findOneBy(['slug' => $username]);
         endif;
         if (!$user):
             $this->addFlash('error', 'User not found.');
@@ -31,12 +32,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile/edit/{username}/", name="profile_edit")
+     * @Route("/profile/edit/{username}", name="profile_edit")
      */
-    public function edit(Request $request, ?string $username = "", UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
+    public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
         $em = $this->getDoctrine()->getManager();
         if ($username && $this->getUser() && $this->getUser()->isAdmin()):
-            $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+            $user = $em->getRepository(User::class)->findOneBy(['slug' => $username]);
             if (!$user): 
                 $this->addFlash('error', 'User not found.');
                 return $this->redirectToRoute('admin');
@@ -47,7 +48,9 @@ class UserController extends AbstractController
             // Username
             $form = $request->request;
             if ($user->getUsername() != $form->get('username')):
-                if ($em->getRepository(User::class)->findOneBy(['username' => $form->get('username')])):
+                $slugify = new Slugify();
+                $slug = $slugify->slugify($form->get('username'));
+                if ($em->getRepository(User::class)->findOneBy(['slug' => $slug])):
                     $this->addFlash('error', 'Username already used.');
                 else: 
                     $user->setUsername($form->get('username')); 
@@ -56,7 +59,7 @@ class UserController extends AbstractController
             endif;
             // Email
             if ($user->getEmail() != $form->get('email')):
-                if ($em->getRepository(User::class)->findOneBy(['email' => $form->get('email')])):
+                if ($em->getRepository(User::class)->findOneBy(['email' => \strtolower($form->get('email'))])):
                     $this->addFlash('error', 'Email already used.');
                 else: 
                     $user->setEmail($form->get('email'));
@@ -93,7 +96,7 @@ class UserController extends AbstractController
 
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('profile_edit', ['username' => $user->getUsername()]);
+            return $this->redirectToRoute('profile_edit', ['username' => $user->getSlug()]);
         endif;
         return $this->render('user/edit.html.twig');
     }

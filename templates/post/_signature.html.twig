@@ -1,5 +1,5 @@
 <div id="post_signature" class="pt-2 rounded text-center">
-    <a href="{{ path('profile', {'username': post.author.username}) }}" title="Profile {{ post.author.username }}" class="username">
+    <a href="{{ path('profile', {'username': post.author.slug}) }}" title="Profile {{ post.author.username }}" class="username">
         <img src="{{ preload(asset('images/avatars/' ~ post.author.avatar), { as: 'image' }) }}" class="img-fluid avatar"> <br>
         <em class="text-info">{{ post.author.username }}</em>
     </a>

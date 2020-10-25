@@ -9,7 +9,7 @@
         <i class="fa fa-search"></i>
     </a>
     {% if app.user is defined and app.user %}
-        <a href="{{ path('profile', {'username': app.user.username}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+        <a href="{{ path('profile', {'username': app.user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
             <i class="fa fa-user"></i>
         </a>
         {% if app.user.isAdmin %}
@@ -48,7 +48,7 @@
             </a>
         {% endif %}
         {% if app.user and request.get('_route') starts with 'profile' %}
-            <a href="{{ path('profile_edit', {'username': app.user.username}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+            <a href="{{ path('profile_edit', {'username': app.user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
                 <i class="fa fa-user-cog"></i>
             </a>
         {% endif %}
