@@ -44,12 +44,11 @@
 
 
 {% block javascripts %}
-    {# Dependencies #}
+    {# CodeMirror #}
     <script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
-    {# CodeMirror Config #}
     <script src="{{ preload(asset('js/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    {# Mode #}
     <script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
-
     {# AutoCompletion #}
     <script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
     <script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
@@ -59,11 +58,11 @@
     <script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
     <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
     <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
-
     <script>
         {% if post is defined %} {% set content = post.content %}
         {% else %} {% set content = "# Hello world\n" %} {% endif %}
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
         refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
     </script>
+
 {% endblock %}
