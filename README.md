@@ -1,6 +1,6 @@
-# Welcome to Mediashare
+# Bienvenue sur Mediashare
 
->   Mediashare est une entité promouvant le partage de ressource sur Internet. Sur ce site, vous trouverez principalement des astuces et de la documentation sur différentes outils permettant l'utilisation d'un numérique plus agréable.
+>   Mediashare est une entité promouvant le partage de ressource sur Internet. Sur ce site, vous trouverez principalement des astuces et de la documentation sur différentes outils permettant l'utilisation d'un numérique plus agréable.  
 L'open-sourcing et le partage des connaissances font partie de l'ADN de Mediashare.
 
 ## Installation
