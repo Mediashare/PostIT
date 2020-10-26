@@ -16,12 +16,12 @@
         
         {# Css #}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ preload(asset('font/recursive.css'), { as: 'font', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/bootstrap.min.css'), { as: 'style', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/retro.css'), { as: 'style', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/menu.css'), { as: 'style' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/highlight.min.css'), { as: 'style' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/custom.css'), { as: 'style' }) }}">
+        <link rel="preload" href="{{ preload(asset('font/recursive.css'), { as: 'font', importance: 'high' }) }}">
+        <link rel="preload" href="{{ preload(asset('css/bootstrap.min.css'), { as: 'style', importance: 'high' }) }}">
+        <link rel="preload" href="{{ preload(asset('css/retro.css'), { as: 'style', importance: 'high' }) }}">
+        <link rel="preload" href="{{ preload(asset('css/menu.css'), { as: 'style' }) }}">
+        <link rel="preload" href="{{ preload(asset('css/highlight.min.css'), { as: 'style' }) }}">
+        <link rel="preload" href="{{ preload(asset('css/custom.css'), { as: 'style' }) }}">
         {% block stylesheets %}{% endblock %}
         
         {# Javascripts #}

@@ -1,6 +1,6 @@
 {# Dependencies #}
 <script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script' }) }}"></script>
-<link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
+<link rel="preload" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
 <script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
 
 {# AutoCompletion #}
@@ -12,7 +12,7 @@
 <script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
 <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
 <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
-<link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
+<link rel="preload" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
 
 <div id="codemirror" class="shadow-lg rounded"></div>
 <textarea name="content" id="content_mirror" class="d-none" required></textarea>
