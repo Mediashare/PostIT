@@ -29,7 +29,7 @@
         <script src="{{ preload(asset('js/jquery.min.js'), { as: 'script', importance: 'high' }) }}"></script>
         <script src="{{ preload(asset('js/bootstrap.min.js'), { as: 'script' }) }}"></script>
         <script src="{{ preload(asset('js/highlight.min.js'), { as: 'script' }) }}"></script>
-        <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js', { as: 'worker' }) }}" crossorigin="anonymous"></script>
+        <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js', { as: 'script', importance: 'high' }) }}" crossorigin="anonymous"></script>
         
         {# Google Analytics #}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
@@ -59,16 +59,12 @@
                 {% block editor %}{% endblock %}
             {% endif %}
         </div>
+
+        {# Javascripts #}
+        <script src="{{ preload(asset('js/app.js'), { as: 'script' }) }}"></script>
+        {# Menu #}
         <script>
-            {# HighLight Synthax #}
-            document.querySelectorAll('.markdown-body pre code').forEach((block) => {
-                hljs.highlightBlock(block);
-            });
-        </script>
-        <script>
-            {# $('#menu_content').animate({'left': '25%'})
-            $('#content').css('flex', '0 0 100%');
-            $('#content').css('max-width', '100%'); #}
+            {% if currentPost.slug is defined %} scrollToAnchor('{{ currentPost.slug }}'); {% endif %}
         </script>
         {# Google Adsense #}
         <script data-ad-client="ca-pub-5281743992366973" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

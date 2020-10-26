@@ -40,16 +40,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    {# Comment Macro #}
-    $(window).bind('keydown', function(event) {
-        if ($('form#form_comment textarea#input_comment').val().length > 0 &&
-            (event.ctrlKey || event.metaKey)) {
-            if (event.which == "13") {
-                event.preventDefault();
-                $('form#form_comment').submit();
-            }
-        }
-    });
-</script>

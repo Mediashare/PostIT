@@ -73,40 +73,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {# Avatar upload #}
-    <script>
-        $("#file").change(function() {
-            file = this.files[0];
-            filename = file.name
-            $('#filename').html(filename);
-            var oFReader = new FileReader();
-            oFReader.readAsDataURL(file);
-            oFReader.onload = function (oFREvent) {$('#image_preview').attr('src', oFREvent.target.result)};
-        });
-    </script>
-    {# Verify Password #}
-    <script>
-        var password = $('form#edit_profile input#inputPassword');
-            passwordRepeat = $('form#edit_profile input#inputPasswordRepeat');
-
-        password.on('change', function () {
-            if (password.val().length > 0) {
-                password.attr('required', 'true');
-                passwordRepeat.attr('required', 'true');
-            } else if (passwordRepeat.val().length < 1) {
-                password.removeAttr('required');
-                passwordRepeat.removeAttr('required');
-            }        
-        });
-        passwordRepeat.on('change', function () {
-            console.log(passwordRepeat.val().length);
-            if (passwordRepeat.val().length > 0) {
-                passwordRepeat.attr('required', 'true');
-                password.attr('required', 'true');
-            } else if (password.val().length < 1) {
-                password.removeAttr('required');
-                passwordRepeat.removeAttr('required');
-            } 
-        });
-    </script>
+    <script src="{{ preload(asset('js/user_edit.js'), { as: 'script', importance: 'low' }) }}"></script>
 {% endblock %}

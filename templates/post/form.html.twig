@@ -2,6 +2,13 @@
 
 {% block title %}Post{% endblock %}
 
+{% block stylesheets %}
+    {# Dependencies #}
+    <link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
+    {# AutoCompletion #}
+    <link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
+{% endblock %}
+
 {% block editor %}
     <form id="post_form" method="POST">
         <div class="row shadow-lg rounded">
@@ -25,7 +32,8 @@
         </div>
         <div class="row">
             <div class="col-lg-6 p-0">
-                {% include 'post/_textarea.html.twig' %}
+                <div id="codemirror" class="shadow-lg rounded"></div>
+                <textarea name="content" id="content_mirror" class="d-none" required></textarea>
             </div>
             <div class="col-lg-6 p-0">
                 {% include 'post/_content.html.twig' %}
@@ -34,27 +42,28 @@
     </form>
 {% endblock %}
 
+
 {% block javascripts %}
+    {# Dependencies #}
+    <script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    {# CodeMirror Config #}
+    <script src="{{ preload(asset('js/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
+
+    {# AutoCompletion #}
+    <script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/html-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/javascript-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/show-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
+
     <script>
-        $('#post_content').height('calc(100vh - 51px)');
-        {# TextArea Macro #}
-        $(window).bind('keydown', function(event) {
-            if (event.ctrlKey || event.metaKey) {
-                switch (String.fromCharCode(event.which).toLowerCase()) {
-                case 's':
-                    event.preventDefault();
-                    $('form#post_form button.btn-submit').click();
-                    break;
-                //case 'f':
-                //    event.preventDefault();
-                //    alert('ctrl-f');
-                //    break;
-                //case 'g':
-                //    event.preventDefault();
-                //    alert('ctrl-g');
-                //    break;
-                }
-            }
-        });
+        {% if post is defined %} {% set content = post.content %}
+        {% else %} {% set content = "# Hello world\n" %} {% endif %}
+        var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
+        refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
     </script>
 {% endblock %}
