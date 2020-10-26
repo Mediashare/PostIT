@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
 <script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
 
+{# Theme #}
+<link rel="stylesheet" href="{{ preload(asset('codemirror/theme/base16-light.css'), { as: 'style' }) }}">
+
 {# AutoCompletion #}
 <script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
 <script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
@@ -26,7 +29,8 @@
             lineNumbers: true,
             lineWrapping: true,
             extraKeys: {"Ctrl-Space": "autocomplete"},
-            keyMap: "sublime"
+            keyMap: "sublime",
+            theme: "base16-light"
     });
     myCodeMirror.setSize('100%', 'calc(100vh - 51px)');
     $('textarea#content_mirror').val(myCodeMirror.getValue());

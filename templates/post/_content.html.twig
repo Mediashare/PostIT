@@ -2,7 +2,7 @@
     {% if post.markdown is defined %}
         {{ post.markdown|raw }}
     {% endif %}
-    {% if post.author is defined %}
+    {% if post.author.username is defined %}
         {% include 'post/_signature.html.twig' %}
     {% endif %}
 </div>
