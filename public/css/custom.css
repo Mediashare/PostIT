@@ -5,7 +5,7 @@
     --main-link-color: #3b97ff;
 }
 html, body {
-    font-family: 'Recursive';
+    font-family: 'Recursive', monospace;
 }
 body {
     height: 100vh;
