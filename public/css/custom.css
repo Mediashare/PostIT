@@ -16,6 +16,11 @@ body {
 strong {
     color: white;
 }
+code {
+    background-color: #333;
+    padding: 0.2em;
+    border-radius: 2px;
+}
 /* Macro */
 .d-none {
     display: none!important;
