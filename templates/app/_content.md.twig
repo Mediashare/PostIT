@@ -22,5 +22,5 @@ echo "# LoremIpsum is beautiful" > LoremIpsum.md
 curl {% if app.user is defined and app.user %}-H "ApiKey: {{ app.user.apikey }}" {% endif %}\
  -F "title=Lorem Ipsum" \ 
  -F "content=@./LoremIpsum.md" \ 
- {{ url('upload')|replace({'http://', 'https://'}) }}
+ {{ url('upload')|replace({'http://': 'https://'}) }}
 ```
