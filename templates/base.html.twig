@@ -30,7 +30,7 @@
         <script src="{{ preload(asset('js/jquery.min.js'), { as: 'script', importance: 'high' }) }}"></script>
         <script src="{{ preload(asset('js/bootstrap.min.js'), { as: 'script' }) }}"></script>
         <script src="{{ preload(asset('js/highlight.min.js'), { as: 'script' }) }}"></script>
-        <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js', { as: 'script', importance: 'high' }) }}" crossorigin="anonymous"></script>
+        <script defer src="{{ preload(asset('fontawesome/js/all.js'), { as: 'script', importance: 'high' }) }}"></script>
         
         {# Google Analytics #}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
