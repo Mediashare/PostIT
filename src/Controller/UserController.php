@@ -47,8 +47,6 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('profile');
             endif;
         else: $user = $this->getUser(); endif;
-
-        if (empty($user)): $user = $this->getUser(); endif;
         if ($request->isMethod('POST')):
             // Username
             $form = $request->request;
