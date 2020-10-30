@@ -29,7 +29,7 @@
 <ul id="menu_posts" class="list-group text-right bg-main">
     {% for post in posts %}
         <a name="{{ post.slug }}" href="{{ path('post', {'slug': post.slug}) }}" class="list-group-item bg-main post_link {% if currentPost == post %}active{% endif %}" title="{{ post.title }}"> 
-            <strong>{{ post.title }} {{ post.title }} {{ post.title }}</strong> 
+            <strong>{{ post.title }}</strong> 
             <br>
             <span class="float-right">
                 <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em>{% if post.author %} - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
