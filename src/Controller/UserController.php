@@ -101,7 +101,7 @@ class UserController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('profile_edit', ['username' => $user->getSlug()]);
         endif;
-        return $this->render('user/edit.html.twig');
+        return $this->render('user/edit.html.twig', ['user' => $user]);
     }
 
     /**
