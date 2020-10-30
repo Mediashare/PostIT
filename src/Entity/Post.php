@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use App\Service\Text;
+use App\Entity\Comment;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\Collection;
