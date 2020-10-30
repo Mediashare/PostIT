@@ -39,6 +39,11 @@
 </ul>
 <div id="menu_footer" class="d-lg-flex bg-main shadow-lg rounded">
     <div id="menu_actions" class="">
+        {% if request.get('_route') == 'index' and app.user is defined and app.user.isAdmin %}
+            <a href="{{ path('admin_edito', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Post">
+                <i class="fa fa-edit"></i>
+            </a>
+        {% endif %}
         {% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}
             <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Post">
                 <i class="fa fa-edit"></i>
