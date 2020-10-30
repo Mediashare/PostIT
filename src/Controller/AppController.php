@@ -27,7 +27,6 @@ class AppController extends AbstractController
             $content = $post->getMarkdown();
             return $this->render('post/show.html.twig', ['content' => $content ?? '', 'page' => $page ?? null, 'post' => $post ?? null]);
         endif;
-
     }
 
     public function menu(Request $request, ?Post $post, ?Page $page) {
