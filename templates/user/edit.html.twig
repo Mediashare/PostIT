@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.user.username }} - Edit{% endblock %}
+{% block title %}{{ user.username }} - Edit{% endblock %}
 
 {% block content %}
     <div class="row m-1">
@@ -15,11 +15,11 @@
                     <form id="edit_profile" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
-                            <input type="text" value="{{ app.user.username }}" name="username" id="inputUsername" class="form-control border" required>    
+                            <input type="text" value="{{ user.username }}" name="username" id="inputUsername" class="form-control border" required>    
                         </div>
                             <div class="form-group">
                             <label for="inputEmail">Email</label>
-                            <input type="email" value="{{ app.user.email }}" name="email" id="inputEmail" class="form-control border" required>    
+                            <input type="email" value="{{ user.email }}" name="email" id="inputEmail" class="form-control border" required>    
                         </div>
                         <div class="form-group">
                             <label for="inputPassword">Password</label>
@@ -34,11 +34,11 @@
                             <label for="file" class="btn btn-lg btn-outline-info">Select Image</label>
                             <input id="file" class="d-none" type="file" name="avatar" accept="image/*">
                             <p id="filename"><p>
-                            <img src="{{ preload(asset('images/avatars/' ~ app.user.avatar), { as: 'image' }) }}" id="image_preview" class="img-fluid avatar">
+                            <img src="{{ preload(asset('images/avatars/' ~ user.avatar), { as: 'image' }) }}" id="image_preview" class="img-fluid avatar">
                         </div>
                         <div class="form-group">
                             <label for="textSignature">Signature</label>
-                            <textarea rows="auto" name="signature" id="textSignature" class="form-control border">{{ app.user.signature }}</textarea>
+                            <textarea rows="auto" name="signature" id="textSignature" class="form-control border">{{ user.signature }}</textarea>
                         </div>
                     </form>
                 </div>
@@ -60,7 +60,7 @@
                     <p>
                         You can use Http API with your <code>ApiKey</code> to sign the publication.
                     </p>
-                    <input type="text" value="{{ app.user.apikey }}" id="inputApikey" class="form-control border" readonly>
+                    <input type="text" value="{{ user.apikey }}" id="inputApikey" class="form-control border" readonly>
                 </div>
                 <div class="card-footer">
                     <a href="{{ path('profile_apikey_reset') }}" class="btn btn-lg btn-primary float-right">
