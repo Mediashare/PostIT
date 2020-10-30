@@ -20,6 +20,7 @@ class PostController extends AbstractController
             'post' => $post,
         ]);
     }
+    
     /**
      * @Route("/new", name="post_new")
      */
@@ -46,6 +47,7 @@ class PostController extends AbstractController
         endif;
         return $this->render('post/form.html.twig');
     }
+
     /**
      * @Route("/edit/{slug}/", name="post_edit")
      */
@@ -75,6 +77,7 @@ class PostController extends AbstractController
             'post' => $post,
         ]);
     }
+
     /**
      * @Route("/delete/{slug}/", name="post_delete")
      */

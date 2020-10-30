@@ -4,12 +4,12 @@ namespace App\Entity;
 
 use App\Service\Text;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\EditoRepository;
+use App\Repository\PageRepository;
 
 /**
- * @ORM\Entity(repositoryClass=EditoRepository::class)
+ * @ORM\Entity(repositoryClass=PageRepository::class)
  */
-class Edito
+class Page
 {
     /**
      * @ORM\Id()
@@ -18,9 +18,24 @@ class Edito
     private $id;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $description;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $content;
+
+    /**
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $url;
 
     /**
      * @ORM\Column(type="datetime")
@@ -28,12 +43,12 @@ class Edito
     private $createDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Editos")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Pages")
      */
     private $author;
 
     public function __toString() {
-        return 'Edito';
+        return 'Page';
     }
 
     public function __construct() {
@@ -48,6 +63,36 @@ class Edito
 
     public function setId(string $id): self {
         $this->id = $id;
+        return $this;
+    }
+
+    public function getUrl(): ?string {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self {
+        $text = new Text();
+        $url = $text->slugify($url);
+        if (\substr($url, 0, 1) !== "/"): $url = "/" . $url; endif;
+        $this->url = $url;
+        return $this;
+    }
+
+    public function getTitle(): ?string {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self {
+        $this->title = $title;
+        return $this;
+    }
+
+    public function getDescription(): ?string {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self {
+        $this->description = $description;
         return $this;
     }
 

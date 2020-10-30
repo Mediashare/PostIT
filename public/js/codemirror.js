@@ -22,7 +22,7 @@ function CodeMirorInit(markdownify_path, content) {
             switch (String.fromCharCode(event.which).toLowerCase()) {
             case 's':
                 event.preventDefault();
-                $('form#post_form button.btn-submit').click();
+                $('form#post_form button.btn-submit, form#page_form button.btn-submit').click();
                 break;
             }
         }

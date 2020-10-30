@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edito{% endblock %}
+{% block title %}Page{% endblock %}
 
 {% block stylesheets %}
     {# Dependencies #}
@@ -10,24 +10,29 @@
 {% endblock %}
 
 {% block editor %}
-    <form id="post_form" method="POST">
+    <form action="{{ path('page_form', {'id': page.id}) }}" id="page_form" method="POST">
         <div class="row shadow-lg rounded">
             <div class="col-lg-9 p-0">
-                <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" disabled="true" {% if post is defined %}value="{{ post.title ?? 'Edito' }}"{% endif %} autofocus>
+                <input type="text" name="url" id="input_url" class="w-100 rounded form-control" placeholder="Url..." required="true" {% if page is defined %}value="{{ page.url ?? '/' }}"{% endif %} autofocus>
             </div>
             <div class="col-lg-3 p-0">
                 <div class="float-left w-50 border-top">
-                    <a tabindex="-1" class="btn btn-cancel" title="Cancel"
-                        {% if post is defined and post.title is defined %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
+                    <a tabindex="-1" class="btn btn-cancel" title="Cancel" href="{{ path('admin') }}"
                     >
                         <i class="fa fa-times"></i>
                     </a>
                 </div>
                 <div class="float-right w-50 border-top">
-                    <button tabindex="-1" form="post_form" type="submit" class="btn btn-submit" title="Submit">
+                    <button tabindex="-1" form="page_form" type="submit" class="btn btn-submit" title="Submit">
                         <i class="fa fa-check"></i>
                     </button>
                 </div>
+            </div>
+            <div class="col-md-6 p-0 shadow-lg">
+                <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" {% if page is defined %}value="{{ page.title }}"{% endif %} autofocus>
+            </div>
+            <div class="col-md-6 p-0 shadow-lg">
+                <input type="text" name="description" id="input_description" class="w-100 rounded form-control" placeholder="Description..." {% if page is defined %}value="{{ page.description }}"{% endif %} autofocus>
             </div>
         </div>
         <div class="row">
@@ -59,7 +64,7 @@
     <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
     <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
     <script>
-        {% if post is defined %} {% set content = post.content %}
+        {% if page is defined %} {% set content = page.content %}
         {% else %} {% set content = "# Hello world\n" %} {% endif %}
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
         refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());

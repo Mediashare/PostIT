@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Page;
 use App\Entity\Post;
-use App\Entity\Edito;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -13,28 +14,29 @@ class AppController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index() {
+    public function index(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        // Get Edito
-        $post = $em->getRepository(Edito::class)->findOneBy([], ['createDate' => 'DESC']);
-        // If have not Edito
-        if (!$post || !$post->getMarkdown()):
-            // Get last post
-            $post = $em->getRepository(Post::class)->findOneBy([], ['createDate' => 'DESC']);
+        // Get Page
+        $page = $em->getRepository(Page::class)->findOneBy(['url' => "/"], ['createDate' => 'DESC']);
+        if ($page && $page->getMarkdown()): 
+            $content = $page->getMarkdown();
+            return $this->render('page/show.html.twig', ['content' => $content ?? '', 'page' => $page ?? null, 'post' => $post ?? null]);
+        else:
+            // If have not Page
+            $post = $em->getRepository(Post::class)->findOneBy([], ['createDate' => 'DESC']); // Get last post
+            $content = $post->getMarkdown();
+            return $this->render('post/show.html.twig', ['content' => $content ?? '', 'page' => $page ?? null, 'post' => $post ?? null]);
         endif;
-        // Get content
-        if ($post): $content = $post->getMarkdown(); endif;
-        if (empty($content)): $content = ''; endif;
 
-        return $this->render('app/index.html.twig', ['content' => $content ?? '']);
     }
 
-    public function menu(Request $request, ?Post $post) {
+    public function menu(Request $request, ?Post $post, ?Page $page) {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
         return $this->render('_menu.html.twig', [
             'posts' => $posts,
             'currentPost' => $post,
+            'page' => $page,
             'request' => $request
         ]);
     }

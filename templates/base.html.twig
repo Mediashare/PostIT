@@ -17,7 +17,7 @@
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
         
         {# Css #}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=0.8">
         <link rel="stylesheet" href="{{ preload(asset('font/recursive.css'), { as: 'font', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('css/bootstrap.min.css'), { as: 'style', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('css/retro.css'), { as: 'style', importance: 'high' }) }}">
@@ -44,15 +44,19 @@
     </head>
     <body>
         <div class="container-fluid">
-            {% if app.request.get('_route') != 'post_new' and app.request.get('_route') != 'post_edit' and app.request.get('_route') != 'admin_edito' %}
+            {% if app.request.get('_route') != 'post_new' and app.request.get('_route') != 'post_edit' and app.request.get('_route') != 'page_form' %}
                 <div class="row">
                     <div id="content" class="col-lg-9 p-0 shadow-lg rounded">
                         {% include '_flash.html.twig' %}
-                        {% block content %}{% endblock %}
-                        {% block comments %}{% endblock %}
+                        <div class="col-12 rounded mt-1">
+                            {% block content %}{% endblock %}
+                        </div>
+                        <div class="col-12 rounded mt-3">
+                            {% block comments %}{% endblock %}
+                        </div>
                     </div>
                     <div id="menu" class="col-lg-3 p-0">
-                        {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null})) }}
+                        {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null, 'page': page ?? null})) }}
                     </div>
                 </div>
             {% else %}

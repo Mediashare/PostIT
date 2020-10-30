@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Edito;
+use App\Entity\Page;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Edito|null find($id, $lockMode = null, $lockVersion = null)
- * @method Edito|null findOneBy(array $criteria, array $orderBy = null)
- * @method Edito[]    findAll()
- * @method Edito[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Page|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Page|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Page[]    findAll()
+ * @method Page[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EditoRepository extends ServiceEntityRepository
+class PageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Edito::class);
+        parent::__construct($registry, Page::class);
     }
 
     // /**
-    //  * @return Edito[] Returns an array of Edito objects
+    //  * @return Page[] Returns an array of Page objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class EditoRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Edito
+    public function findOneBySomeField($value): ?Page
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

@@ -1,5 +1,5 @@
 <div id="menu_header" class="d-lg-flex bg-main shadow-lg rounded">
-    <a href="{{ path('index') }}" class="list-group-item bg-main post_link float-left text-center text-primary {% if request.get('_route') == 'index' %}active{% endif %}" title="Homepage">
+    <a href="/" class="list-group-item bg-main post_link float-left text-center text-primary {% if request.get('_route') == 'index' %}active{% endif %}" title="Homepage">
         <i class="fa fa-home"></i>
     </a>
     <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="New Post">
@@ -29,7 +29,7 @@
 <ul id="menu_posts" class="list-group text-right bg-main">
     {% for post in posts %}
         <a name="{{ post.slug }}" href="{{ path('post', {'slug': post.slug}) }}" class="list-group-item bg-main post_link {% if currentPost == post %}active{% endif %}" title="{{ post.title }}"> 
-            <strong>{{ post.title }}</strong> 
+            <strong>{{ post.title }} {{ post.title }} {{ post.title }}</strong> 
             <br>
             <span class="float-right">
                 <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em>{% if post.author %} - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
@@ -39,11 +39,12 @@
 </ul>
 <div id="menu_footer" class="d-lg-flex bg-main shadow-lg rounded">
     <div id="menu_actions" class="">
-        {% if request.get('_route') == 'index' and app.user is defined and app.user.isAdmin %}
-            <a href="{{ path('admin_edito') }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Homepage">
+        {% if page and app.user and app.user.isAdmin and (request.get('_route') == 'page' or request.get('_route') == 'index') %}
+            <a href="{{ path('page_form', {'id': page.id}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Page">
                 <i class="fa fa-edit"></i>
             </a>
         {% endif %}
+
         {% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}
             <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Post">
                 <i class="fa fa-edit"></i>
@@ -58,7 +59,7 @@
             </a>
         {% endif %}
     </div>
-    <div id="menu_search" class="d-none w-100" data-displayed="false">
+    <div id="menu_search" class="w-100" data-displayed="false">
          <input type="text" id="input_search" class="form-control bg-main" onkeyup="search()" placeholder="Search...">
     </div>
 </div>

@@ -3,21 +3,8 @@
 {% block title %}Administration{% endblock %}
 
 {% block content %}
-    <div class="col-12">
-        <div class="card bg-main shadow-lg rounded mt-1">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Homepage
-                </h4>
-            </div>
-            <div class="card-footer">
-                <a href="{{ path('admin_edito') }}" class="btn btn-outline-success">
-                    Modifier l'édito
-                </a>
-            </div>
-        </div>
+        {% include 'admin/_pages.html.twig' %}
         {% include 'admin/_posts.html.twig' %}
         {% include 'admin/_comments.html.twig' %}
         {% include 'admin/_accounts.html.twig' %}
-    </div>
 {% endblock %}
