@@ -36,13 +36,18 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
         $em = $this->getDoctrine()->getManager();
-        if ($username && $this->getUser() && $this->getUser()->isAdmin()):
+        if ($username):
             $user = $em->getRepository(User::class)->findOneBy(['slug' => $username]);
-            if (!$user): 
+            if (!$user):
                 $this->addFlash('error', 'User not found.');
-                return $this->redirectToRoute('admin');
-            endif; 
+                return $this->redirectToRoute('profile');
+            endif;
+            if ($user != $this->getUser() && !$this->getUser()->isAdmin()):
+                $this->addFlash('error', 'You have not permission.');
+                return $this->redirectToRoute('profile');
+            endif;
         endif;
+        
         if (empty($user)): $user = $this->getUser(); endif;
         if ($request->isMethod('POST')):
             // Username
