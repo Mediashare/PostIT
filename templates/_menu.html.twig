@@ -40,7 +40,7 @@
 <div id="menu_footer" class="d-lg-flex bg-main shadow-lg rounded">
     <div id="menu_actions" class="">
         {% if request.get('_route') == 'index' and app.user is defined and app.user.isAdmin %}
-            <a href="{{ path('admin_edito', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Post">
+            <a href="{{ path('admin_edito') }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Homepage">
                 <i class="fa fa-edit"></i>
             </a>
         {% endif %}
