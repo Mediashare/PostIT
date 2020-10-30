@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Cocur\Slugify\Slugify;
+use App\Service\Text;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -319,8 +319,8 @@ class User implements UserInterface
 
     public function setSlug(?string $slug): self
     {
-        $slugify = new Slugify();
-        $this->slug = $slugify->slugify($slug);
+        $text = new Text();
+        $this->slug = $text->slugify($slug);
 
         return $this;
     }

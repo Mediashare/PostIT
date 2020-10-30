@@ -46,8 +46,8 @@ class UserController extends AbstractController
                 $this->addFlash('error', 'You have not permission.');
                 return $this->redirectToRoute('profile');
             endif;
-        endif;
-        
+        else: $user = $this->getUser(); endif;
+
         if (empty($user)): $user = $this->getUser(); endif;
         if ($request->isMethod('POST')):
             // Username
