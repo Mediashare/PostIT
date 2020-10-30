@@ -40,8 +40,8 @@ textarea { border-color: var(--main-bg-color)!important; background-color: var(-
 .btn-comment:hover { background-color: #877ac1; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 
 /* Avatar */
-.avatar { border-radius: 50%; width: 120px; height: 120px; }
-.avatar_min { border-radius: 50%; width: 50px!important; height: 50px!important; }
+.avatar { border-radius: 50%!important; width: 120px; height: 120px; }
+.avatar_min { border-radius: 50%!important; width: 50px!important; height: 50px!important; }
 
 /* Responsive */
 @media (max-width: 991px) {
