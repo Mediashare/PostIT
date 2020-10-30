@@ -1,0 +1,24 @@
+<div class="card bg-main shadow-lg rounded mt-1">
+    <div class="card-header">
+        <h4 class="card-title">
+            Accounts
+        </h4>
+    </div>
+    <div class="card-content" style="max-height: 50vh;overflow: auto;">
+        <ul class="list-group text-right bg-main">
+            {% for user in users %}
+                <li class="list-group-item bg-main post_link" > 
+                    <span class="float-left">
+                        <a href="{{ path('profile_edit', {'username': user.slug,}) }}" class="text-warning">Edit</a> -
+                        <a href="{{ path('admin_user_delete', {'id': user.id}) }}" class="text-danger">Delete</a>
+                    </span>
+                    <strong>{{ user.username }}</strong> 
+                    <br>
+                    <span class="float-right">
+                        <em>{{ user.email }}</em>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

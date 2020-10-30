@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edito{% endblock %}
+
+{% block stylesheets %}
+    {# Dependencies #}
+    <link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
+    {# AutoCompletion #}
+    <link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
+{% endblock %}
+
+{% block editor %}
+    <form id="post_form" method="POST">
+        <div class="row shadow-lg rounded">
+            <div class="col-lg-9 p-0">
+                <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" disabled="true" {% if post is defined %}value="{{ post.title ?? 'Edito' }}"{% endif %} autofocus>
+            </div>
+            <div class="col-lg-3 p-0">
+                <div class="float-left w-50 border-top">
+                    <a tabindex="-1" class="btn btn-cancel" title="Cancel"
+                        {% if post is defined and post.title is defined %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
+                    >
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="float-right w-50 border-top">
+                    <button tabindex="-1" form="post_form" type="submit" class="btn btn-submit" title="Submit">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 p-0">
+                <div id="codemirror" class="shadow-lg rounded"></div>
+                <textarea name="content" id="content_mirror" class="d-none" required></textarea>
+            </div>
+            <div class="col-lg-6 p-0">
+                {% include 'post/_content.html.twig' %}
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block javascripts %}
+    {# CodeMirror #}
+    <script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    <script src="{{ preload(asset('js/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    {# Mode #}
+    <script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
+    {# AutoCompletion #}
+    <script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/html-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/javascript-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/show-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
+    <script>
+        {% if post is defined %} {% set content = post.content %}
+        {% else %} {% set content = "# Hello world\n" %} {% endif %}
+        var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
+        refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
+    </script>
+
+{% endblock %}

@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Parsedown;
-use Cocur\Slugify\Slugify;
+use App\Service\Text;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -94,14 +93,8 @@ class Post
     }
 
     public function getMarkdown(): ?string {
-        $parsedown = new Parsedown();
-        // $parsedown->setSafeMode(true);
-        $markdown = $parsedown->text($this->getContent());
-        $markdown = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $markdown);
-        $markdown = preg_replace('#<script(.*?)>(.*?)</script(.*?)>#is', '', $markdown);
-        $markdown = preg_replace('/<script\b[^>]*>/is', "", $markdown);
-        // $markdown = \htmlspecialchars_decode($markdown);
-        return $markdown ?? '';
+        $text = new Text();
+        return $text->markdownify($this->getContent()) ?? '';
     }
 
     public function getSlug(): ?string {
@@ -109,8 +102,8 @@ class Post
     }
 
     public function setSlug(string $slug): self {
-        $slugify = new Slugify();
-        $this->slug = $slugify->slugify($slug);
+        $text = new Text();
+        $this->slug = $text->slugify($slug);
         return $this;
     }
 

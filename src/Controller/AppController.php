@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Edito;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,9 +14,19 @@ class AppController extends AbstractController
      * @Route("/", name="index")
      */
     public function index() {
-        $content = new Post();
-        $content->setContent($this->render('app/_content.md.twig')->getContent());
-        return $this->render('app/index.html.twig', ['content' => $content->getMarkdown()]);
+        $em = $this->getDoctrine()->getManager();
+        // Get Edito
+        $post = $em->getRepository(Edito::class)->findOneBy([], ['createDate' => 'DESC']);
+        // If have not Edito
+        if (!$post || !$post->getMarkdown()):
+            // Get last post
+            $post = $em->getRepository(Post::class)->findOneBy([], ['createDate' => 'DESC']);
+        endif;
+        // Get content
+        if ($post): $content = $post->getMarkdown(); endif;
+        if (empty($content)): $content = ''; endif;
+
+        return $this->render('app/index.html.twig', ['content' => $content ?? '']);
     }
 
     public function menu(Request $request, ?Post $post) {

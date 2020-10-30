@@ -24,7 +24,7 @@ class PostController extends AbstractController
      * @Route("/new", name="post_new")
      */
     public function new(Request $request) {
-        if ($request->get('title') && $request->get('content')):
+        if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
             $em = $this->getDoctrine()->getManager();
             $post = new Post();
             $post->setTitle($request->get('title'));
@@ -57,7 +57,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
 
-        if ($request->isMethod('POST')):
+        if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
             $post->setTitle($request->get('title'));
             $post->setContent($request->get('content'));
             $post->setSlug($post->getTitle());

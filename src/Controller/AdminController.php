@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Entity\Edito;
 use App\Entity\Comment;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -23,6 +25,29 @@ class AdminController extends AbstractController
             'comments' => $comments,
             'users' => $users
         ]);
+    }
+
+    /**
+     * @Route("/admin/edito", name="admin_edito")
+     */
+    public function edito(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $edito = $em->getRepository(Edito::class)->findOneBy([], ['createDate' => 'DESC']);
+        if (!$edito):
+            $edito = new Edito();
+            $edito->setContent('');
+            $edito->setAuthor($this->getUser());
+            $em->persist($edito);
+            $em->flush();
+        endif;
+
+        if ($request->isMethod('POST') && $request->get('content')):
+            $edito->setContent($request->get('content'));
+            $em->persist($edito);
+            $em->flush();
+        endif;
+
+        return $this->render('admin/edito.html.twig', ['post' => $edito]);
     }
 
     /**
