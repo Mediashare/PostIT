@@ -1,0 +1,23 @@
+post:
+    path: /post/{slug}
+    controller: App\Controller\PostController::show
+post_new:
+    path: /new
+    controller: App\Controller\PostController::new
+post_edit:
+    path: /edit/{slug}
+    controller: App\Controller\PostController::edit
+post_delete:
+    path: /delete/{slug}
+    controller: App\Controller\PostController::delete
+
+upload:
+    path: /upload
+    controller: App\Controller\UploadController::upload
+
+comment:
+    path: /comment/{slug}
+    controller: App\Controller\CommentController::comment
+comment_delete:
+    path: /comment/{slug}/delete/{id}
+    controller: App\Controller\CommentController::delete

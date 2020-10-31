@@ -2,108 +2,23 @@ index:
    path: /
    controller: App\Controller\AppController::index
 
-# Post
-post:
-   path: /post/{slug}
-   controller: App\Controller\PostController::show
-post_new:
-   path: /new
-   controller: App\Controller\PostController::new
-post_edit:
-   path: /edit/{slug}
-   controller: App\Controller\PostController::edit
-post_delete:
-   path: /delete/{slug}
-   controller: App\Controller\PostController::delete
-upload:
-   path: /upload
-   controller: App\Controller\UploadController::upload
-
-# Markdownify
 markdownify:
    path: /markdownify
    controller: App\Controller\MarkdownifyController::markdownify
 
-# User
-profile:
-   path: /user/{username}
-   controller: App\Controller\UserController::user
-profile_edit:
-   path: /profile/edit/{username}
-   controller: App\Controller\UserController::edit
-profile_apikey_reset:
-   path: /profile/apikey/reset
-   controller: App\Controller\UserController::apikey
-
-# Comment
-comment:
-   path: /comment/{slug}
-   controller: App\Controller\CommentController::comment
-comment_delete:
-   path: /comment/{slug}/delete/{id}
-   controller: App\Controller\CommentController::delete
-
-# Account
-## Authentification
-account:
-   path: /account
-   controller: App\Controller\SecurityController::account
-logout:
-   path: /logout
-   controller: App\Controller\SecurityController::logout
-## Registration
-register:
-   path: /register
-   methods: POST
-   controller: App\Controller\RegistrationController::register
-app_verify_email:
-   path: /verify/email
-   controller: App\Controller\RegistrationController::verifyUserEmail
-## Reset Password
-account_password_forget:
-   path: /account/password/forget
-   controller: App\Controller\SecurityController::passwordForget
-account_password_recovery:
-   path: /account/password/recovery
-   controller: App\Controller\SecurityController::passwordRecovery
-
-# API
-api_posts:
-   path: /api/posts
-   controller: App\Controller\ApiController::posts
-api_post:
-   path: /api/post/{id}
-   controller: App\Controller\ApiController::post
-api_users:
-   path: /api/users
-   controller: App\Controller\ApiController::users
-api_user:
-   path: /api/user/{id}
-   controller: App\Controller\ApiController::user
-   
-# Sitemap
 sitemap:
    path: /sitemap
    controller: App\Controller\SitemapController::sitemap
 
-# Admin
-## Dashboard
-admin:
-   path: /admin
-   controller: App\Controller\AdminController::admin
-## Users
-user_delete:
-   path: /admin/user/delete/{id}
-   controller: App\Controller\AdminController::userDelete
-## Pages
-page_form:
-   path: /admin/page/{id}
-   controller: App\Controller\PageController::form
-page_delete:
-   path: /admin/page/delete/{id}
-   controller: App\Controller\PageController::delete
+routing_post:
+   resource: 'routes/post.yaml'
+routing_user:
+   resource: 'routes/user.yaml'
+routing_api:
+   resource: 'routes/api.yaml'
+routing_admin:
+   resource: 'routes/admin.yaml'
 
-# Page
 page:
    path: /{url}
    controller: App\Controller\PageController::page 
