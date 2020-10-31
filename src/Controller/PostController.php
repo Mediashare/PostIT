@@ -28,19 +28,19 @@ class PostController extends AbstractController {
 
         if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
             // Init parameters
-            $post->setTitle($request->get('title'));
+            if ($post->getTitle() != $request->get('title')):
+                $post->setTitle($request->get('title'));
+                // Generate Slug
+                $post->setSlug($post->getTitle());
+                while ($duplication = $em->getRepository(Post::class)->findOneBy(['slug' => $post->getSlug()])):
+                    if (!isset($slug_counter)): $slug_counter = 0; endif;
+                    $slug_counter++;
+                    $post->setSlug($post->getTitle().'-'.$slug_counter);
+                endwhile;
+            endif;
             $post->setContent($request->get('content'));
-            // Generate Slug
-            $post->setSlug($post->getTitle());
-            while ($duplication = $em->getRepository(Post::class)->findOneBy(['slug' => $post->getSlug()])):
-                if (!isset($slug_counter)): $slug_counter = 0; endif;
-                $slug_counter++;
-                $post->setSlug($post->getTitle().'-'.$slug_counter);
-            endwhile;
-
             $em->persist($post);
             $em->flush();
-
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
         
