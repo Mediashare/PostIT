@@ -5,18 +5,10 @@
     <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="New Post">
         <i class="fa fa-plus"></i>
     </a>
-    <a onclick="searchDisplay();" class="btn-search list-group-item bg-main post_link float-left text-center text-white" title="Search">
-        <i class="fa fa-search"></i>
-    </a>
     {% if app.user is defined and app.user %}
-        <a href="{{ path('profile', {'username': app.user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+        <a href="{{ path('profile') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
             <i class="fa fa-user"></i>
         </a>
-        {% if app.user.isAdmin %}
-            <a href="{{ path('admin') }}" class="list-group-item bg-main post_link float-left text-center bg-info text-white {% if request.get('_route') == 'admin' %}active{% endif %}" title="Administration">
-                <i class="fa fa-cogs"></i>
-            </a>
-        {% endif %}
         <a href="{{ path('logout') }}" class="list-group-item bg-main post_link float-left text-center text-danger" title="Logout">
             <i class="fa fa-sign-out-alt"></i>
         </a>
@@ -39,10 +31,16 @@
 </ul>
 <div id="menu_footer" class="d-lg-flex bg-main shadow-lg rounded">
     <div id="menu_actions" class="">
-        {% if page and app.user and app.user.isAdmin and (request.get('_route') == 'page' or request.get('_route') == 'index') %}
-            <a href="{{ path('page_form', {'id': page.id}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Page">
-                <i class="fa fa-edit"></i>
+
+        {% if app.user and app.user.isAdmin %}
+            <a href="{{ path('admin') }}" class="list-group-item bg-main post_link float-left text-center bg-info text-white {% if request.get('_route') == 'admin' %}active{% endif %}" title="Administration">
+                <i class="fa fa-cogs"></i>
             </a>
+            {% if page and (request.get('_route') == 'page' or request.get('_route') == 'index') %}
+                <a href="{{ path('page_form', {'id': page.id}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Page">
+                    <i class="fa fa-edit"></i>
+                </a>
+            {% endif %}
         {% endif %}
 
         {% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}

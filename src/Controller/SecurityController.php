@@ -20,9 +20,7 @@ class SecurityController extends AbstractController {
     }
 
     public function account(AuthenticationUtils $authenticationUtils, $registrationForm = null): Response {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('profile_edit');
-        }
+        if ($this->getUser()): return $this->redirectToRoute('profile'); endif;
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

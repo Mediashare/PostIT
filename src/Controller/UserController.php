@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController {
-    public function user(?string $username = null) {
+    public function profile(?string $username = null) {
         if (!$username): 
             $user = $this->getUser(); 
         else:

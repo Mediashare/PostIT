@@ -1,9 +1,13 @@
 profile:
-    path: /user/{username}
-    controller: App\Controller\UserController::user
+    path: /profile/{username}
+    controller: App\Controller\UserController::profile
+    defaults:
+        username: null
 profile_edit:
     path: /profile/edit/{username}
     controller: App\Controller\UserController::edit
+    defaults:
+        username: null
 profile_apikey_reset:
     path: /profile/apikey/reset
     controller: App\Controller\UserController::apikey
