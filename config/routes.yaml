@@ -22,4 +22,4 @@ routing_admin:
 
 page:
    path: /{url}
-   controller: App\Controller\AppController::page 
+   controller: App\Controller\PageController::show 
