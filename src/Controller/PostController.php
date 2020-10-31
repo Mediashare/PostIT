@@ -62,9 +62,7 @@ class PostController extends AbstractController {
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
 
-        return $this->render('post/form.html.twig', [
-            'post' => $post,
-        ]);
+        return $this->render('post/form.html.twig', ['post' => $post]);
     }
 
     public function delete(string $slug) {

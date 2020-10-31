@@ -9,6 +9,9 @@ user_delete:
 page_form:
     path: /admin/page/{id}
     controller: App\Controller\PageController::form
+    defaults: 
+        id: null
+
 page_delete:
     path: /admin/page/delete/{id}
     controller: App\Controller\PageController::delete

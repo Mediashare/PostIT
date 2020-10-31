@@ -10,7 +10,7 @@
                 <li class="list-group-item bg-main post_link" > 
                     <span class="float-left">
                         <a href="{{ path('profile_edit', {'username': user.slug,}) }}" class="text-warning">Edit</a> -
-                        <a href="{{ path('admin_user_delete', {'id': user.id}) }}" class="text-danger">Delete</a>
+                        <a href="{{ path('user_delete', {'id': user.id}) }}" class="text-danger">Delete</a>
                     </span>
                     <strong>{{ user.username }}</strong> 
                     <br>
