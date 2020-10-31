@@ -10,6 +10,8 @@
                 {% block comments %}{% endblock %}
             </div>
         </div>
-        {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null, 'page': page ?? null})) }}
+        {% block menu %}
+            {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null, 'page': page ?? null})) }}
+        {% endblock %}
     </div>
 {% endblock %}
