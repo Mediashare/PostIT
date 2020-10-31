@@ -34,15 +34,6 @@ class ApiController extends AbstractController {
         
         return $this->json(['status' => 'success', 'post' => $post ?? []]);
     }
-    
-    public function users(): Response {
-        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository(User::class)->findAll();
-        $serizalizer = new Serialize();
-        $users = $serizalizer->users($users, $type = 'array');
-        
-        return $this->json(['status' => 'success', 'users' => $users ?? []]);
-    }
 
     public function user(string $id): Response {
         $em = $this->getDoctrine()->getManager();
