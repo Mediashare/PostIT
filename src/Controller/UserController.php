@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -23,6 +24,16 @@ class UserController extends AbstractController {
         endif;
         
         return $this->render('user/profile.html.twig', ['user' => $user]);
+    }
+
+    public function signature(?string $username = null) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+        if (!$user):
+            if (!$this->getUser()): return new Response(''); endif;
+            $user = $this->getUser();
+        endif;
+        return $this->render('user/_signature.html.twig', ['user' => $user]);
     }
 
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {

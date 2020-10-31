@@ -35,7 +35,7 @@ function CodeMirorInit(markdownify_path, content) {
 function refreshPreview(markdownify_path, content) {
     $('textarea#content_mirror').val(content);
     $.post(markdownify_path, {content: content}, function (data) {
-        $('.markdown-body').html(data);
+        $('.markdown-preview').html(data);
         document.querySelectorAll('.markdown-body pre code').forEach((block) => {
             hljs.highlightBlock(block);
         });

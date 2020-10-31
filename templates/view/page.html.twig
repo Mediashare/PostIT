@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block page %}
+    <div class="row">
+        <div id="content" class="col-lg-9 p-0 shadow-lg rounded">
+            {% include '_flash.html.twig' %}
+            <div class="col-12 rounded mt-3">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-12 rounded mt-3 mb-3">
+                {% block comments %}{% endblock %}
+            </div>
+        </div>
+        <div id="menu" class="col-lg-3 p-0">
+            {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null, 'page': page ?? null})) }}
+        </div>
+    </div>
+{% endblock %}

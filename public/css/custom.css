@@ -22,7 +22,7 @@ a:hover { text-decoration: none!important; }
 a.username:hover { font-weight: 600; color: #73daea!important; }
 div#content { height: 100vh; overflow: auto; }
 .markdown-body { overflow: auto; padding: 1rem; }
-.signature { width: 50vw; margin: auto!important; }
+.signature { margin: auto!important; }
 .comment, .signature { white-space: pre-line; }
 .comment_info { margin: 0; display: inline-block; vertical-align: middle; line-height: 50px; }
 input { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 2.5em!important; height: 50px!important; }

@@ -3,11 +3,11 @@
 {% endif %}
 
 {% if user is defined %}
-    <div id="post_signature" class="pt-2 rounded text-center">
-        <a href="{{ path('profile', {'username': user.slug}) }}" title="Profile {{ user.username }}" class="username">
-            <img src="{{ preload(asset('images/avatars/' ~ user.avatar ?? 'default.png'), { as: 'image' }) }}" class="img-fluid avatar"> <br>
-            <em class="text-info">{{ user.username }}</em>
-        </a>
-        <p class="m-0 pb-2 signature">{{ user.signature }}</p>
-    </div>
+<div id="post_signature" class="p-0 pt-2 rounded text-center">
+    <a href="{{ path('profile', {'username': user.slug}) }}" title="Profile {{ user.username }}" class="username">
+        <img src="{{ preload(asset('images/avatars/' ~ user.avatar ?? 'default.png'), { as: 'image' }) }}" class="img-fluid avatar"> <br>
+        <em class="text-info">{{ user.username }}</em>
+    </a>
+    <p class="m-0 pb-2 signature">{{ user.signature }}</p>
+</div>
 {% endif %}
