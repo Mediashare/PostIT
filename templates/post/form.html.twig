@@ -18,7 +18,7 @@
             <div class="col-lg-3 p-0">
                 <div class="float-left w-50 border-top">
                     <a tabindex="-1" class="btn btn-cancel" title="Cancel"
-                        {% if post is defined %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
+                        {% if post.slug %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
                     >
                         <i class="fa fa-times"></i>
                     </a>
@@ -59,7 +59,7 @@
     <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
     <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
     <script>
-        {% if post is defined %} {% set content = post.content %}
+        {% if post.content %} {% set content = post.content %}
         {% else %} {% set content = "# Hello world\n" %} {% endif %}
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
         refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());

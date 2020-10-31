@@ -3,10 +3,13 @@ post:
     controller: App\Controller\PostController::show
 post_new:
     path: /new
-    controller: App\Controller\PostController::new
+    controller: App\Controller\PostController::form
+    defaults:
+        slug: null
 post_edit:
     path: /edit/{slug}
-    controller: App\Controller\PostController::edit
+    controller: App\Controller\PostController::form
+
 post_delete:
     path: /delete/{slug}
     controller: App\Controller\PostController::delete

@@ -44,7 +44,9 @@
     </head>
     <body>
         <div class="container-fluid">
-            {% if app.request.get('_route') != 'post_new' and app.request.get('_route') != 'post_edit' and app.request.get('_route') != 'page_form' %}
+            {% if app.request.get('_route') != 'post_new' 
+                and app.request.get('_route') != 'post_edit' 
+                and app.request.get('_route') != 'page_form' %}
                 <div class="row">
                     <div id="content" class="col-lg-9 p-0 shadow-lg rounded">
                         {% include '_flash.html.twig' %}

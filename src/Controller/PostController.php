@@ -15,11 +15,21 @@ class PostController extends AbstractController {
             'post' => $post,
         ]);
     }
-    
-    public function new(Request $request) {
+
+    public function form(Request $request, ?string $slug = null) {
+        $em = $this->getDoctrine()->getManager();
+        if ($slug):
+            $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug], ['createDate' => 'DESC']);
+            if (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
+                return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
+            endif;
+        else: 
+            $post = new Post(); 
+            if ($this->getUser()): $post->setAuthor($this->getUser()); endif;
+        endif;
+
         if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
-            $em = $this->getDoctrine()->getManager();
-            $post = new Post();
+            // Init parameters
             $post->setTitle($request->get('title'));
             $post->setContent($request->get('content'));
             // Generate Slug
@@ -29,39 +39,13 @@ class PostController extends AbstractController {
                 $slug_counter++;
                 $post->setSlug($post->getTitle().'-'.$slug_counter);
             endwhile;
-            if ($this->getUser()):
-                $post->setAuthor($this->getUser());
-            endif;
+
             $em->persist($post);
             $em->flush();
 
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
-        return $this->render('post/form.html.twig');
-    }
-    
-    public function edit(Request $request, string $slug) {
-        $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
-        if (!$post): return $this->redirectToRoute('index'); endif;
-        if (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
-            return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
-        endif;
-
-        if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
-            $post->setTitle($request->get('title'));
-            $post->setContent($request->get('content'));
-            $post->setSlug($post->getTitle());
-            while ($duplication = $em->getRepository(Post::class)->findOneBy(['slug' => $post->getSlug()])):
-                if (!isset($slug_counter)): $slug_counter = 0; endif;
-                $slug_counter++;
-                $post->setSlug($post->getTitle().'-'.$slug_counter);
-            endwhile;
-            $em->persist($post);
-            $em->flush();
-            return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
-        endif;
-
+        
         return $this->render('post/form.html.twig', ['post' => $post]);
     }
 
