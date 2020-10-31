@@ -4,7 +4,7 @@ index:
 
 markdownify:
    path: /markdownify
-   controller: App\Controller\MarkdownifyController::markdownify
+   controller: App\Controller\ApiController::markdownify
 
 sitemap:
    path: /sitemap
@@ -17,8 +17,9 @@ routing_user:
 routing_api:
    resource: 'routes/api.yaml'
 routing_admin:
+   prefix: '/admin'
    resource: 'routes/admin.yaml'
 
 page:
    path: /{url}
-   controller: App\Controller\PageController::page 
+   controller: App\Controller\AppController::page 

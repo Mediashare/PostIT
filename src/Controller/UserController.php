@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
+use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController {
@@ -114,5 +113,26 @@ class UserController extends AbstractController {
         $this->addFlash('success', 'Apikey has been reseted.');
 
         return $this->redirectToRoute('profile');
+    }
+
+
+    public function delete(string $id) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['id' => $id]);
+        if (!$user):
+            $this->addFlash('error', 'No user found.');
+            return $this->redirectToRoute('admin');
+        endif;
+        foreach ($user->getPosts() as $post):
+            $em->remove($post);
+        endforeach;
+        foreach ($user->getComments() as $comment):
+            $em->remove($comment);
+        endforeach;
+        
+        $em->remove($user);
+        $em->flush();
+        
+        return $this->redirectToRoute('admin');
     }
 }

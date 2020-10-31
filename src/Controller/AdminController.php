@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
-use App\Entity\Page;
 use App\Entity\Comment;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController {
-    public function admin() {
+    public function dashboard() {
         $em = $this->getDoctrine()->getManager();
         $pages = $em->getRepository(Page::class)->findBy([], ['createDate' => 'DESC']);
         $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
@@ -21,25 +22,5 @@ class AdminController extends AbstractController {
             'users' => $users,
             'pages' => $pages
         ]);
-    }
-
-    public function userDelete(string $id) {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(['id' => $id]);
-        if (!$user):
-            $this->addFlash('error', 'No user found.');
-            return $this->redirectToRoute('admin');
-        endif;
-        foreach ($user->getPosts() as $post):
-            $em->remove($post);
-        endforeach;
-        foreach ($user->getComments() as $comment):
-            $em->remove($comment);
-        endforeach;
-        
-        $em->remove($user);
-        $em->flush();
-        
-        return $this->redirectToRoute('admin');
     }
 }

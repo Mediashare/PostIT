@@ -16,11 +16,11 @@ post_delete:
 
 upload:
     path: /upload
-    controller: App\Controller\UploadController::upload
+    controller: App\Controller\PostController::upload
 
 comment:
     path: /comment/{slug}
-    controller: App\Controller\CommentController::comment
+    controller: App\Controller\CommentController::new
 comment_delete:
     path: /comment/{slug}/delete/{id}
     controller: App\Controller\CommentController::delete

@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Security\EmailVerifier;
 use Symfony\Component\Mime\Address;
+use App\Controller\AbstractController;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 

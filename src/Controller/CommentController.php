@@ -1,14 +1,7 @@
 <?php
-
 namespace App\Controller;
-
-use App\Entity\Post;
-use App\Entity\Comment;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 class CommentController extends AbstractController {
-    public function comment(Request $request, string $slug) {
+    public function new(Request $request, string $slug) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
         if (!$post): 

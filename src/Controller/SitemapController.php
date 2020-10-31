@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Page;
 use App\Entity\Post;
+use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class SitemapController extends AbstractController {
     public function sitemap(Request $request) {

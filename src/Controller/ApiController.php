@@ -4,11 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Service\Text;
 use App\Service\Serialize;
+use App\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiController extends AbstractController {
+    public function markdownify(Request $request) {
+        $text = new Text();
+        $markdown = $text->markdownify($request->get('content') ?? '');
+        return new Response($markdown, 200);
+    }
+    
     public function posts(): Response {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'desc']);

@@ -1,17 +1,17 @@
 admin:
-    path: /admin
-    controller: App\Controller\AdminController::admin
+    path: /
+    controller: App\Controller\AdminController::dashboard
 
 user_delete:
-    path: /admin/user/delete/{id}
-    controller: App\Controller\AdminController::userDelete
+    path: /user/delete/{id}
+    controller: App\Controller\UserController::delete
     
 page_form:
-    path: /admin/page/{id}
+    path: /page/{id}
     controller: App\Controller\PageController::form
     defaults: 
         id: null
 
 page_delete:
-    path: /admin/page/delete/{id}
+    path: /page/delete/{id}
     controller: App\Controller\PageController::delete

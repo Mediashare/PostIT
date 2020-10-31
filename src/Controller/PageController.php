@@ -1,15 +1,12 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Page;
-use App\Entity\Post;
+use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PageController extends AbstractController {
-    public function page(?Request $request, ?string $url, ?string $id) {
+class PageController extends AbstractController { 
+    public function show(?Request $request, ?string $url, ?string $id) {
         $em = $this->getDoctrine()->getManager();
         // Get Page
         if ($url):
@@ -25,7 +22,7 @@ class PageController extends AbstractController {
         
         return $this->render('page/show.html.twig', ['content' => $page->getMarkdown() ?? '', 'page' => $page]);
     }
-
+    
     public function form(Request $request, ?string $id = null) {
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository(Page::class)->findOneBy(['id' => $id], ['createDate' => 'DESC']);

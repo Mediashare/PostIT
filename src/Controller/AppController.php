@@ -5,9 +5,9 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Post;
 use App\Service\View;
+use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AppController extends AbstractController {
     public function index(Request $request) {
@@ -23,7 +23,7 @@ class AppController extends AbstractController {
             return $this->render('post/show.html.twig', ['post' => $post]);
         endif;
     }
-
+    
     public function menu(Request $request, ?Post $post, ?Page $page) {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
