@@ -1,8 +1,0 @@
-<div id="post_content" class="markdown-body shadow-lg rounded">
-    <div class="markdown-preview">
-        {% if post.markdown is defined %}
-            {{ post.markdown|raw }}
-        {% endif %}
-    </div>
-    {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
-</div>

@@ -11,9 +11,7 @@ class PostController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
         if (!$post): return $this->redirectToRoute('index'); endif;
-        return $this->render('post/show.html.twig', [
-            'post' => $post,
-        ]);
+        return $this->render('post/show.html.twig', ['post' => $post]);
     }
 
     public function form(Request $request, ?string $slug = null) {

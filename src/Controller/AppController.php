@@ -16,13 +16,11 @@ class AppController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository(Page::class)->findOneBy(['url' => '/'], ['createDate' => 'DESC']);
         if ($page && $page->getMarkdown()): 
-            $content = $page->getMarkdown();
-            return $view->page($page);
+            return $this->render('page/show.html.twig', ['page' => $page]);
         else:
             // If have not Page
             $post = $em->getRepository(Post::class)->findOneBy([], ['createDate' => 'DESC']); // Get last post
-            $content = $post->getMarkdown();
-            return $view->post($post);
+            return $this->render('post/show.html.twig', ['post' => $post]);
         endif;
     }
 

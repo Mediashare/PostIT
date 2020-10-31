@@ -1,16 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends 'view/page.html.twig' %}
 
-{% block title %}{{ post.title }}{% endblock %}
-{% block title_og %}{{ post.title }}{% endblock %}
-{% block description %}{{ post.markdown|striptags|slice(0.156) }}...{% endblock %}
-{% block description_og %}{{ post.markdown|striptags|slice(0.156) }}...{% endblock %}
+{% block title %}{{ post.title ?? null }}{% endblock %}
+{% block title_og %}{{ post.title ?? null }}{% endblock %}
+{% block description %}{{ post.content ?? null }}{% endblock %}
+{% block description_og %}{{ post.content ?? null }}{% endblock %}
+
 {% block type_og %}article{% endblock %}
 {% block author %}{{ post.author ?? 'Anonyme' }}{% endblock %}
 {% block author_og %}{{ post.author ?? 'Anonyme' }}{% endblock %}
 
 {% block content %}
-    {% include 'post/_content.html.twig' %}
+    <div id="post_content" class="markdown-body shadow-lg rounded">
+        <div class="markdown-preview">
+            {% if post.markdown is defined %}
+                {{ post.markdown|raw }}
+            {% endif %}
+        </div>
+        {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
+    </div>
 {% endblock %}
+
 {% block comments %}
     {% include 'post/_comments.html.twig' %}
 {% endblock %}
