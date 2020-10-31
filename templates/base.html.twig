@@ -6,6 +6,7 @@
         {# SEO #}
         <title>{% block title %}Mediashare{% endblock %}</title>
         <meta name="robots" content="index, follow">
+        <link rel="canonical" href="{{ app.request.uri }}"/>
         <meta name="description" content="{% block description %}Mediashare est une entité promouvant le partage de ressource sur Internet.{% endblock %}">
         <meta name="author" content="{% block author %}Mediashare{% endblock %}">
         <meta name="keywords" content="Mediashare, mediashare.fr, partage, blog, automatisation, devops, documentations, hack, astuces, command line, open-sourcing, php, librairies, symfony, tools, outils numérique" lang="fr">
@@ -16,20 +17,20 @@
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
         
         {# Css #}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=0.8">
         <link rel="stylesheet" href="{{ preload(asset('font/recursive.css'), { as: 'font', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('css/bootstrap.min.css'), { as: 'style', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('css/retro.css'), { as: 'style', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('css/menu.css'), { as: 'style' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/highlight.min.css'), { as: 'style' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('css/custom.css'), { as: 'style' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('fontawesome/css/all.css'), { as: 'style', importance: 'high' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('css/highlight.min.css'), { as: 'style' }) }}">
         {% block stylesheets %}{% endblock %}
         
         {# Javascripts #}
         <script src="{{ preload(asset('js/jquery.min.js'), { as: 'script', importance: 'high' }) }}"></script>
         <script src="{{ preload(asset('js/bootstrap.min.js'), { as: 'script' }) }}"></script>
         <script src="{{ preload(asset('js/highlight.min.js'), { as: 'script' }) }}"></script>
-        <script src="{{ preload('https://kit.fontawesome.com/15a8f6574f.js', { as: 'script', importance: 'high' }) }}" crossorigin="anonymous"></script>
         
         {# Google Analytics #}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
@@ -43,21 +44,9 @@
     </head>
     <body>
         <div class="container-fluid">
-            {% if app.request.get('_route') != 'post_new' and app.request.get('_route') != 'post_edit' %}
-                <div class="row">
-                    <div id="content" class="col-lg-9 p-0 shadow-lg rounded">
-                        {% include '_flash.html.twig' %}
-                        {% block content %}{% endblock %}
-                        {% block comments %}{% endblock %}
-                    </div>
-                    <div id="menu" class="col-lg-3 p-0">
-                        {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null})) }}
-                    </div>
-                </div>
-            {% else %}
-                {% include '_flash.html.twig' %}
-                {% block editor %}{% endblock %}
-            {% endif %}
+            {% include '_flash.html.twig' %}
+            {% block page %}{% endblock %}    
+            {% block editor %}{% endblock %}
         </div>
 
         {# Javascripts #}

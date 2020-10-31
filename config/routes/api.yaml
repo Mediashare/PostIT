@@ -1,0 +1,13 @@
+api_posts:
+    path: /api/posts
+    controller: App\Controller\ApiController::posts
+api_post:
+    path: /api/post/{id}
+    controller: App\Controller\ApiController::post
+api_users:
+    path: /api/users
+    controller: App\Controller\ApiController::users
+api_user:
+    path: /api/user/{id}
+    controller: App\Controller\ApiController::user
+    

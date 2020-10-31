@@ -43,19 +43,19 @@ function scrollToAnchor(id){
     $('ul#menu_posts').animate({scrollTop: Tag.offset().top - 50},'slow');
 }
 function searchDisplay() {
-    var input = $('#menu_search');
-    if (input.attr('data-displayed') == "true") {
-        input.attr('data-displayed', "false").addClass('d-none');
-        $('#menu_actions').attr('data-displayed', "true").removeClass('d-none');
-        $('.btn-search').removeClass('active');
-        input.find('input').val('');
-        search();
-    } else {
-        $('.btn-search').addClass('active');
-        input.attr('data-displayed', "true").removeClass('d-none');
-        input.find('input').focus();
-        $('#menu_actions').attr('data-displayed', "false").addClass('d-none');
-    }
+    // var input = $('#menu_search');
+    // if (input.attr('data-displayed') == "true") {
+    //     input.attr('data-displayed', "false").addClass('d-none');
+    //     $('#menu_actions').attr('data-displayed', "true").removeClass('d-none');
+    //     $('.btn-search').removeClass('active');
+    //     input.find('input').val('');
+    //     search();
+    // } else {
+    //     $('.btn-search').addClass('active');
+    //     input.attr('data-displayed', "true").removeClass('d-none');
+    //     input.find('input').focus();
+    //     $('#menu_actions').attr('data-displayed', "false").addClass('d-none');
+    // }
 }
 function search() {
     // Declare variables

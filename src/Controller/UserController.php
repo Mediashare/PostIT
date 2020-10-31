@@ -5,18 +5,13 @@ namespace App\Controller;
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserController extends AbstractController
-{
-
-    /**
-     * @Route("/user/{username}", name="profile")
-     */
-    public function user(?string $username = null) {
+class UserController extends AbstractController {
+    public function profile(?string $username = null) {
         if (!$username): 
             $user = $this->getUser(); 
         else:
@@ -31,19 +26,29 @@ class UserController extends AbstractController
         return $this->render('user/profile.html.twig', ['user' => $user]);
     }
 
-    /**
-     * @Route("/profile/edit/{username}", name="profile_edit")
-     */
+    public function signature(?string $username = null) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+        if (!$user):
+            if (!$this->getUser()): return new Response(''); endif;
+            $user = $this->getUser();
+        endif;
+        return $this->render('user/_signature.html.twig', ['user' => $user]);
+    }
+
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
         $em = $this->getDoctrine()->getManager();
-        if ($username && $this->getUser() && $this->getUser()->isAdmin()):
+        if ($username):
             $user = $em->getRepository(User::class)->findOneBy(['slug' => $username]);
-            if (!$user): 
+            if (!$user):
                 $this->addFlash('error', 'User not found.');
-                return $this->redirectToRoute('admin');
-            endif; 
-        endif;
-        if (empty($user)): $user = $this->getUser(); endif;
+                return $this->redirectToRoute('profile');
+            endif;
+            if ($user != $this->getUser() && !$this->getUser()->isAdmin()):
+                $this->addFlash('error', 'You have not permission.');
+                return $this->redirectToRoute('profile');
+            endif;
+        else: $user = $this->getUser(); endif;
         if ($request->isMethod('POST')):
             // Username
             $form = $request->request;
@@ -98,12 +103,9 @@ class UserController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('profile_edit', ['username' => $user->getSlug()]);
         endif;
-        return $this->render('user/edit.html.twig');
+        return $this->render('user/edit.html.twig', ['user' => $user]);
     }
 
-    /**
-     * @Route("/profile/apikey/reset", name="profile_apikey_reset")
-     */
     public function apikey() {
         $this->getUser()->setApikey(\sha1(\microtime().$this->getUser()->getId()));
         $em = $this->getDoctrine()->getManager();

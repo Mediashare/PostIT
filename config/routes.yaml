@@ -1,3 +1,24 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /
+   controller: App\Controller\AppController::index
+
+markdownify:
+   path: /markdownify
+   controller: App\Controller\MarkdownifyController::markdownify
+
+sitemap:
+   path: /sitemap
+   controller: App\Controller\SitemapController::sitemap
+
+routing_post:
+   resource: 'routes/post.yaml'
+routing_user:
+   resource: 'routes/user.yaml'
+routing_api:
+   resource: 'routes/api.yaml'
+routing_admin:
+   resource: 'routes/admin.yaml'
+
+page:
+   path: /{url}
+   controller: App\Controller\PageController::page 

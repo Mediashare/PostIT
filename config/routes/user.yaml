@@ -1,0 +1,36 @@
+profile:
+    path: /profile/{username}
+    controller: App\Controller\UserController::profile
+    defaults:
+        username: null
+profile_edit:
+    path: /profile/edit/{username}
+    controller: App\Controller\UserController::edit
+    defaults:
+        username: null
+profile_apikey_reset:
+    path: /profile/apikey/reset
+    controller: App\Controller\UserController::apikey
+
+
+account:
+    path: /account
+    controller: App\Controller\SecurityController::account
+logout:
+    path: /logout
+    controller: App\Controller\SecurityController::logout
+
+register:
+    path: /register
+    methods: POST
+    controller: App\Controller\RegistrationController::register
+app_verify_email:
+    path: /verify/email
+    controller: App\Controller\RegistrationController::verifyUserEmail
+
+account_password_forget:
+    path: /account/password/forget
+    controller: App\Controller\SecurityController::passwordForget
+account_password_recovery:
+    path: /account/password/recovery
+    controller: App\Controller\SecurityController::passwordRecovery

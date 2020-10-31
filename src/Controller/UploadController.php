@@ -5,15 +5,10 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class UploadController extends AbstractController
-{
-    /**
-     * @Route("/upload", name="upload")
-     */
+class UploadController extends AbstractController {
     public function upload(Request $request) {
         $title = $request->get('title');
         $content = $request->get('content') ?? $this->getFileContent($request->files->get('content'));

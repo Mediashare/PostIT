@@ -1,0 +1,25 @@
+<div class="card bg-main shadow-lg rounded mt-1">
+    <div class="card-header">
+        <h4 class="card-title">
+            Posts
+        </h4>
+    </div>
+    <div class="card-content" style="max-height: 50vh;overflow: auto;">
+        <ul class="list-group text-right bg-main">
+            {% for post in posts %}
+                <li class="list-group-item bg-main post_link"> 
+                    <span class="float-left">
+                        <a href="{{ path('post', {'slug': post.slug}) }}" class="text-primary">Show</a> -
+                        <a href="{{ path('post_edit', {'slug': post.slug}) }}" class="text-warning">Edit</a> -
+                        <a href="{{ path('post_delete', {'slug': post.slug}) }}" class="text-danger">Delete</a>
+                    </span>
+                    <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 
+                    <br>
+                    <span class="float-right">
+                        <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em> - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

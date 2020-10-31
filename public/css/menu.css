@@ -51,7 +51,7 @@ ul#menu_posts {
 }
 @media (max-width: 991px) {
     div#menu_header {
-        width: 55vw;
+        width: 100vw;
         display: none;
         position: fixed;
         z-index: 21;
@@ -61,9 +61,9 @@ ul#menu_posts {
     }
     ul#menu_posts {
         margin-top: 50px!important;
-        padding-bottom: 50px!important;
+        /* padding-bottom: 50px!important; */
         display: none;
-        width: 55vw;
+        width: 100vw;
         position: fixed;
         top: 0;
         right: 0;
@@ -71,7 +71,7 @@ ul#menu_posts {
     }
     div#menu_footer {
         margin-top: 50px;
-        width: 55vw;
+        width: 100vw;
         display: none;
         position: fixed;
         z-index: 21;

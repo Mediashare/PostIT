@@ -10,6 +10,10 @@
     border-radius: 5px;
 }
 
+.markdown-body img {
+    border-radius: 0.2em;
+}
+
 @media print {
     .markdown-body a,
     .markdown-body a:visited {

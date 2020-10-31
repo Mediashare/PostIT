@@ -6,7 +6,7 @@
 }
 html, body { font-family: 'Recursive', monospace; }
 body { height: 100vh; background-color: var(--main-bg-color); color: var(--main-text-color); word-wrap: normal; }
-strong { color: white; }
+strong { color: white; font-weight: 500; }
 code { background-color: #333; padding: 0.2em; border-radius: 0.2em; }
 /* Macro */
 .d-none { display: none!important; }
@@ -22,7 +22,7 @@ a:hover { text-decoration: none!important; }
 a.username:hover { font-weight: 600; color: #73daea!important; }
 div#content { height: 100vh; overflow: auto; }
 .markdown-body { overflow: auto; padding: 1rem; }
-.signature { width: 50vw; margin: auto!important; }
+.signature { margin: auto!important; }
 .comment, .signature { white-space: pre-line; }
 .comment_info { margin: 0; display: inline-block; vertical-align: middle; line-height: 50px; }
 input { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 2.5em!important; height: 50px!important; }
@@ -40,8 +40,8 @@ textarea { border-color: var(--main-bg-color)!important; background-color: var(-
 .btn-comment:hover { background-color: #877ac1; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 
 /* Avatar */
-.avatar { border-radius: 50%; width: 120px; height: 120px; }
-.avatar_min { border-radius: 50%; width: 50px!important; height: 50px!important; }
+.avatar { border-radius: 50%!important; width: 120px; height: 120px; }
+.avatar_min { border-radius: 50%!important; width: 50px!important; height: 50px!important; }
 
 /* Responsive */
 @media (max-width: 991px) {

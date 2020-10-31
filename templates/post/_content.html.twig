@@ -1,8 +1,8 @@
 <div id="post_content" class="markdown-body shadow-lg rounded">
-    {% if post.markdown is defined %}
-        {{ post.markdown|raw }}
-    {% endif %}
-    {% if post.author.username is defined %}
-        {% include 'post/_signature.html.twig' %}
-    {% endif %}
+    <div class="markdown-preview">
+        {% if post.markdown is defined %}
+            {{ post.markdown|raw }}
+        {% endif %}
+    </div>
+    {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
 </div>
