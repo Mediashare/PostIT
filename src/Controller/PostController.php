@@ -4,14 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PostController extends AbstractController
-{
-    /**
-     * @Route("/post/{slug}/", name="post")
-     */
+class PostController extends AbstractController {
     public function show(string $slug) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
@@ -21,9 +16,6 @@ class PostController extends AbstractController
         ]);
     }
     
-    /**
-     * @Route("/new", name="post_new")
-     */
     public function new(Request $request) {
         if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
             $em = $this->getDoctrine()->getManager();
@@ -47,10 +39,7 @@ class PostController extends AbstractController
         endif;
         return $this->render('post/form.html.twig');
     }
-
-    /**
-     * @Route("/edit/{slug}/", name="post_edit")
-     */
+    
     public function edit(Request $request, string $slug) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
@@ -78,9 +67,6 @@ class PostController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/delete/{slug}/", name="post_delete")
-     */
     public function delete(string $slug) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);

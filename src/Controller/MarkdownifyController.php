@@ -4,14 +4,9 @@ namespace App\Controller;
 
 use App\Service\Text;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class MarkdownifyController extends AbstractController
-{
-    /**
-     * @Route("/markdownify", name="markdownify")
-     */
+class MarkdownifyController extends AbstractController {
     public function markdownify(Request $request) {
         $text = new Text();
         $markdown = $text->markdownify($request->get('content') ?? '');

@@ -8,25 +8,18 @@ use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class SecurityController extends AbstractController
-{
+class SecurityController extends AbstractController {
     private $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
-    {
+    public function __construct(EmailVerifier $emailVerifier) {
         $this->emailVerifier = $emailVerifier;
     }
 
-    /**
-     * @Route("/account", name="account")
-     */
-    public function account(AuthenticationUtils $authenticationUtils, $registrationForm = null): Response
-    {
+    public function account(AuthenticationUtils $authenticationUtils, $registrationForm = null): Response {
         if ($this->getUser()) {
             return $this->redirectToRoute('profile_edit');
         }
@@ -39,9 +32,6 @@ class SecurityController extends AbstractController
         return $this->render('security/index.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'registrationForm' => $registrationForm]);
     }
 
-    /**
-     * @Route("/account/password/forget", name="account_password_forget")
-     */
     public function passwordForget(Request $request) {
         if ($request->isMethod('POST')):
             $em = $this->getDoctrine()->getManager();
@@ -65,9 +55,6 @@ class SecurityController extends AbstractController
         return $this->render('security/password_forget.html.twig');
     }
     
-    /**
-     * @Route("/account/password/recovery", name="account_password_recovery")
-     */
     public function passwordRecovery(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
         if (!$request->get('token')):
             return $this->redirectToRoute('account_password_forget');
@@ -96,11 +83,7 @@ class SecurityController extends AbstractController
         return $this->render('security/password_recovery.html.twig');
     }
     
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logout()
-    {
+    public function logout() {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
     

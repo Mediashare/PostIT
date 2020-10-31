@@ -5,14 +5,9 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\Comment;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class CommentController extends AbstractController
-{
-    /**
-     * @Route("/comment/{slug}", name="comment")
-     */
+class CommentController extends AbstractController {
     public function comment(Request $request, string $slug) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
@@ -38,9 +33,6 @@ class CommentController extends AbstractController
         return $this->redirectToRoute('post', ['slug' => $post->getSlug(), '_fragment' => 'comment_'.$comment->getId() ?? '']);
     }
 
-    /**
-     * @Route("/comment/{slug}/delete/{id}", name="comment_delete")
-     */
     public function delete(Request $request, string $slug, string $id) {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);

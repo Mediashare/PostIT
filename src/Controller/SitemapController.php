@@ -5,14 +5,9 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class SitemapController extends AbstractController
-{
-    /**
-     * @Route("/sitemap", name="sitemap")
-     */
+class SitemapController extends AbstractController {
     public function sitemap(Request $request) {
         $urls[$this->generateUrl('index')] = ['url' => $this->generateUrl('index', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
         $urls[$this->generateUrl('post_new')] = ['url' => $this->generateUrl('post_new', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];

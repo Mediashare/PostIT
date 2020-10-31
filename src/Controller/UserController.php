@@ -5,17 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserController extends AbstractController
-{
-
-    /**
-     * @Route("/user/{username}", name="profile")
-     */
+class UserController extends AbstractController {
     public function user(?string $username = null) {
         if (!$username): 
             $user = $this->getUser(); 
@@ -31,9 +25,6 @@ class UserController extends AbstractController
         return $this->render('user/profile.html.twig', ['user' => $user]);
     }
 
-    /**
-     * @Route("/profile/edit/{username}", name="profile_edit")
-     */
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
         $em = $this->getDoctrine()->getManager();
         if ($username):
@@ -104,9 +95,6 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', ['user' => $user]);
     }
 
-    /**
-     * @Route("/profile/apikey/reset", name="profile_apikey_reset")
-     */
     public function apikey() {
         $this->getUser()->setApikey(\sha1(\microtime().$this->getUser()->getId()));
         $em = $this->getDoctrine()->getManager();

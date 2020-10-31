@@ -6,14 +6,9 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Page;
 use App\Entity\Comment;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AdminController extends AbstractController
-{
-    /**
-     * @Route("/admin", name="admin")
-     */
+class AdminController extends AbstractController {
     public function admin() {
         $em = $this->getDoctrine()->getManager();
         $pages = $em->getRepository(Page::class)->findBy([], ['createDate' => 'DESC']);
@@ -28,9 +23,6 @@ class AdminController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin/user/delete/{id}", name="admin_user_delete")
-     */
     public function userDelete(string $id) {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->findOneBy(['id' => $id]);

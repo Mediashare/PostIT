@@ -6,11 +6,9 @@ use App\Entity\Page;
 use App\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PageController extends AbstractController
-{
+class PageController extends AbstractController {
     public function page(?Request $request, ?string $url, ?string $id) {
         $em = $this->getDoctrine()->getManager();
         // Get Page
@@ -28,10 +26,7 @@ class PageController extends AbstractController
         return $this->render('page/show.html.twig', ['content' => $page->getMarkdown() ?? '', 'page' => $page]);
     }
 
-     /**
-     * @Route("/admin/page/{id}", name="page_form")
-     */
-    public function edit(Request $request, ?string $id = null) {
+    public function form(Request $request, ?string $id = null) {
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository(Page::class)->findOneBy(['id' => $id], ['createDate' => 'DESC']);
         if (!$page):
@@ -54,9 +49,6 @@ class PageController extends AbstractController
         return $this->render('page/form.html.twig', ['page' => $page]);
     }
 
-    /**
-     * @Route("/admin/page/delete/{id}", name="page_delete")
-     */
     public function delete(string $id) {
         $em = $this->getDoctrine()->getManager();
         $page = $em->getRepository(Page::class)->findOneBy(['id' => $id]);

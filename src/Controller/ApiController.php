@@ -6,14 +6,9 @@ use App\Entity\Post;
 use App\Entity\User;
 use App\Service\Serialize;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ApiController extends AbstractController
-{
-    /**
-     * @Route("/api/posts", name="api_posts")
-     */
+class ApiController extends AbstractController {
     public function posts(): Response {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'desc']);
@@ -22,9 +17,7 @@ class ApiController extends AbstractController
         
         return $this->json(['status' => 'success', 'posts' => $posts ?? []]);
     }
-    /**
-     * @Route("/api/post/{id}", name="api_post")
-     */
+
     public function post(string $id): Response {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->find($id);
@@ -33,10 +26,7 @@ class ApiController extends AbstractController
         
         return $this->json(['status' => 'success', 'post' => $post ?? []]);
     }
-
-    /**
-     * @Route("/api/users", name="api_users")
-     */
+    
     public function users(): Response {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository(User::class)->findAll();
@@ -46,9 +36,6 @@ class ApiController extends AbstractController
         return $this->json(['status' => 'success', 'users' => $users ?? []]);
     }
 
-    /**
-     * @Route("/api/user/{id}", name="api_user")
-     */
     public function user(string $id): Response {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository(User::class)->find($id);
