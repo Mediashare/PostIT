@@ -36,6 +36,10 @@ ul#menu_posts a.active:hover {
     color: white;
 }
 
+.btn-search-close {
+    display: none;
+}
+
 /* Responsive */
 ul#menu_posts {
     display: flex;

@@ -2,6 +2,12 @@
     <a href="/" class="list-group-item bg-main post_link float-left text-center text-primary {% if request.get('_route') == 'index' %}active{% endif %}" title="Homepage">
         <i class="fa fa-home"></i>
     </a>
+    <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-white text-center btn-search" title="Rechercher un post">
+        <i class="fa fa-search"></i>
+    </a>
+    <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-danger text-center btn-search-close" title="Rechercher un post">
+        <i class="fa fa-times"></i>
+    </a>
     <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="New Post">
         <i class="fa fa-plus"></i>
     </a>
@@ -17,6 +23,9 @@
             <i class="fa fa-user"></i>
         </a>
     {% endif %}
+    <div id="menu_search" class="d-none" data-displayed="false">
+        <input type="text" id="input_search" class="form-control bg-main pl-0" onkeyup="search()" placeholder="Search...">
+    </div>
 </div>
 <ul id="menu_posts" class="list-group text-right bg-main">
     {% for post in posts %}
@@ -55,9 +64,6 @@
                 <i class="fa fa-user-cog"></i>
             </a>
         {% endif %}
-        <div id="menu_search" class="d-flex" data-displayed="false">
-            <input type="text" id="input_search" class="form-control bg-main" onkeyup="search()" placeholder="Search...">
-        </div>
     </div>
 </div>
     
