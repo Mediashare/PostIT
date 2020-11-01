@@ -8,5 +8,5 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
+/.time-tracking/
 .DS_Store
