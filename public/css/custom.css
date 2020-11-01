@@ -18,10 +18,10 @@ code { background-color: #333; padding: 0.2em; border-radius: 0.2em; }
 .btn-circle.btn-xl { width: 70px; height: 70px; padding: 22px 22px; border-radius: 35px; font-size: 24px; line-height: 1.33; }
 
 /* Content */
-a:hover { text-decoration: none!important; }
-a.username:hover { font-weight: 600; color: #73daea!important; }
 div#content { width: 75vw; height: 100vh; overflow: auto; }
 div#content > div.row { max-width: 75vw; margin: auto; }
+a:hover { text-decoration: none!important; }
+a.username:hover { font-weight: 600; color: #73daea!important; }
 .markdown-body { overflow: auto; padding: 1rem; }
 .signature { margin: auto!important; }
 .comment, .signature { white-space: pre-line; }
