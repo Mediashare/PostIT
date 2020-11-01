@@ -29,7 +29,7 @@
                     </h2>
                 </div>
                 <div class="card-body">
-                    {{ render(controller('App\\Controller\\PartialController::register', {'request': app.request})) }}
+                    {{ render(controller('App\\Controller\\SecurityController::register', {'request': app.request})) }}
                 </div>
                 <div class="card-footer">
                     <button form="form_registration" class="btn btn-lg btn-primary float-right" type="submit">
