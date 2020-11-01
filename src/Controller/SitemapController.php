@@ -33,7 +33,7 @@ class SitemapController extends AbstractController {
             ];
         endforeach;
         
-        return $this->render('sitemap/index.xml.twig', [
+        return $this->render('app/sitemap.xml.twig', [
             'urls' => $urls ?? [],
         ]);
     }

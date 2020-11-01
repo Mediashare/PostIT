@@ -16,7 +16,7 @@ class AdminController extends AbstractController {
         $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
         $comments = $em->getRepository(Comment::class)->findBy([], ['createDate' => 'DESC']);
         $users = $em->getRepository(User::class)->findAll();
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/dashboard.html.twig', [
             'posts' => $posts,
             'comments' => $comments,
             'users' => $users,

@@ -22,7 +22,7 @@ class UserController extends AbstractController {
             return $this->redirectToRoute('index');
         endif;
         
-        return $this->render('user/profile.html.twig', ['user' => $user]);
+        return $this->render('app/profile.html.twig', ['user' => $user]);
     }
 
     public function signature(?string $username = null) {
@@ -32,7 +32,7 @@ class UserController extends AbstractController {
             if (!$this->getUser()): return new Response(''); endif;
             $user = $this->getUser();
         endif;
-        return $this->render('user/_signature.html.twig', ['user' => $user]);
+        return $this->render('partial/_signature.html.twig', ['user' => $user]);
     }
 
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
@@ -102,7 +102,7 @@ class UserController extends AbstractController {
             $em->flush();
             return $this->redirectToRoute('profile_edit', ['username' => $user->getSlug()]);
         endif;
-        return $this->render('user/edit.html.twig', ['user' => $user]);
+        return $this->render('app/profile_edit.html.twig', ['user' => $user]);
     }
 
     public function apikey() {

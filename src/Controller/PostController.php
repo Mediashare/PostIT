@@ -12,7 +12,7 @@ class PostController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug]);
         if (!$post): return $this->redirectToRoute('index'); endif;
-        return $this->render('post/show.html.twig', ['post' => $post]);
+        return $this->render('app/post.html.twig', ['post' => $post]);
     }
 
     public function form(Request $request, ?string $slug = null) {
@@ -45,7 +45,7 @@ class PostController extends AbstractController {
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
         
-        return $this->render('post/form.html.twig', ['post' => $post]);
+        return $this->render('app/post_form.html.twig', ['post' => $post]);
     }
 
     public function upload(Request $request) {

@@ -20,7 +20,7 @@ class PageController extends AbstractController {
             return $this->redirectToRoute('index');
         endif;
         
-        return $this->render('page/show.html.twig', ['content' => $page->getMarkdown() ?? '', 'page' => $page]);
+        return $this->render('app/page.html.twig', ['content' => $page->getMarkdown() ?? '', 'page' => $page]);
     }
     
     public function form(Request $request, ?string $id = null) {
@@ -43,7 +43,7 @@ class PageController extends AbstractController {
             return $this->redirect($page->getUrl());
         endif;
 
-        return $this->render('page/form.html.twig', ['page' => $page]);
+        return $this->render('admin/page_form.html.twig', ['page' => $page]);
     }
 
     public function delete(string $id) {

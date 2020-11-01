@@ -26,7 +26,7 @@ class SecurityController extends AbstractController {
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/index.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'registrationForm' => $registrationForm]);
+        return $this->render('app/account.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'registrationForm' => $registrationForm]);
     }
 
     public function passwordForget(Request $request) {
@@ -49,7 +49,7 @@ class SecurityController extends AbstractController {
                 $this->addFlash('error', 'User not found with this email.');
             endif;
         endif;
-        return $this->render('security/password_forget.html.twig');
+        return $this->render('app/password_forget.html.twig');
     }
     
     public function passwordRecovery(Request $request, UserPasswordEncoderInterface $passwordEncoder) {
@@ -77,7 +77,7 @@ class SecurityController extends AbstractController {
             return $this->redirectToRoute('account');
         endif;
 
-        return $this->render('security/password_recovery.html.twig');
+        return $this->render('app/password_recovery.html.twig');
     }
     
     public function logout() {
