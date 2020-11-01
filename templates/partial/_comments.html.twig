@@ -20,7 +20,7 @@
         <div class="card-content">
             <ul class="list-group bg-main">
                 {% for comment in post.comments|reverse %}
-                    <li id="comment_{{ comment.id }} {% if loop.index == 1 %}last_comment{% endif %}" class="list-group-item bg-main text-left p-2"> 
+                    <li id="comment_{{ comment.id }}" class="list-group-item bg-main text-left p-2"> 
                         <strong class="comment">{{ comment.content }}</strong> 
                         <div class="text-right">
                             <a href="{{ path('profile', {'username': comment.author.slug}) }}" title="Profile {{ comment.author.username }}">
