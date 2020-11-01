@@ -1,6 +1,6 @@
 {% extends 'view/form.html.twig' %}
 
-{% block title %}Page{% endblock %}
+{% block title %}{{ page.title ?? 'Nouvelle page' }}{% endblock %}
 
 {% block form_inputs %}
     <div class="col-lg-9 p-0">
