@@ -1,6 +1,6 @@
 .markdown-body code:not(.hljs) { color: #fff; }
 code.hljs, .hljs-subst { color: #d2d0c8; }
-.markdown-body pre { padding: .5rem; line-height: 1.25; overflow-x: auto; border-radius: 5px; }
+.markdown-body pre { padding: .5rem; line-height: 1.4; overflow-x: auto; border-radius: 5px; }
 .markdown-body img { border-radius: 0.2em; }
 
 @media print {
