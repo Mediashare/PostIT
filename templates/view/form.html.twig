@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page{% endblock %}
+{% block title %}Form{% endblock %}
 
 {% block stylesheets %}
     {# Dependencies #}
@@ -11,8 +11,8 @@
 
 {% block form %}
     <form method="POST">
-        <div class="row shadow-lg rounded">
-            {% block form_header %}{% endblock %}
+        <div id="form_inputs" class="row shadow-lg rounded">
+            {% block form_inputs %}{% endblock %}
         </div>
         <div class="row">
             {% block editor %}

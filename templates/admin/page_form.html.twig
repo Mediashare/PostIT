@@ -2,7 +2,7 @@
 
 {% block title %}Page{% endblock %}
 
-{% block form_header %}
+{% block form_inputs %}
     <div class="col-lg-9 p-0">
         <input type="text" name="url" id="input_url" class="w-100 rounded form-control" placeholder="Url..." required="true" {% if page is defined %}value="{{ page.url ?? '/' }}"{% endif %} autofocus>
     </div>

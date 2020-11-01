@@ -8,8 +8,8 @@ function CodeMirorInit(markdownify_path, content) {
         keyMap: "sublime"
     });
 
-    $('#post_content').height('calc(100vh - 51px)');
-    myCodeMirror.setSize('100%', 'calc(100vh - 51px)');
+    $('#post_content').height('calc(100vh - ' + $('#form_inputs').height() + 'px)');
+    myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_inputs').height() + 'px)');
     $('textarea#content_mirror').val(myCodeMirror.getValue());
 
     myCodeMirror.on('change', function (CodeMirror) {
