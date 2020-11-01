@@ -4,12 +4,12 @@ profile:
     defaults:
         username: null
 profile_edit:
-    path: /profile/edit/{username}
+    path: /user/edit/{username}
     controller: App\Controller\UserController::edit
     defaults:
         username: null
 profile_apikey_reset:
-    path: /profile/apikey/reset
+    path: /user/apikey/reset
     controller: App\Controller\UserController::apikey
 
 
