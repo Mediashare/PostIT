@@ -51,10 +51,6 @@
 
         {# Javascripts #}
         <script src="{{ preload(asset('js/app.js'), { as: 'script' }) }}"></script>
-        {# Menu #}
-        <script>
-            {% if currentPost.slug is defined %} scrollToAnchor('{{ currentPost.slug }}'); {% endif %}
-        </script>
         {# Google Adsense #}
         <script data-ad-client="ca-pub-5281743992366973" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         {% block javascripts %}{% endblock %}
