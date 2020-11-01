@@ -1,8 +1,9 @@
-.markdown-body pre, 
-.markdown-body code {
-    color: white;
+.markdown-body code:not(.hljs) {
+    color: #fff;
 }
-
+code.hljs, .hljs-subst {
+    color: #ffa;
+}
 .markdown-body pre {
     padding: .5rem;
     line-height: 1.25;
