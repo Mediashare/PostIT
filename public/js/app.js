@@ -1,8 +1,3 @@
-// HighLight Synthax
-document.querySelectorAll('.markdown-body pre code').forEach((block) => {
-    hljs.highlightBlock(block);
-});
-
 // Avatar upload
 $("#file").change(function() {
     file = this.files[0];
