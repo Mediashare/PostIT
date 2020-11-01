@@ -13,7 +13,7 @@ function CodeMirorInit(markdownify_path, content) {
     $('textarea#content_mirror').val(myCodeMirror.getValue());
 
     myCodeMirror.on('change', function (CodeMirror) {
-        refreshPreview(markdownify_path, myCodeMirror.getValue());
+        refreshPreview(markdownify_path, CodeMirror.getValue());
     });
     
     // TextArea Macro
