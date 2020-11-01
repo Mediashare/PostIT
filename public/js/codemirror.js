@@ -38,6 +38,7 @@ function refreshPreview(markdownify_path, content) {
         $('.markdown-preview').html(data);
         document.querySelectorAll('.markdown-body pre code').forEach((block) => {
             hljs.highlightBlock(block);
+            Prism.highlightElement(block);
         });
     });
 }
