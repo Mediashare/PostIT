@@ -1,5 +1,11 @@
 <?php
 namespace App\Controller;
+
+use App\Entity\Post;
+use App\Entity\Comment;
+use App\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+
 class CommentController extends AbstractController {
     public function new(Request $request, string $slug) {
         $em = $this->getDoctrine()->getManager();
