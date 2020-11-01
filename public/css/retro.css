@@ -1,156 +1,35 @@
-.markdown-body code:not(.hljs) {
-    color: #fff;
-}
-.markdown-body pre {
-    padding: .5rem;
-    line-height: 1.25;
-    overflow-x: auto;
-    border-radius: 5px;
-}
-
-.markdown-body img {
-    border-radius: 0.2em;
-}
+.markdown-body code:not(.hljs) { color: #fff; }
+code.hljs, .hljs-subst { color: #d2d0c8; }
+.markdown-body pre { padding: .5rem; line-height: 1.25; overflow-x: auto; border-radius: 5px; }
+.markdown-body img { border-radius: 0.2em; }
 
 @media print {
-    .markdown-body a,
-    .markdown-body a:visited {
-        text-decoration: underline;
-    }
-
-    .markdown-body a[href]:after {
-        content: " ("attr(href) ")";
-    }
-
-    .markdown-body abbr[title]:after {
-        content: " ("attr(title) ")";
-    }
-
-    .markdown-body a[href^="#"]:after,
-    .markdown-body a[href^="javascript:"]:after {
-        content: "";
-    }
-
-    .markdown-body pre,
-    .markdown-body blockquote {
-        border: 1px solid #999;
-        page-break-inside: avoid;
-    }
-
-    .markdown-body thead {
-        display: table-header-group;
-    }
-
-    .markdown-body tr,
-    .markdown-body img {
-        page-break-inside: avoid;
-    }
-
-    .markdown-body img {
-        max-width: 100% !important;
-    }
-
-    .markdown-body p,
-    .markdown-body h2,
-    .markdown-body h3 {
-        orphans: 3;
-        widows: 3;
-    }
-
-    .markdown-body h2,
-    .markdown-body h3 {
-        page-break-after: avoid;
-    }
+.markdown-body a, .markdown-body a:visited { text-decoration: underline; }
+.markdown-body a[href]:after { content: " ("attr(href) ")"; }
+.markdown-body abbr[title]:after { content: " ("attr(title) ")"; }
+.markdown-body a[href^="#"]:after, .markdown-body a[href^="javascript:"]:after { content: ""; }
+.markdown-body pre, .markdown-body blockquote { border: 1px solid #999; page-break-inside: avoid; }
+.markdown-body thead { display: table-header-group; }
+.markdown-body tr, .markdown-body img { page-break-inside: avoid; }
+.markdown-body img { max-width: 100% !important; }
+.markdown-body p, .markdown-body h2, .markdown-body h3 { orphans: 3; widows: 3; }
+.markdown-body h2, .markdown-body h3 { page-break-after: avoid; }
 }
 
-.markdown-body a,
-.markdown-body a:visited {
-    color: #01ff70;
-}
-
-.markdown-body a:hover,
-.markdown-body a:focus,
-.markdown-body a:active {
-    color: #2ecc40;
-}
-
-.markdown-body .retro-no-decoration {
-    text-decoration: none;
-}
-
-
-.markdown-body p,
-.markdown-body .retro-p {
-    font-size: 1rem;
-    margin-bottom: 1.3rem;
-}
-
-.markdown-body h1,
-.markdown-body .retro-h1,
-.markdown-body h2,
-.markdown-body .retro-h2,
-.markdown-body h3,
-.markdown-body .retro-h3,
-.markdown-body h4,
-.markdown-body .retro-h4 {
-    margin: 1.414rem 0 .5rem;
-    font-weight: inherit;
-    line-height: 1.42;
-}
-
-.markdown-body h1,
-.markdown-body .retro-h1 {
-    margin-top: 0;
-    font-size: 3.998rem;
-}
-
-.markdown-body h2,
-.markdown-body .retro-h2 {
-    font-size: 2.827rem;
-}
-
-.markdown-body h3,
-.markdown-body .retro-h3 {
-    font-size: 1.999rem;
-}
-
-.markdown-body h4,
-.markdown-body .retro-h4 {
-    font-size: 1.414rem;
-}
-
-.markdown-body h5,
-.markdown-body .retro-h5 {
-    font-size: 1.121rem;
-}
-
-.markdown-body h6,
-.markdown-body .retro-h6 {
-    font-size: .88rem;
-}
-
-.markdown-body small,
-.markdown-body .retro-small {
-    font-size: .707em;
-}
+.markdown-body a, .markdown-body a:visited { color: #01ff70; }
+.markdown-body a:hover, .markdown-body a:focus, .markdown-body a:active { color: #2ecc40; }
+.markdown-body .retro-no-decoration { text-decoration: none; }
+.markdown-body p, .markdown-body .retro-p { font-size: 1rem; margin-bottom: 1.3rem; }
+.markdown-body h1, .markdown-body .retro-h1, .markdown-body h2, .markdown-body .retro-h2, .markdown-body h3, .markdown-body .retro-h3, .markdown-body h4, .markdown-body .retro-h4 { margin: 1.414rem 0 .5rem; font-weight: inherit; line-height: 1.42; }
+.markdown-body h1, .markdown-body .retro-h1 { margin-top: 0;font-size: 3.998rem; }
+.markdown-body h2, .markdown-body .retro-h2 { font-size: 2.827rem; }
+.markdown-body h3, .markdown-body .retro-h3 { font-size: 1.999rem; }
+.markdown-body h4, .markdown-body .retro-h4 { font-size: 1.414rem; }
+.markdown-body h5, .markdown-body .retro-h5 { font-size: 1.121rem; }
+.markdown-body h6, .markdown-body .retro-h6 { font-size: .88rem; }
+.markdown-body small, .markdown-body .retro-small { font-size: .707em; }
 
 /* https://github.com/mrmrs/fluidity */
-
-.markdown-body img,
-.markdown-body canvas,
-.markdown-body iframe,
-.markdown-body video,
-.markdown-body svg,
-.markdown-body select,
-.markdown-body textarea {
-    max-width: 100%;
-}
-
-.markdown-body pre {
-    background-color: #333;
-}
-
-.markdown-body blockquote {
-    border-left: 3px solid #01ff70;
-    padding-left: 1rem;
-}
+.markdown-body img, .markdown-body canvas, .markdown-body iframe, .markdown-body video, .markdown-body svg, .markdown-body select, .markdown-body textarea { max-width: 100%; }
+.markdown-body pre { background-color: #333; }
+.markdown-body blockquote { border-left: 3px solid #01ff70; padding-left: 1rem; }
