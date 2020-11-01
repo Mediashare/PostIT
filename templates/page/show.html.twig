@@ -9,7 +9,9 @@
 {% block author_og %}{{ page.author ?? null }}{% endblock %}
 
 {% block content %}
-    <div class="markdown-body shadow-lg rounded">
-        {{ page.markdown|raw }}
+    <div class="col-12 mt-3">
+        <div class="markdown-body shadow-lg rounded">
+            {{ page.markdown|raw }}
+        </div>
     </div>
 {% endblock %}

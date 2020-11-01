@@ -3,7 +3,7 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-    <div class="col-12">
+    <div class="col-12 mt-3">
         {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
         <div class="card bg-main shadow-lg rounded mt-1">
             <div class="card-header">
@@ -35,7 +35,7 @@
                 </ul>
             </div>
         </div>
-        <div class="card bg-main shadow-lg rounded mt-1">
+        <div class="card bg-main shadow-lg rounded mt-3 mb-3">
             <div class="card-header">
                 <h4 class="card-title">
                     Comments

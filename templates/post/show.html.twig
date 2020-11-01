@@ -10,18 +10,22 @@
 {% block author_og %}{{ post.author ?? 'Anonyme' }}{% endblock %}
 
 {% block content %}
-    <div id="post_content" class="markdown-body shadow-lg rounded">
-        <div class="markdown-preview">
-            {% if post.markdown is defined %}
-                {{ post.markdown|raw }}
-            {% endif %}
+    <div class="col-12 mt-3">
+        <div id="post_content" class="markdown-body shadow-lg rounded">
+            <div class="markdown-preview">
+                {% if post.markdown is defined %}
+                    {{ post.markdown|raw }}
+                {% endif %}
+            </div>
+            {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
         </div>
-        {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
     </div>
 {% endblock %}
 
 {% block comments %}
-    {% include 'post/_comments.html.twig' %}
+    <div class="col-12 mt-3 mb-3">
+        {% include 'post/_comments.html.twig' %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}

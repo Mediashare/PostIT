@@ -1,30 +1,32 @@
-<div class="card bg-main shadow-lg rounded mt-1">
-    <div class="card-header">
-        <h4 class="card-title">
-            Pages
-        </h4>
-    </div>
-    <div class="card-content" style="max-height: 50vh;overflow: auto;">
-        <ul class="list-group text-right bg-main">
-            {% for page in pages %}
-                <li class="list-group-item bg-main post_link"> 
-                    <span class="float-left">
-                        <a href="{{ page.url }}" class="text-primary">Show</a> -
-                        <a href="{{ path('page_form', {'id': page.id}) }}" class="text-warning">Edit</a> -
-                        <a href="{{ path('page_delete', {'id': page.id}) }}" class="text-danger">Delete</a>
-                    </span>
-                    <a href="{{ page.url }}"><strong>{{ page.url }}</strong></a> 
-                    <br>
-                    <span class="float-right">
-                        <em>{{ page.createDate|date('d/m/Y H:i:s') }}</em> - <span class="text-info">{{ page.author ?? 'Anomyme' }}</span>
-                    </span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="card-footer">
-        <a href="{{ path('page_form') }}" class="btn btn-outline-success">
-            Créer une nouvelle page
-        </a>
+<div class="col-12 mt-3">
+    <div class="card bg-main shadow-lg rounded">
+        <div class="card-header">
+            <h4 class="card-title">
+                Pages
+            </h4>
+        </div>
+        <div class="card-content" style="max-height: 50vh;overflow: auto;">
+            <ul class="list-group text-right bg-main">
+                {% for page in pages %}
+                    <li class="list-group-item bg-main post_link"> 
+                        <span class="float-left">
+                            <a href="{{ page.url }}" class="text-primary">Show</a> -
+                            <a href="{{ path('page_form', {'id': page.id}) }}" class="text-warning">Edit</a> -
+                            <a href="{{ path('page_delete', {'id': page.id}) }}" class="text-danger">Delete</a>
+                        </span>
+                        <a href="{{ page.url }}"><strong>{{ page.url }}</strong></a> 
+                        <br>
+                        <span class="float-right">
+                            <em>{{ page.createDate|date('d/m/Y H:i:s') }}</em> - <span class="text-info">{{ page.author ?? 'Anomyme' }}</span>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('page_form') }}" class="btn btn-outline-success">
+                Créer une nouvelle page
+            </a>
+        </div>
     </div>
 </div>

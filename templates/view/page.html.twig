@@ -2,13 +2,9 @@
 
 {% block page %}
     <div class="row">
-        <div id="content" class="col-lg-9 p-0 shadow-lg rounded">
-            <div class="col-12 rounded mt-3">
-                {% block content %}{% endblock %}
-            </div>
-            <div class="col-12 rounded mt-3 mb-3">
-                {% block comments %}{% endblock %}
-            </div>
+        <div id="content" class="shadow-lg rounded">
+            {% block content %}{% endblock %}
+            {% block comments %}{% endblock %}
         </div>
         {% block menu %}
             {{ render(controller('App\\Controller\\AppController::menu', {'request': app.request, 'post': post ?? null, 'page': page ?? null})) }}
