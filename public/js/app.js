@@ -40,7 +40,7 @@ passwordRepeat.on('change', function () {
 // Menu
 function scrollToAnchor(id){
     var Tag = $("a[name='"+ id +"']");
-    $('ul#menu_posts').animate({scrollTop: Tag.offset().top - 50},'slow');
+    $('ul#menu_posts').animate({scrollTop: Tag.offset().top - 50});
 }
 function searchDisplay() {
     var input = $('#menu_search');
