@@ -23,5 +23,5 @@
 {% endblock %}
 
 {% block signature %}
-    {{ render(controller('App\\Controller\\UserController::signature', {'username': post.author.username ?? null})) }}
+    {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
 {% endblock %}

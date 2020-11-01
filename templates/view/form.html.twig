@@ -51,8 +51,8 @@
     <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
     <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
     <script>
-        {% if page is defined %} {% set content = page.content %}
-        {% elseif post is defined %} {% set content = post.content %}
+        {% if page is defined and page %} {% set content = page.content %}
+        {% elseif post is defined and post %} {% set content = post.content %}
         {% else %} {% set content = "# Hello world\n" %} {% endif %}
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
         refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());

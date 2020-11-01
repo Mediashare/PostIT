@@ -19,7 +19,9 @@ class PostController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         if ($slug):
             $post = $em->getRepository(Post::class)->findOneBy(['slug' => $slug], ['createDate' => 'DESC']);
-            if (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
+            if (!$post):
+                return $this->redirectToRoute('post_new');
+            elseif (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
                 return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
             endif;
         else: 

@@ -25,16 +25,6 @@ class UserController extends AbstractController {
         return $this->render('app/profile.html.twig', ['user' => $user]);
     }
 
-    public function signature(?string $username = null) {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
-        if (!$user):
-            if (!$this->getUser()): return new Response(''); endif;
-            $user = $this->getUser();
-        endif;
-        return $this->render('partial/_signature.html.twig', ['user' => $user]);
-    }
-
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
         $em = $this->getDoctrine()->getManager();
         if ($username):

@@ -23,17 +23,6 @@ class AppController extends AbstractController {
             return $this->render('app/post.html.twig', ['post' => $post]);
         endif;
     }
-    
-    public function menu(Request $request, ?Post $post, ?Page $page) {
-        $em = $this->getDoctrine()->getManager();
-        $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
-        return $this->render('_menu.html.twig', [
-            'posts' => $posts,
-            'currentPost' => $post,
-            'page' => $page,
-            'request' => $request
-        ]);
-    }
 
     public function pageNotFound(Request $request) {
         $app_env = $this->getParameter('appenv');
