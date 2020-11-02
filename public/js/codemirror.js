@@ -1,19 +1,19 @@
-function CodeMirorInit(markdownify_path, content) {
+function CodeMirorInit(render_path, content, mode = 'markdown') {
     var myCodeMirror = CodeMirror(document.getElementById('codemirror'), {
         value: content,
-        mode:  "markdown",
+        mode:  mode,
         lineNumbers: true,
         lineWrapping: true,
         extraKeys: {"Ctrl-Space": "autocomplete"},
         keyMap: "sublime"
     });
 
-    $('#post_content').height('calc(100vh - ' + $('#form_inputs').height() + 'px)');
-    myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_inputs').height() + 'px)');
+    $('#editor_preview').height('calc(100vh - ' + $('#form_header').height() + 'px)');
+    myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_header').height() + 'px)');
     $('textarea#content_mirror').val(myCodeMirror.getValue());
 
     myCodeMirror.on('change', function (CodeMirror) {
-        refreshPreview(markdownify_path, CodeMirror.getValue());
+        renderPreview(render_path, CodeMirror.getValue());
     });
     
     // TextArea Macro
@@ -31,11 +31,11 @@ function CodeMirorInit(markdownify_path, content) {
     return myCodeMirror;
 }
 
-// TextArea to Markdown
-function refreshPreview(markdownify_path, content) {
+// Render TextArea Content
+function renderPreview(render_path, content) {
     $('textarea#content_mirror').val(content);
-    $.post(markdownify_path, {content: content}, function (data) {
-        $('.markdown-preview').html(data);
+    $.post(render_path, {content: content}, function (data) {
+        $('.render-preview').html(data);
         document.querySelectorAll('.markdown-body pre code').forEach((block) => {
             Prism.highlightElement(block);
         });

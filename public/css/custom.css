@@ -28,6 +28,7 @@ a.username:hover { font-weight: 600; color: #73daea!important; }
 .comment_info { margin: 0; display: inline-block; vertical-align: middle; line-height: 50px; }
 input { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 2.5em!important; height: 50px!important; }
 textarea { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 1.5em!important; }
+select, select option { height: 100%!important; border: none!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; font-size: 1.5em!important; }
 
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }

@@ -15,3 +15,19 @@ page_form:
 page_delete:
     path: /page/delete/{id}
     controller: App\Controller\PageController::delete
+
+module_form:
+    path: /module/{id}
+    controller: App\Controller\ModuleController::module
+    defaults: 
+        id: null
+
+module_show:
+    path: /module/render/{id}
+    controller: App\Controller\ModuleController::show
+    defaults: 
+        id: null
+
+input_delete:
+    path: /input/delete/{module}/{id}
+    controller: App\Controller\InputController::delete

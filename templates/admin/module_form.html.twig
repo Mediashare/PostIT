@@ -1,0 +1,109 @@
+{% extends 'view/form.html.twig' %}
+
+{% block title %}{{ module.name ?? 'Nouveau module' }}{% endblock %}
+
+{% block form_header %}
+    <div class="col-lg-9 p-0">
+        <input type="text" name="name" class="w-100 rounded form-control" placeholder="Name..." required="true" {% if module.name %}value="{{ module.name }}"{% endif %} autofocus>
+    </div>
+    <div class="col-lg-3 p-0">
+        <div class="float-left w-50 border-top">
+            <a tabindex="-1" class="btn btn-cancel" title="Cancel" href="{{ path('admin') }}">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="float-right w-50 border-top">
+            <button tabindex="-1" type="submit" class="btn btn-submit" title="Submit">
+                <i class="fa fa-check"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="card bg-main m-3">
+            <div class="card-header">
+                <h2>Inputs</h2>
+            </div>
+            <div class="card-content">
+                <div class="row pr-3 pl-3">
+                    {% for input in module.inputs %}
+                        <div class="col-3 p-0 shadow-lg">
+                            <input type="text" name="inputs[{{ input.id }}][key]" class="rounded p-0 m-0 form-control" value="{{ input.key }}" autofocus>
+                        </div>
+                        <div class="col-2 p-0 shadow-lg">
+                            <select name="inputs[{{ input.id }}][type]" class="form-control">
+                                <option value="text">Text</option>
+                                <option value="textarea" {% if input.type == "textarea" %}selected{% endif %}>TextArea</option>
+                                <option value="boolean" {% if input.type == "boolean" %}selected{% endif %}>Boolean</option>
+                            </select>
+                        </div>
+                        <div class="col-5 p-0 shadow-lg">
+                            <input type="text" name="inputs[{{ input.id }}][value]" class="rounded p-0 m-0 form-control" value="{{ input.value }}" autofocus>
+                        </div>
+                        <div class="col-2 p-0 shadow-lg">
+                            <a href="{{ path('input_delete', {'module': module.id, 'id': input.id}) }}" class="btn btn-cancel" title="Supprimer">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    <div class="col-3 p-0 shadow-lg">
+                        <input type="text" name="inputs[0][key]" class="rounded p-0 m-0 form-control" placeholder="key" autofocus>
+                    </div>
+                    <div class="col-2 p-0 shadow-lg">
+                        <select name="inputs[0][type]" class="form-control">
+                            <option value="text">Text</option>
+                            <option value="textarea">TextArea</option>
+                            <option value="boolean">Boolean</option>
+                        </select>
+                    </div>
+                    <div class="col-5 p-0 shadow-lg">
+                        <input type="text" name="inputs[0][value]" class="rounded p-0 m-0 form-control" placeholder="value" autofocus>
+                    </div>
+                    <div class="col-2 p-0 shadow-lg">
+                        <button type="submit" class="btn btn-submit" title="Ajouter">
+                            <i class="fa fa-save"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block editor %}
+    <div class="col-lg-6 p-0">
+        <div id="codemirror" class="shadow-lg rounded"></div>
+        <textarea name="render" id="content_mirror" class="d-none" required></textarea>
+    </div>
+    <div class="col-lg-6 p-0">
+        <div id="editor_preview" class="markdown-body shadow-lg rounded">
+            <div class="render-preview"></div>
+            {% block signature %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {# CodeMirror #}
+    <script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    <script src="{{ preload(asset('js/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
+    {# Mode #}
+    <script src="{{ preload(asset('codemirror/mode/twig/twig.js'), { as: 'script' }) }}"></script>
+    {# AutoCompletion #}
+    <script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/html-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/javascript-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/show-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
+    <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
+    <script>
+        {% if module.render %} {% set content = module.render %}
+        {% else %} 
+            {% set content = "<div class=\"col-12\"></div>" %} 
+        {% endif %}
+        var myCodeMirror = CodeMirorInit('{{ path("module_show", {"id": module.id ?? 0}) }}', "{{- content|e('js') -}}", "twig");
+        renderPreview('{{ path("module_show", {"id": module.id ?? 0}) }}', myCodeMirror.getValue());
+    </script>
+{% endblock %}

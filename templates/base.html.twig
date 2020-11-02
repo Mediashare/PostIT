@@ -6,7 +6,7 @@
         {# SEO #}
         <title>{% block title %}Mediashare{% endblock %}</title>
         <meta name="robots" content="index, follow">
-        <link rel="canonical" href="{{ app.request.uri }}"/>
+        <link rel="canonical" href="{{ app.request.uri|replace({'http://': 'https://'}) }}"/>
         <meta name="description" content="{% block description %}Mediashare est une entité promouvant le partage de ressource sur Internet.{% endblock %}">
         <meta name="author" content="{% block author %}Mediashare{% endblock %}">
         <meta name="keywords" content="Mediashare, mediashare.fr, partage, blog, automatisation, devops, documentations, hack, astuces, command line, open-sourcing, php, librairies, symfony, tools, outils numérique" lang="fr">

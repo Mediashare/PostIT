@@ -2,7 +2,7 @@
 
 {% block title %}{{ post.title ?? 'Nouvelle article' }}{% endblock %}
 
-{% block form_inputs %}
+{% block form_header %}
     <div class="col-lg-9 p-0">
         <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" {% if post is defined %}value="{{ post.title }}"{% endif %} autofocus>
     </div>

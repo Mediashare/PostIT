@@ -1,0 +1,26 @@
+<div class="col-12 mt-3">
+    <div class="card bg-main shadow-lg rounded">
+        <div class="card-header">
+            <h4 class="card-title">
+                Modules
+            </h4>
+        </div>
+        <div class="card-content" style="max-height: 50vh;overflow: auto;">
+            <ul class="list-group text-right bg-main">
+                {% for module in modules %}
+                    <li class="list-group-item bg-main post_link"> 
+                        <span class="float-left">
+                            <a href="{{ path('module_form', {'id': module.id}) }}" class="text-warning">Edit</a>
+                        </span>
+                        <strong>{{ module.name }}</strong> 
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('module_form') }}" class="btn btn-outline-success">
+                Créer un nouveau module
+            </a>
+        </div>
+    </div>
+</div>

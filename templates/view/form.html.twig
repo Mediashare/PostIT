@@ -11,8 +11,8 @@
 
 {% block container %}
     <form method="POST">
-        <div id="form_inputs" class="row shadow-lg rounded">
-            {% block form_inputs %}{% endblock %}
+        <div id="form_header" class="row shadow-lg rounded">
+            {% block form_header %}{% endblock %}
         </div>
         <div class="row">
             {% block editor %}
@@ -21,12 +21,8 @@
                     <textarea name="content" id="content_mirror" class="d-none" required></textarea>
                 </div>
                 <div class="col-lg-6 p-0">
-                    <div id="post_content" class="markdown-body shadow-lg rounded">
-                        <div class="markdown-preview">
-                            {% if post.markdown is defined %}
-                                {{ post.markdown|raw }}
-                            {% endif %}
-                        </div>
+                    <div id="editor_preview" class="markdown-body shadow-lg rounded">
+                        <div class="render-preview"></div>
                         {% block signature %}{% endblock %}
                     </div>
                 </div>
@@ -55,6 +51,6 @@
         {% elseif post is defined and post %} {% set content = post.content %}
         {% else %} {% set content = "# Hello world\n" %} {% endif %}
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
-        refreshPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
+        renderPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
     </script>
 {% endblock %}
