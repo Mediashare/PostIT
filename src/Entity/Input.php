@@ -35,9 +35,10 @@ class Input
     private $value;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="inputs")
+     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="inputs")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $modules;
+    private $module;
 
     public function __construct(?string $key, ?string $value, ?string $type) {
         if ($key): $this->setKey($key); endif;
@@ -87,29 +88,14 @@ class Input
         return $this;
     }
 
-    /**
-     * @return Collection|Module[]
-     */
-    public function getModules(): Collection
+    public function getModule(): ?Module
     {
-        return $this->modules;
+        return $this->module;
     }
 
-    public function addModule(Module $module): self
+    public function setModule(?Module $module): self
     {
-        if (!$this->modules->contains($module)) {
-            $this->modules[] = $module;
-            $module->addInput($this);
-        }
-
-        return $this;
-    }
-
-    public function removeModule(Module $module): self
-    {
-        if ($this->modules->removeElement($module)) {
-            $module->removeInput($this);
-        }
+        $this->module = $module;
 
         return $this;
     }

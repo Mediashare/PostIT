@@ -36,7 +36,7 @@ class Module
     private $allow;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Input::class, inversedBy="modules")
+     * @ORM\OneToMany(targetEntity=Input::class, mappedBy="module", orphanRemoval=true)
      */
     private $inputs;
 
@@ -89,15 +89,24 @@ class Module
     /**
      * @return Collection|Input[]
      */
-    public function getInputs(): Collection
+    public function getInputs()
     {
-        return $this->inputs;
+        foreach ($this->inputs ?? [] as $input):
+            $inputs[$input->getKey()] = $input;
+        endforeach;
+
+        return $inputs ?? [];
+    }
+
+    public function getInput(string $key): ?Input {
+        return $this->getInputs()[$key] ?? null;
     }
 
     public function addInput(Input $input): self
     {
         if (!$this->inputs->contains($input)) {
-            $this->inputs[$input->getKey()] = $input;
+            $this->inputs[$input->getId()] = $input;
+            $input->setModule($this);
         }
 
         return $this;
@@ -105,7 +114,12 @@ class Module
 
     public function removeInput(Input $input): self
     {
-        $this->inputs->removeElement($input);
+        if ($this->inputs->removeElement($input)) {
+            // set the owning side to null (unless already changed)
+            if ($input->getModule() === $this) {
+                $input->setModule(null);
+            }
+        }
 
         return $this;
     }

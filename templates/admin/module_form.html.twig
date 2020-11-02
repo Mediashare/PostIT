@@ -25,45 +25,7 @@
             </div>
             <div class="card-content">
                 <div class="row pr-3 pl-3">
-                    {% for input in module.inputs %}
-                        <div class="col-3 p-0 shadow-lg">
-                            <input type="text" name="inputs[{{ input.id }}][key]" class="rounded p-0 m-0 form-control" value="{{ input.key }}" autofocus>
-                        </div>
-                        <div class="col-2 p-0 shadow-lg">
-                            <select name="inputs[{{ input.id }}][type]" class="form-control">
-                                <option value="text">Text</option>
-                                <option value="textarea" {% if input.type == "textarea" %}selected{% endif %}>TextArea</option>
-                                <option value="markdown" {% if input.type == "markdown" %}selected{% endif %}>Markdown</option>
-                                <option value="boolean" {% if input.type == "boolean" %}selected{% endif %}>Boolean</option>
-                            </select>
-                        </div>
-                        <div class="col-5 p-0 shadow-lg">
-                            <input type="text" name="inputs[{{ input.id }}][value]" class="rounded p-0 m-0 form-control" value="{{ input.value }}" autofocus>
-                        </div>
-                        <div class="col-2 p-0 shadow-lg">
-                            <a href="{{ path('input_delete', {'module': module.id, 'id': input.id}) }}" class="btn btn-cancel" title="Supprimer">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    {% endfor %}
-                    <div class="col-3 p-0 shadow-lg">
-                        <input type="text" name="inputs[0][key]" class="rounded p-0 m-0 form-control" placeholder="key" autofocus>
-                    </div>
-                    <div class="col-2 p-0 shadow-lg">
-                        <select name="inputs[0][type]" class="form-control">
-                            <option value="text">Text</option>
-                            <option value="textarea">TextArea</option>
-                            <option value="boolean">Boolean</option>
-                        </select>
-                    </div>
-                    <div class="col-5 p-0 shadow-lg">
-                        <input type="text" name="inputs[0][value]" class="rounded p-0 m-0 form-control" placeholder="value" autofocus>
-                    </div>
-                    <div class="col-2 p-0 shadow-lg">
-                        <button type="submit" class="btn btn-submit" title="Ajouter">
-                            <i class="fa fa-save"></i>
-                        </button>
-                    </div>
+                    {% include "admin/_module_inputs.html.twig" %}
                 </div>
             </div>
         </div>

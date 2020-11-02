@@ -17,16 +17,23 @@ class ModuleController extends AbstractController {
         if ($request->isMethod('POST')):
             $module->setName($request->get('name'));
             $module->setRender($request->get('render'));
-            foreach ($request->get('inputs') ?? [] as $key => $input):
-                if (!empty($input['key']) && !empty($input['value']) && !empty($input['type'])): 
-                    $input = new Input($input['key'], $input['value'], $input['type']);
-                    $input->addModule($module);
-                    $em->persist($input);
-                endif;
+            $input = $request->get('input')['new'];
+            if (!empty($input['key']) && !empty($input['value']) && !empty($input['type'])): 
+                $input = new Input($input['key'], $input['value'], $input['type']);
+                $input->setModule($module);
+                $em->persist($input);
+            endif;
+            
+            foreach ($module->getInputs() ?? [] as $key => $input):
+                $input->setKey($request->get('inputs')[$key]['key']);
+                $input->setType($request->get('inputs')[$key]['type']);
+                $input->setValue($request->get('inputs')[$key]['value']);
+                $em->persist($input);
             endforeach;
+            
             $em->persist($module);
             $em->flush();
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('module_form', ['id' => $module->getId()]);
         endif;
         return $this->render('admin/module_form.html.twig', ['module' => $module]);
     }
@@ -39,11 +46,9 @@ class ModuleController extends AbstractController {
             $module = new Module(); 
         endif;
         $module->setRender($request->get('content'));
-
         $loader = new \Twig\Loader\ArrayLoader(['_module.html.twig' => $module->getRender()]);
-        $twig = new \Twig\Environment($loader, ['debug' => true]);
+        $twig = new \Twig\Environment($loader, ['debug' => false]);
         $twig->addExtension(new \Twig\Extension\DebugExtension());
-
-        return new Response($twig->render('_module.html.twig', ['module' => $module]));
+        return new Response($twig->render('_module.html.twig', ['module' => $module, 'inputs' => $module->getInputs()]), 200);
     }
 }
