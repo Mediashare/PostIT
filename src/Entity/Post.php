@@ -42,6 +42,11 @@ class Post
     private $createDate;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updateDate;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      */
     private $author;
@@ -117,6 +122,18 @@ class Post
     public function setCreateDate(\DateTime $createDate): self
     {
         $this->createDate = $createDate;
+
+        return $this;
+    }
+
+    public function getUpdateDate(): ?\DateTime
+    {
+        return $this->updateDate ?? $this->getCreateDate();
+    }
+
+    public function setUpdateDate(\DateTime $updateDate): self
+    {
+        $this->updateDate = $updateDate;
 
         return $this;
     }

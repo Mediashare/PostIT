@@ -38,6 +38,7 @@ class PageController extends AbstractController {
             $page->setDescription($request->get('description'));
             $page->setUrl($request->get('url') ?? '/');
             $page->setContent($request->get('content'));
+            $page->setUpdateDate(new \DateTime());
             $em->persist($page);
             $em->flush();
             return $this->redirect($page->getUrl());

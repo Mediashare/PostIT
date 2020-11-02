@@ -42,6 +42,7 @@ class PostController extends AbstractController {
                 endwhile;
             endif;
             $post->setContent($request->get('content'));
+            $post->setUpdateDate(new \DateTime());
             $em->persist($post);
             $em->flush();
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);

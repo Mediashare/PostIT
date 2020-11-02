@@ -18,7 +18,7 @@ class SitemapController extends AbstractController {
                 'url' => $request->isSecure() ? 
                     'https://' . $request->headers->get('host').$page->getUrl() : 
                     'http://' . $request->headers->get('host').$page->getUrl(), 
-                'lastmod' => $page->getCreateDate(), 
+                'lastmod' => $page->getUpdateDate(), 
                 'changefreq' => 'monthly', 
                 'priority' => 0.9
             ];
@@ -27,7 +27,7 @@ class SitemapController extends AbstractController {
         foreach ($em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']) as $post):
             $urls[$this->generateUrl('post', ['slug' => $post->getSlug()])] = [
                 'url' => $this->generateUrl('post', ['slug' => $post->getSlug()], false), 
-                'lastmod' => $post->getCreateDate(), 
+                'lastmod' => $post->getUpdateDate(), 
                 'changefreq' => 'monthly', 
                 'priority' => 0.8
             ];

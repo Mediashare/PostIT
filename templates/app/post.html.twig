@@ -23,9 +23,11 @@
 {% endblock %}
 
 {% block comments %}
-    <div class="col-12 mt-3 mb-3">
-        {% include 'partial/_comments.html.twig' %}
-    </div>
+    {% if post %}
+        <div class="col-12 mt-3 mb-3">
+            {% include 'partial/_comments.html.twig' %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block javascripts %}
@@ -40,6 +42,6 @@
                 }
             }
         });
-        {% if post.slug %} scrollToAnchor('{{ post.slug }}'); {% endif %}
+        {% if post and post.slug %} scrollToAnchor('{{ post.slug }}'); {% endif %}
     </script>
 {% endblock %}
