@@ -33,6 +33,7 @@
                             <select name="inputs[{{ input.id }}][type]" class="form-control">
                                 <option value="text">Text</option>
                                 <option value="textarea" {% if input.type == "textarea" %}selected{% endif %}>TextArea</option>
+                                <option value="markdown" {% if input.type == "markdown" %}selected{% endif %}>Markdown</option>
                                 <option value="boolean" {% if input.type == "boolean" %}selected{% endif %}>Boolean</option>
                             </select>
                         </div>
