@@ -18,13 +18,7 @@ page_delete:
 
 module_form:
     path: /module/{id}
-    controller: App\Controller\ModuleController::module
-    defaults: 
-        id: null
-
-module_show:
-    path: /module/render/{id}
-    controller: App\Controller\ModuleController::show
+    controller: App\Controller\ModuleController::form
     defaults: 
         id: null
 

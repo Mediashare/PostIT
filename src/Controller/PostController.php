@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Entity\Module;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -48,7 +49,8 @@ class PostController extends AbstractController {
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
         
-        return $this->render('app/post_form.html.twig', ['post' => $post]);
+        $modules = $em->getRepository(Module::class)->findAll();
+        return $this->render('app/post_form.html.twig', ['post' => $post, 'modules' => $modules]);
     }
 
     public function upload(Request $request) {

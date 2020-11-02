@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ModuleController extends AbstractController {
-    public function module(Request $request, ?int $id = null): Response {
+    public function form(Request $request, ?int $id = null): Response {
         $em = $this->getDoctrine()->getManager();
         if ($id): $module = $em->getRepository(Module::class)->find($id); endif;
         if (empty($module)): $module = new Module(); endif;
@@ -36,20 +36,6 @@ class ModuleController extends AbstractController {
             return $this->redirectToRoute('module_form', ['id' => $module->getId()]);
         endif;
         return $this->render('admin/module_form.html.twig', ['module' => $module]);
-    }
-
-    public function show(Request $request, ?int $id = null): Response {
-        if ($id): 
-            $module = $this->getDoctrine()->getManager()->getRepository(Module::class)->find($id);
-        endif;
-        if (empty($module)): 
-            $module = new Module(); 
-        endif;
-        $module->setRender($request->get('content'));
-        $loader = new \Twig\Loader\ArrayLoader(['_module.html.twig' => $module->getRender()]);
-        $twig = new \Twig\Environment($loader, ['debug' => false]);
-        $twig->addExtension(new \Twig\Extension\DebugExtension());
-        return new Response($twig->render('_module.html.twig', ['module' => $module, 'inputs' => $module->getInputs()]), 200);
     }
 
     public function delete(string $id) {

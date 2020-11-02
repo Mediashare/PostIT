@@ -6,15 +6,15 @@
     <div class="col-lg-9 p-0">
         <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" {% if post is defined %}value="{{ post.title }}"{% endif %} autofocus>
     </div>
-    <div class="col-lg-3 p-0">
-        <div class="float-left w-50 border-top">
+    <div class="col-lg-3 p-0 d-flex">
+        <div class="w-100 border-top">
             <a tabindex="-1" class="btn btn-cancel" title="Cancel"
                 {% if post.slug %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
             >
                 <i class="fa fa-times"></i>
             </a>
         </div>
-        <div class="float-right w-50 border-top">
+        <div class="w-100 border-top">
             <button tabindex="-1" type="submit" class="btn btn-submit" title="Submit">
                 <i class="fa fa-check"></i>
             </button>

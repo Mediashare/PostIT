@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Entity\Module;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,5 +29,19 @@ class PartialController extends AbstractController {
             $user = $this->getUser();
         endif;
         return $this->render('partial/_signature.html.twig', ['user' => $user]);
+    }
+
+    public function module(Request $request, ?int $id = null): Response {
+        if ($id): 
+            $module = $this->getDoctrine()->getManager()->getRepository(Module::class)->find($id);
+        endif;
+        if (empty($module)): 
+            $module = new Module(); 
+        endif;
+        $module->setRender($request->get('content'));
+        $loader = new \Twig\Loader\ArrayLoader(['_module.html.twig' => $module->getRender()]);
+        $twig = new \Twig\Environment($loader, ['debug' => false]);
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
+        return new Response($twig->render('_module.html.twig', ['module' => $module, 'inputs' => $module->getInputs()]), 200);
     }
 }
