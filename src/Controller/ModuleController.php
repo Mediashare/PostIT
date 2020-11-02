@@ -51,4 +51,15 @@ class ModuleController extends AbstractController {
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         return new Response($twig->render('_module.html.twig', ['module' => $module, 'inputs' => $module->getInputs()]), 200);
     }
+
+    public function delete(string $id) {
+        $em = $this->getDoctrine()->getManager();
+        $module = $em->getRepository(Module::class)->findOneBy(['id' => $id]);
+        if (!$module): return $this->redirectToRoute('admin'); endif;
+
+        $em->remove($module);
+        $em->flush();
+
+        return $this->redirectToRoute('admin');
+    }
 }
