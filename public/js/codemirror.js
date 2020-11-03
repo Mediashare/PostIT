@@ -1,5 +1,5 @@
-function CodeMirorInit(render_path, content, mode = 'markdown') {
-    var myCodeMirror = CodeMirror(document.getElementById('codemirror'), {
+function CodeMirorInit(selector = 'codemirror', content, mode = 'markdown', render_path) {
+    var myCodeMirror = CodeMirror(document.getElementById('textarea_' + selector), {
         value: content,
         mode:  mode,
         lineNumbers: true,
@@ -8,12 +8,12 @@ function CodeMirorInit(render_path, content, mode = 'markdown') {
         keyMap: "sublime"
     });
 
-    $('#editor_preview').height('calc(100vh - ' + $('#form_header').height() + 'px)');
+    $('#preview_' + selector).height('calc(100vh - ' + $('#form_header').height() + 'px)');
     myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_header').height() + 'px)');
-    $('textarea#content_mirror').val(myCodeMirror.getValue());
+    $('textarea#mirror_' + selector).val(myCodeMirror.getValue());
 
     myCodeMirror.on('change', function (CodeMirror) {
-        renderPreview(render_path, CodeMirror.getValue());
+        renderPreview(render_path, CodeMirror.getValue(), selector);
     });
     
     // TextArea Macro
@@ -32,10 +32,9 @@ function CodeMirorInit(render_path, content, mode = 'markdown') {
 }
 
 // Render TextArea Content
-function renderPreview(render_path, content) {
-    $('textarea#content_mirror').val(content);
+function renderPreview(render_path, content, selector) {
     $.post(render_path, {content: content}, function (data) {
-        $('.render-preview').html(data);
+        $('.render_' + selector).html(data);
         document.querySelectorAll('.markdown-body pre code').forEach((block) => {
             Prism.highlightElement(block);
         });

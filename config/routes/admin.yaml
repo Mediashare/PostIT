@@ -11,7 +11,6 @@ page_form:
     controller: App\Controller\PageController::form
     defaults: 
         id: null
-
 page_delete:
     path: /page/delete/{id}
     controller: App\Controller\PageController::delete
@@ -21,11 +20,20 @@ module_form:
     controller: App\Controller\ModuleController::form
     defaults: 
         id: null
-
 module_delete:
     path: /module/delete/{id}
     controller: App\Controller\ModuleController::delete
 
+input_show:
+    path: /input/show/{id}
+    controller: App\Controller\PartialController::input
+    defaults: 
+        id: null
+input_form:
+    path: /input/{id}
+    controller: App\Controller\InputController::form
+    defaults: 
+        id: null
 input_delete:
-    path: /input/delete/{module}/{id}
+    path: /input/delete/{id}
     controller: App\Controller\InputController::delete

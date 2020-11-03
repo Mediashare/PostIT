@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Entity\Input;
 use App\Entity\Module;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,5 +44,19 @@ class PartialController extends AbstractController {
         $twig = new \Twig\Environment($loader, ['debug' => false]);
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         return new Response($twig->render('_module.html.twig', ['module' => $module, 'inputs' => $module->getInputs()]), 200);
+    }
+
+    public function input(Request $request, ?string $id = null): Response {
+        if ($id): 
+            $input = $this->getDoctrine()->getManager()->getRepository(Input::class)->find($id);
+        endif;
+        if (empty($input)): 
+            $input = new Input(); 
+        endif;
+        $input->setRender($request->get('content') ?? $request->get('render_' + $input->getId()));
+        $loader = new \Twig\Loader\ArrayLoader(['_input.html.twig' => $input->getRender()]);
+        $twig = new \Twig\Environment($loader, ['debug' => false]);
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
+        return new Response($twig->render('_input.html.twig', ['input' => $input]), 200);
     }
 }

@@ -14,8 +14,7 @@ class Input
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $id;
 
@@ -25,77 +24,56 @@ class Input
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
-    private $key;
+    private $render;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private $value;
+    private $required;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Module::class, inversedBy="inputs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $module;
-
-    public function __construct(?string $key, ?string $value, ?string $type) {
-        if ($key): $this->setKey($key); endif;
-        if ($value): $this->setValue($value); endif;
-        if ($type): $this->setType($type); endif;
-        $this->modules = new ArrayCollection();
+    public function __construct() {
+        $this->setId(\uniqid());
     }
 
-    public function getId(): ?int
-    {
+    public function getId(): ?string {
         return $this->id;
     }
 
-    public function getType(): ?string
-    {
+    public function setId(string $id): self {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function getType(): ?string {
         return $this->type;
     }
 
-    public function setType(string $type): self
-    {
+    public function setType(string $type): self {
         $this->type = $type;
 
         return $this;
     }
 
-    public function getKey(): ?string
-    {
-        return $this->key;
+    public function getRender(): ?string {
+        return $this->render;
     }
 
-    public function setKey(string $key): self
-    {
-        $this->key = $key;
+    public function setRender(string $render): self {
+        $this->render = $render;
 
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getRequired(): ?bool
     {
-        return $this->value;
+        return $this->required;
     }
 
-    public function setValue(?string $value): self
+    public function setRequired(bool $required): self
     {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    public function getModule(): ?Module
-    {
-        return $this->module;
-    }
-
-    public function setModule(?Module $module): self
-    {
-        $this->module = $module;
+        $this->required = $required;
 
         return $this;
     }
