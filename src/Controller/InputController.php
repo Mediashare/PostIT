@@ -12,12 +12,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class InputController extends AbstractController {
     public function form(Request $request, ?string $id = null): Response {
         $em = $this->getDoctrine()->getManager();
+        $id = $id ?? $request->request->get('id');
         if ($id): $input = $em->getRepository(Input::class)->find($id); endif;
-        if (empty($input)): $input = new Input(); endif;
+        if (empty($input)): 
+            $input = new Input(); 
+            if ($id): $input->setId($id); endif;
+        endif;
         if ($request->isMethod('POST')):
             $input->setType($request->get('type'));
             $input->setRender($request->get('render_' . $input->getId()));
-            $input->setRequired($request->get('required') ?? false);
             $em->persist($input);
             $em->flush();
             return $this->redirectToRoute('admin');

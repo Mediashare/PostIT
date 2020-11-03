@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Input;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ModuleRepository;
 use Doctrine\Common\Collections\Collection;
@@ -15,8 +14,7 @@ class Module
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $id;
 
@@ -31,23 +29,30 @@ class Module
     private $render;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $allow;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Input::class, mappedBy="module", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity=Input::class, inversedBy="modules")
      */
     private $inputs;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Variable::class, mappedBy="module")
+     */
+    private $variables;
+
     public function __construct() {
+        $this->setId(\uniqid());
         $this->setAllow(false);
         $this->inputs = new ArrayCollection();
+        $this->variables = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function setId(string $id): self {
+        $this->id = $id;
+        return $this;
     }
 
     public function getName(): ?string
@@ -87,26 +92,26 @@ class Module
     }
 
     /**
-     * @return Collection|Input[]
+     * @return array|Input[]
      */
-    public function getInputs()
-    {
-        foreach ($this->inputs ?? [] as $input):
-            $inputs[$input->getKey()] = $input;
+    public function getInputs(): array {
+        foreach ($this->inputs as $input):
+            $inputs[$input->getId()] = $input;
         endforeach;
-
         return $inputs ?? [];
     }
 
-    public function getInput(string $key): ?Input {
-        return $this->getInputs()[$key] ?? null;
+    public function getInput(string $id): ?Input {
+        foreach ($this->getInputs() as $input):
+            if ($id == $input->getId()): return $input; endif;
+        endforeach;
+        return null;
     }
 
     public function addInput(Input $input): self
     {
         if (!$this->inputs->contains($input)) {
-            $this->inputs[$input->getId()] = $input;
-            $input->setModule($this);
+            $this->inputs[] = $input;
         }
 
         return $this;
@@ -114,10 +119,51 @@ class Module
 
     public function removeInput(Input $input): self
     {
-        if ($this->inputs->removeElement($input)) {
+        $this->inputs->removeElement($input);
+
+        return $this;
+    }
+
+    /**
+     * @return array|Variable[]
+     */
+    public function getVariables(): array {
+        foreach ($this->variables as $variable):
+            $variables[$variable->getName()] = $variable;
+        endforeach;
+        return $variables ?? [];
+    }
+
+    public function getVariableByName(string $name): ?Variable {
+        foreach ($this->getVariables() as $variable):
+            if ($name == $variable->getName()): return $variable; endif;
+        endforeach;
+        return null;
+    }
+
+    public function getVariableById(string $id): ?Variable {
+        foreach ($this->getVariables() as $variable):
+            if ($id == $variable->getId()): return $variable; endif;
+        endforeach;
+        return null;
+    }
+
+    public function addVariable(Variable $variable): self
+    {
+        if (!$this->variables->contains($variable)) {
+            $this->variables[] = $variable;
+            $variable->setModule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariable(Variable $variable): self
+    {
+        if ($this->variables->removeElement($variable)) {
             // set the owning side to null (unless already changed)
-            if ($input->getModule() === $this) {
-                $input->setModule(null);
+            if ($variable->getModule() === $this) {
+                $variable->setModule(null);
             }
         }
 

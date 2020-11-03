@@ -37,3 +37,7 @@ input_form:
 input_delete:
     path: /input/delete/{id}
     controller: App\Controller\InputController::delete
+    
+variable_delete:
+    path: /variable/delete/{id}
+    controller: App\Controller\VariableController::delete

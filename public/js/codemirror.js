@@ -10,8 +10,9 @@ function CodeMirorInit(selector = 'codemirror', content, mode = 'markdown', rend
 
     $('#preview_' + selector).height('calc(100vh - ' + $('#form_header').height() + 'px)');
     myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_header').height() + 'px)');
-    $('textarea#mirror_' + selector).val(myCodeMirror.getValue());
+    $('textarea#input_' + selector).val(myCodeMirror.getValue());
 
+    renderPreview(render_path, myCodeMirror.getValue(), selector);
     myCodeMirror.on('change', function (CodeMirror) {
         renderPreview(render_path, CodeMirror.getValue(), selector);
     });
@@ -33,7 +34,8 @@ function CodeMirorInit(selector = 'codemirror', content, mode = 'markdown', rend
 
 // Render TextArea Content
 function renderPreview(render_path, content, selector) {
-    $.post(render_path, {content: content}, function (data) {
+    $('textarea#input_' + selector).val(content);
+    $.post(render_path, {content: content, id: selector}, function (data) {
         $('.render_' + selector).html(data);
         document.querySelectorAll('.markdown-body pre code').forEach((block) => {
             Prism.highlightElement(block);

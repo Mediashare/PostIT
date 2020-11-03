@@ -29,12 +29,19 @@ class Input
     private $render;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\ManyToMany(targetEntity=Module::class, mappedBy="inputs")
      */
-    private $required;
+    private $modules;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Variable::class, mappedBy="input")
+     */
+    private $variables;
 
     public function __construct() {
         $this->setId(\uniqid());
+        $this->modules = new ArrayCollection();
+        $this->variables = new ArrayCollection();
     }
 
     public function getId(): ?string {
@@ -66,14 +73,59 @@ class Input
         return $this;
     }
 
-    public function getRequired(): ?bool
+    /**
+     * @return Collection|Module[]
+     */
+    public function getModules(): Collection
     {
-        return $this->required;
+        return $this->modules;
     }
 
-    public function setRequired(bool $required): self
+    public function addModule(Module $module): self
     {
-        $this->required = $required;
+        if (!$this->modules->contains($module)) {
+            $this->modules[] = $module;
+            $module->addInput($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): self
+    {
+        if ($this->modules->removeElement($module)) {
+            $module->removeInput($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Variable[]
+     */
+    public function getVariables(): Collection
+    {
+        return $this->variables;
+    }
+
+    public function addVariable(Variable $variable): self
+    {
+        if (!$this->variables->contains($variable)) {
+            $this->variables[] = $variable;
+            $variable->setInput($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariable(Variable $variable): self
+    {
+        if ($this->variables->removeElement($variable)) {
+            // set the owning side to null (unless already changed)
+            if ($variable->getInput() === $this) {
+                $variable->setInput(null);
+            }
+        }
 
         return $this;
     }

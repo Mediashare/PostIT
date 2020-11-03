@@ -34,13 +34,12 @@
 
 {% block editor %}
     <div class="col-lg-6 p-0">
-        <div id="codemirror" class="shadow-lg rounded"></div>
-        <textarea name="render" id="content_mirror" class="d-none" required></textarea>
+        <div id="textarea_{{ module.id }}" class="shadow-lg rounded"></div>
+        <textarea name="render_{{ module.id }}" id="input_{{ module.id }}" class="d-none" required></textarea>
     </div>
     <div class="col-lg-6 p-0">
-        <div id="editor_preview" class="markdown-body shadow-lg rounded">
-            <div class="render-preview"></div>
-            {% block signature %}{% endblock %}
+        <div id="preview_{{ module.id }}" class="markdown-body shadow-lg rounded">
+            <div class="render_{{ module.id }}"></div>
         </div>
     </div>
 {% endblock %}
@@ -66,7 +65,11 @@
         {% else %} 
             {% set content = "<div class=\"col-12\"></div>" %} 
         {% endif %}
-        var myCodeMirror = CodeMirorInit('{{ path("module_show", {"id": module.id ?? 0}) }}', "{{- content|e('js') -}}", "twig");
-        renderPreview('{{ path("module_show", {"id": module.id ?? 0}) }}', myCodeMirror.getValue());
+
+        CodeMirorInit(selector = "{{ module.id }}", 
+            content = "{{- content|e('js') -}}", 
+            mode = "twig", 
+            path_render = '{{ path("module_show") }}', 
+        );
     </script>
 {% endblock %}

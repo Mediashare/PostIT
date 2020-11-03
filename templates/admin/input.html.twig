@@ -4,6 +4,7 @@
 
 {% block form_header %}
     <div class="col-lg-9 p-0">
+        <input type="hidden" name="id" value="{{ input.id }}">
         <input type="text" name="type" class="w-100 rounded form-control" placeholder="Type..." required="true" {% if input.type %}value="{{ input.type }}"{% endif %} autofocus>
     </div>
     <div class="col-lg-3 p-0 d-flex">
@@ -26,7 +27,7 @@
         <textarea name="render_{{ input.id }}" id="input_{{ input.id }}" class="d-none" required></textarea>
     </div>
     <div class="col-lg-6 p-0">
-        <div id="preview_{{ input.id }}" class="markdown-body shadow-lg rounded">
+        <div id="preview_{{ input.id }}" class="pt-0 markdown-body shadow-lg rounded">
             <div class="render_{{ input.id }}"></div>
         </div>
     </div>
@@ -56,7 +57,7 @@
         CodeMirorInit(selector = "{{ input.id }}", 
             content = "{{- content|e('js') -}}", 
             mode = "twig", 
-            url = '{{ path("input_show", {"id": input.id ?? 0}) }}', 
+            path_render = '{{ path("input_show") }}', 
         );
     </script>
 {% endblock %}
