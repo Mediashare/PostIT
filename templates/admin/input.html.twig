@@ -2,6 +2,14 @@
 
 {% block title %}Input{% endblock %}
 
+
+{% block stylesheets %}
+    {# Dependencies #}
+    <link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
+    {# AutoCompletion #}
+    <link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
+{% endblock %}
+
 {% block form_header %}
     <div class="col-lg-9 p-0">
         <input type="hidden" name="id" value="{{ input.id }}">

@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Page;
+use App\Entity\Module;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,7 +45,9 @@ class PageController extends AbstractController {
             return $this->redirect($page->getUrl());
         endif;
 
-        return $this->render('admin/page_form.html.twig', ['page' => $page]);
+        $modules = $em->getRepository(Module::class)->findAll();
+
+        return $this->render('admin/page_form.html.twig', ['page' => $page, 'modules' => $modules]);
     }
 
     public function delete(string $id) {

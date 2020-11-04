@@ -2,13 +2,6 @@
 
 {% block title %}Form{% endblock %}
 
-{% block stylesheets %}
-    {# Dependencies #}
-    <link rel="stylesheet" href="{{ preload(asset('codemirror/lib/codemirror.css'), { as: 'style' }) }}">
-    {# AutoCompletion #}
-    <link rel="stylesheet" href="{{ preload(asset('codemirror/addon/hint/show-hint.css'), { as: 'style' }) }}">
-{% endblock %}
-
 {% block container %}
     <form method="POST">
         <div id="form_header" class="row shadow-lg rounded">
@@ -29,28 +22,4 @@
             {% endblock %}
         </div>
     </form>
-{% endblock %}
-
-{% block javascripts %}
-    {# CodeMirror #}
-    <script src="{{ preload(asset('codemirror/lib/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
-    <script src="{{ preload(asset('js/codemirror.js'), { as: 'script', importance: 'high' }) }}"></script>
-    {# Mode #}
-    <script src="{{ preload(asset('codemirror/mode/markdown/markdown.js'), { as: 'script' }) }}"></script>
-    {# AutoCompletion #}
-    <script src="{{ preload(asset('codemirror/addon/hint/anyword-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/addon/hint/css-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/addon/hint/html-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/addon/hint/javascript-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/addon/hint/show-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/addon/hint/sql-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/addon/hint/xml-hint.js'), { as: 'script' }) }}"></script>
-    <script src="{{ preload(asset('codemirror/keymap/sublime.js'), { as: 'script' }) }}"></script>
-    <script>
-        {% if page is defined and page %} {% set content = page.content %}
-        {% elseif post is defined and post %} {% set content = post.content %}
-        {% else %} {% set content = "# Hello world\n" %} {% endif %}
-        var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
-        renderPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
-    </script>
 {% endblock %}

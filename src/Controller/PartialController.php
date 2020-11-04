@@ -40,9 +40,9 @@ class PartialController extends AbstractController {
         if (empty($module)): 
             $module = new Module(); 
         endif;
-        $module->setRender($request->get('content'));
+        $module->setRender($request->get('content') ?? $module->getRender());
         $loader = new \Twig\Loader\ArrayLoader(['_module.html.twig' => $module->getRender()]);
-        $twig = new \Twig\Environment($loader, ['debug' => true]);
+        $twig = new \Twig\Environment($loader, ['debug' => false]);
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         return new Response($twig->render('_module.html.twig', ['module' => $module, 'inputs' => $module->getInputs()]), 200);
     }
@@ -51,7 +51,7 @@ class PartialController extends AbstractController {
         $em = $this->getDoctrine()->getManager();
         $id = $request->request->get('id');
         if ($id): 
-            $input = $em->getRepository(Input::class)->find($id);
+            $input = $em->getRepository(Input::class)->findOneBy(['id' => $id]);
         endif;
         if (empty($input)): $input = new Input(); endif;
         if ($request->get('module')):
@@ -59,7 +59,7 @@ class PartialController extends AbstractController {
         endif;
         $input->setRender($request->get('content') ?? $request->get('render_' + $input->getId()));
         $loader = new \Twig\Loader\ArrayLoader(['_input.html.twig' => $input->getRender()]);
-        $twig = new \Twig\Environment($loader, ['debug' => true]);
+        $twig = new \Twig\Environment($loader, ['debug' => false]);
         $twig->addExtension(new \Twig\Extension\DebugExtension());
         return new Response($twig->render('_input.html.twig', ['input' => $input, 'module' => $module ?? null]), 200);
     }
