@@ -14,8 +14,7 @@ class UserController extends AbstractController {
         if (!$username): 
             $user = $this->getUser(); 
         else:
-            $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->findOneBy(['slug' => $username]);
+            $user = $this->getUser(['slug' => $username]);
         endif;
         if (!$user):
             $this->addFlash('error', 'User not found.');
@@ -26,9 +25,8 @@ class UserController extends AbstractController {
     }
 
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
-        $em = $this->getDoctrine()->getManager();
         if ($username):
-            $user = $em->getRepository(User::class)->findOneBy(['slug' => $username]);
+            $user = $this->getUser(['slug' => $username]);
             if (!$user):
                 $this->addFlash('error', 'User not found.');
                 return $this->redirectToRoute('profile');
@@ -44,7 +42,7 @@ class UserController extends AbstractController {
             if ($user->getUsername() != $form->get('username')):
                 $slugify = new Slugify();
                 $slug = $slugify->slugify($form->get('username'));
-                if ($em->getRepository(User::class)->findOneBy(['slug' => $slug])):
+                if ($this->getUser(['slug' => $slug])):
                     $this->addFlash('error', 'Username already used.');
                 else: 
                     $user->setUsername($form->get('username')); 
@@ -53,7 +51,7 @@ class UserController extends AbstractController {
             endif;
             // Email
             if ($user->getEmail() != $form->get('email')):
-                if ($em->getRepository(User::class)->findOneBy(['email' => \strtolower($form->get('email'))])):
+                if ($this->getUser(['email' => \strtolower($form->get('email'))])):
                     $this->addFlash('error', 'Email already used.');
                 else: 
                     $user->setEmail($form->get('email'));
@@ -88,8 +86,8 @@ class UserController extends AbstractController {
                 $user->setSignature($form->get('signature'));
             endif;
 
-            $em->persist($user);
-            $em->flush();
+            $this->getEm()->persist($user);
+            $this->getEm()->flush();
             return $this->redirectToRoute('profile_edit', ['username' => $user->getSlug()]);
         endif;
         return $this->render('app/profile_edit.html.twig', ['user' => $user]);
@@ -97,9 +95,8 @@ class UserController extends AbstractController {
 
     public function apikey() {
         $this->getUser()->setApikey(\sha1(\microtime().$this->getUser()->getId()));
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($this->getUser());
-        $em->flush();
+        $this->getEm()->persist($this->getUser());
+        $this->getEm()->flush();
         $this->addFlash('success', 'Apikey has been reseted.');
 
         return $this->redirectToRoute('profile');
@@ -107,21 +104,20 @@ class UserController extends AbstractController {
 
 
     public function delete(string $id) {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(['id' => $id]);
+        $user = $this->getUser(['id' => $id]);
         if (!$user):
             $this->addFlash('error', 'No user found.');
             return $this->redirectToRoute('admin');
         endif;
         foreach ($user->getPosts() as $post):
-            $em->remove($post);
+            $this->getEm()->remove($post);
         endforeach;
         foreach ($user->getComments() as $comment):
-            $em->remove($comment);
+            $this->getEm()->remove($comment);
         endforeach;
         
-        $em->remove($user);
-        $em->flush();
+        $this->getEm()->remove($user);
+        $this->getEm()->flush();
         
         return $this->redirectToRoute('admin');
     }

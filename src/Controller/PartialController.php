@@ -11,8 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PartialController extends AbstractController {
     public function menu(Request $request, ?Post $post, ?Page $page) {
-        $em = $this->getDoctrine()->getManager();
-        $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
+        $posts = $this->getPosts([], ['createDate' => 'DESC']);
         return $this->render('partial/_menu.html.twig', [
             'posts' => $posts,
             'currentPost' => $post,
@@ -22,8 +21,7 @@ class PartialController extends AbstractController {
     }
 
     public function signature(?string $username = null) {
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(['username' => $username]);
+        $user = $this->getUser(['username' => $username]);
         if (!$user):
             if (!$this->getUser()): return new Response(''); endif;
             $user = $this->getUser();

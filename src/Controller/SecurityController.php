@@ -26,12 +26,11 @@ class SecurityController extends AbstractController {
 
     public function passwordForget(Request $request, EmailVerifier $emailVerifier) {
         if ($request->isMethod('POST')):
-            $em = $this->getDoctrine()->getManager();
-            $user = $em->getRepository(User::class)->findOneBy(['email' => \strtolower($request->get('email'))]);
+            $user = $this->getUser(['email' => \strtolower($request->get('email'))]);
             if ($user):
                 $user->setToken(\sha1(\microtime().$user->getId()));
-                $em->persist($user);
-                $em->flush();
+                $this->getEm()->persist($user);
+                $this->getEm()->flush();
 
                 $template = (new TemplatedEmail())
                     ->from(new Address($this->getParameter('mailer.from'), $this->getParameter('mailer.from_name')))
@@ -51,8 +50,7 @@ class SecurityController extends AbstractController {
         if (!$request->get('token')):
             return $this->redirectToRoute('account_password_forget');
         endif;
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository(User::class)->findOneBy(['token' => $request->get('token')]);
+        $user = $this->getUser(['token' => $request->get('token')]);
         if (!$user):
             $this->addFlash('error', 'User not found with this token.');
             return $this->redirectToRoute('account_password_forget');
@@ -67,8 +65,8 @@ class SecurityController extends AbstractController {
                 $passwordEncoder->encodePassword($user, $request->get('password'))
             );
             $user->setToken(null);
-            $em->persist($user);
-            $em->flush();
+            $this->getEm()->persist($user);
+            $this->getEm()->flush();
             return $this->redirectToRoute('account');
         endif;
 
@@ -109,20 +107,19 @@ class SecurityController extends AbstractController {
                 )
             );
             $user->setEmail(\strtolower($user->getEmail()));
-            $em = $this->getDoctrine()->getManager();
-            if (!$em->getRepository(User::class)->findAll()):
+            if (!$this->getRepository(User::class)->findAll()):
                 $user->setRoles(['ROLE_ADMIN']);
             endif;
-            if ($em->getRepository(User::class)->findOneBy(['email' => \strtolower($user->getEmail())])):
+            if ($this->getUser(['email' => \strtolower($user->getEmail())])):
                 $this->addFlash('verify_email_error', 'This email already exist.');
                 return $this->redirectToRoute('account');
             endif;
-            if ($em->getRepository(User::class)->findOneBy(['username' => $user->getUsername()])):
+            if ($this->getUser(['username' => $user->getUsername()])):
                 $this->addFlash('verify_email_error', 'This username already exist.');
                 return $this->redirectToRoute('account');
             endif;
-            $em->persist($user);
-            $em->flush();
+            $this->getEm()->persist($user);
+            $this->getEm()->flush();
 
             // generate a signed url and email it to the user
             $emailVerifier->sendEmailConfirmation('app_verify_email', $user,

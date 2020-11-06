@@ -12,11 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController {
     public function dashboard() {
-        $em = $this->getDoctrine()->getManager();
-        $pages = $em->getRepository(Page::class)->findBy([], ['createDate' => 'DESC']);
-        $posts = $em->getRepository(Post::class)->findBy([], ['createDate' => 'DESC']);
-        $comments = $em->getRepository(Comment::class)->findBy([], ['createDate' => 'DESC']);
-        $users = $em->getRepository(User::class)->findAll();
+        $pages = $this->getPages([], ['createDate' => 'DESC']);
+        $posts = $this->getPosts([], ['createDate' => 'DESC']);
+        $comments = $this->getComments([], ['createDate' => 'DESC']);
+        $users = $this->getUsers();
         return $this->render('admin/dashboard.html.twig', [
             'posts' => $posts,
             'comments' => $comments,
