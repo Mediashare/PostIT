@@ -1,11 +1,17 @@
 // Avatar upload
 $("#file").change(function() {
+    $('#file_error').html('');
     file = this.files[0];
-    filename = file.name
-    $('#filename').html(filename);
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(file);
-    oFReader.onload = function (oFREvent) {$('#image_preview').attr('src', oFREvent.target.result)};
+    if(file.size > 2097152){
+        $('#file_error').append('La taille de votre image dépace la limite autorisé de 2 Mo.')
+        this.value = "";
+    } else {
+        filename = file.name
+        $('#filename').html(filename);
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(file);
+        oFReader.onload = function (oFREvent) {$('#image_preview').attr('src', oFREvent.target.result)};
+    }
 });
 
 // Verify Password
