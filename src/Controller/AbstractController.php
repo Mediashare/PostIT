@@ -27,7 +27,7 @@ class AbstractController extends Controller {
         return $this->getRepository(Page::class)->findOneBy($parameters, $order);
     }
 
-    public function getPages(array $parameters, ?array $order = ['createDate' => 'DESC']) {
+    public function getPages(?array $parameters = [], ?array $order = ['createDate' => 'DESC']) {
         return $this->getRepository(Page::class)->findBy($parameters, $order);
     }
 
@@ -35,7 +35,7 @@ class AbstractController extends Controller {
         return $this->getRepository(Post::class)->findOneBy($parameters, $order);
     }
 
-    public function getPosts(array $parameters, ?array $order = ['createDate' => 'DESC']) {
+    public function getPosts(?array $parameters = [], ?array $order = ['createDate' => 'DESC']) {
         return $this->getRepository(Post::class)->findBy($parameters, $order);
     }
 
@@ -43,7 +43,7 @@ class AbstractController extends Controller {
         return $this->getRepository(Comment::class)->findOneBy($parameters, $order);
     }
 
-    public function getComments(array $parameters, ?array $order = ['createDate' => 'DESC']) {
+    public function getComments(?array $parameters = [], ?array $order = ['createDate' => 'DESC']) {
         return $this->getRepository(Comment::class)->findBy($parameters, $order);
     }
 
@@ -52,7 +52,7 @@ class AbstractController extends Controller {
         return $this->getRepository(User::class)->findOneBy($parameters, $order);
     }
 
-    public function getUsers(array $parameters, ?array $order = []) {
+    public function getUsers(?array $parameters = [], ?array $order = []) {
         return $this->getRepository(User::class)->findBy($parameters, $order);
     }
 }
