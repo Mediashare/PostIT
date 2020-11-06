@@ -23,7 +23,8 @@ logout:
 register:
     path: /register
     methods: POST
-    controller: App\Controller\PartialController::register
+    controller: App\Controller\SecurityController::register
+
 app_verify_email:
     path: /verify/email
     controller: App\Controller\SecurityController::verifyUserEmail
