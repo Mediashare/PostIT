@@ -81,7 +81,8 @@
 
         function renderModuleInput(id) {
             $.post('{{ path("module_show") }}', {id: id}, function (data) {
-                $('#page_modules').html(data);
+                var content = '<div class="card bg-main">' + data + '</div>'
+                $('#page_modules').html(content);
                 document.querySelectorAll('.markdown-body pre code').forEach((block) => {
                     Prism.highlightElement(block);
                 });

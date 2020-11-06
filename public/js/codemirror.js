@@ -1,4 +1,4 @@
-function CodeMirorInit(selector = 'codemirror', content, mode = 'markdown', render_path) {
+function CodeMirorInit(selector = 'codemirror', content, mode = 'markdown', render_path, height = '300') {
     var myCodeMirror = CodeMirror(document.getElementById('textarea_' + selector), {
         value: content,
         mode:  mode,
@@ -8,8 +8,11 @@ function CodeMirorInit(selector = 'codemirror', content, mode = 'markdown', rend
         keyMap: "sublime"
     });
 
-    $('#preview_' + selector).height('calc(100vh - ' + $('#form_header').height() + 'px)');
-    myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_header').height() + 'px)');
+    // $('#preview_' + selector).height('calc(100vh - ' + $('#form_header').height() + 'px)');
+    // myCodeMirror.setSize('100%', 'calc(100vh - ' + $('#form_header').height() + 'px)');
+    myCodeMirror.setSize('100%', height + 'px');
+    $('#preview_' + selector).css('height', height + 'px');
+    console.log(height);
     $('textarea#input_' + selector).val(myCodeMirror.getValue());
 
     renderPreview(render_path, myCodeMirror.getValue(), selector);
