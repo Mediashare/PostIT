@@ -19,13 +19,7 @@ routing_api:
 routing_admin:
    prefix: '/admin'
    resource: 'routes/admin.yaml'
-
-module_show:
-   path: /module/render/{id}
-   controller: App\Controller\PartialController::module
-   defaults: 
-      id: null
-      
+   
 page:
    path: /{url}
    controller: App\Controller\PageController::show 

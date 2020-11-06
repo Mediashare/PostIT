@@ -44,7 +44,7 @@ class PageController extends AbstractController {
             return $this->redirect($page->getUrl());
         endif;
 
-        return $this->render('admin/page_form.html.twig', ['page' => $page]);
+        return $this->render('admin/page.html.twig', ['page' => $page]);
     }
 
     public function delete(string $id) {
