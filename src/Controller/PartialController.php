@@ -3,8 +3,6 @@ namespace App\Controller;
 
 use App\Entity\Page;
 use App\Entity\Post;
-use App\Entity\User;
-use App\Entity\Module;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

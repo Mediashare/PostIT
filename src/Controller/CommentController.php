@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Post;
 use App\Entity\Comment;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

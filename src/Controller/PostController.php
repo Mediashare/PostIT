@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 

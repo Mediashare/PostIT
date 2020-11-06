@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Post;
-use App\Entity\User;
 use App\Service\Text;
 use App\Service\Serialize;
 use App\Controller\AbstractController;

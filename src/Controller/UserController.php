@@ -1,11 +1,9 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\User;
-use Cocur\Slugify\Slugify;
+use App\Service\Text;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -40,8 +38,8 @@ class UserController extends AbstractController {
             // Username
             $form = $request->request;
             if ($user->getUsername() != $form->get('username')):
-                $slugify = new Slugify();
-                $slug = $slugify->slugify($form->get('username'));
+                $text = new Text();
+                $slug = $text->slugify($form->get('username'));
                 if ($this->getUser(['slug' => $slug])):
                     $this->addFlash('error', 'Username already used.');
                 else: 

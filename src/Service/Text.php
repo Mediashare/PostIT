@@ -16,7 +16,7 @@ Class Text {
         return $markdown ?? '';
     }
 
-    public function slugify (?string $text): ?string {
+    public function Slugify (?string $text): ?string {
         $slugify = new Slugify();
         $slug = $slugify->slugify($text);
         return $slug ?? '';

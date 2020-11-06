@@ -2,11 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Page;
-use App\Entity\Post;
-use App\Entity\User;
-use App\Entity\Module;
-use App\Entity\Comment;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
