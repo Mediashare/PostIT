@@ -33,7 +33,7 @@
             <strong>{{ post.title }}</strong> 
             <br>
             <span class="float-right">
-                <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em>{% if post.author %} - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
+                <em>{{ post.createDate|date('d/m/Y') }}</em>{% if post.author %} - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
             </span>
         </a>
     {% endfor %}

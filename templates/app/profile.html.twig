@@ -25,7 +25,7 @@
                             <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 
                             <br>
                             <span class="float-right">
-                                <em>{{ post.createDate|date('d/m/Y H:i:s') }}</em>
+                                <em>{{ post.createDate|date('d/m/Y') }}</em>
                                 {% if post.author %}
                                  - <a href="{{ path('profile', {'username': post.author.slug}) }}" title="Profile {{ post.author }}" class="username text-info">{{ post.author }}</a>
                                 {% endif %}
