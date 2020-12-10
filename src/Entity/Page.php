@@ -47,11 +47,6 @@ class Page
      */
     private $updateDate;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Pages")
-     */
-    private $author;
-
     public function __toString() {
         return 'Page';
     }
@@ -138,18 +133,6 @@ class Page
     public function setUpdateDate(\DateTime $updateDate): self
     {
         $this->updateDate = $updateDate;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
