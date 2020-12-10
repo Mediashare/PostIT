@@ -15,7 +15,7 @@
         <meta property="og:description" content="{% block description_og %}Mediashare est une entité promouvant le partage de ressource sur Internet.{% endblock %}">
         <meta property="og:type" content="{% block type_og %}article{% endblock %}">
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
-        <meta property="og:image" content="{% block image_og %}{{  app.request.getSchemeAndHttpHost() ~ asset('images/logo.png') }}{% endblock %}">
+        <meta property="og:image" content="{% block image_og %}{{ asset('images/logo.png') }}{% endblock %}">
         
         {# Css #}
         <meta name="viewport" content="width=device-width, initial-scale=0.8">
