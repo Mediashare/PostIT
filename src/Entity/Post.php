@@ -37,6 +37,11 @@ class Post
     private $slug;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $online;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createDate;
@@ -111,6 +116,18 @@ class Post
     public function setSlug(string $slug): self {
         $text = new Text();
         $this->slug = $text->slugify($slug);
+        return $this;
+    }
+
+    public function isOnline(): ?bool
+    {
+        return $this->online;
+    }
+
+    public function setOnline(bool $online): self
+    {
+        $this->online = $online;
+
         return $this;
     }
 

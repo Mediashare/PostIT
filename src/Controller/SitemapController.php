@@ -21,7 +21,7 @@ class SitemapController extends AbstractController {
             ];
         endforeach;
         
-        foreach ($this->getPosts([], ['createDate' => 'DESC']) as $post):
+        foreach ($this->getPosts(['online' => true], ['createDate' => 'DESC']) as $post):
             $urls[$this->generateUrl('post', ['slug' => $post->getSlug()])] = [
                 'url' => $this->generateUrl('post', ['slug' => $post->getSlug()], false), 
                 'lastmod' => $post->getUpdateDate(), 

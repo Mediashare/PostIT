@@ -39,6 +39,7 @@ class PostController extends AbstractController {
                 endwhile;
             endif;
             $post->setContent($request->get('content'));
+            $post->setOnline($request->get('online') ? true : false);
             $post->setUpdateDate(new \DateTime());
             $this->getEm()->persist($post);
             $this->getEm()->flush();
@@ -55,6 +56,7 @@ class PostController extends AbstractController {
             $post = new Post();
             $post->setTitle($title);
             $post->setContent($content);
+            $post->setOnline($request->get('online') ? true : false);
             // Generate Slug
             $post->setSlug($post->getTitle());
             while ($duplication = $this->getPost(['slug' => $post->getSlug()])):
