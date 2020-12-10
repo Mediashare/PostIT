@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="col-12 mt-3">
-        {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
+        {{ render(controller('App\\Controller\\PartialController::signature', {'username': user.username ?? null})) }}
         <div class="card bg-main shadow-lg rounded mt-1">
             <div class="card-header">
                 <h4 class="card-title">
