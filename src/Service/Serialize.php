@@ -8,7 +8,14 @@ use App\Entity\Comment;
 Class Serialize {
     public function posts($posts, ?string $type = 'json') {
         foreach ($posts ?? [] as $index => $post):
-            $posts[$index] = $this->post($post, 'array');
+            $posts[$index] = [
+                'id' => $post->getId(),
+                'title' => $post->getTitle(),
+                'slug' => $post->getSlug(),
+                'createDate' => $post->getCreateDate(),
+                'comments' => count($post->getComments()),
+                'author' => $this->author($post->getAuthor() ?? [], 'array'),
+            ];
         endforeach;
 
         if ($type === 'array'):
@@ -109,8 +116,6 @@ Class Serialize {
         foreach ([$class_name] ?? $entities as $class_name):
             $serialized = unserialize(sprintf('O:%d:"%s"%s', strlen('App\Entity\\' . $class_name), 'App\Entity\\' . $class_name, strstr(serialize($serialized ?? $array), ':')));
         endforeach;
-        // dd($serialized);
-        // dd($serialized);
         return $serialized;
     }
 }
