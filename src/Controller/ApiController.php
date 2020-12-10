@@ -17,7 +17,7 @@ class ApiController extends AbstractController {
     
     public function posts(): Response {
         $em = $this->getDoctrine()->getManager();
-        $posts = $this->getPosts([], ['createDate' => 'desc']);
+        $posts = $this->getPosts(['online' => true], ['createDate' => 'desc']);
         $serizalizer = new Serialize();
         $posts = $serizalizer->posts($posts, $type = 'array');
         
@@ -26,7 +26,7 @@ class ApiController extends AbstractController {
 
     public function post(string $id): Response {
         $em = $this->getDoctrine()->getManager();
-        $post = $this->getPost(['id' => $id]);
+        $post = $this->getPost(['online' => true, 'id' => $id]);
         $serizalizer = new Serialize();
         $post = $serizalizer->post($post, $type = 'array');
         

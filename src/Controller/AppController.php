@@ -14,7 +14,7 @@ class AppController extends AbstractController {
             return $this->render('app/page.html.twig', ['page' => $page]);
         else:
             // If have not Page
-            $post = $this->getPost([], ['createDate' => 'DESC']); // Get last post
+            $post = $this->getPost(['online' => true], ['createDate' => 'DESC']); // Get last post
             return $this->render('app/post.html.twig', ['post' => $post]);
         endif;
     }

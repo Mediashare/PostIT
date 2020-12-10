@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends AbstractController {
     public function new(Request $request, string $slug) {
-        $post = $this->getPost(['slug' => $slug]);
+        $post = $this->getPost(['slug' => $slug, 'online' => true]);
         if (!$post): 
             $this->addFlash('error', 'Post not found.');
             return $this->redirectToRoute('index'); 
