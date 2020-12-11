@@ -39,6 +39,18 @@ passwordRepeat.on('change', function () {
 });
 
 // Menu
+var current = $('ul#menu_posts a.post_link.active');
+if (current.length > 0) {
+    $(window).bind('keydown', function(event) {
+        if (event.shiftKey && (event.ctrlKey || event.metaKey)) {
+            if (event.which === 38) {
+                $(current).prev()[0].click();
+            } else if (event.which === 40) {
+                $(current).next()[0].click();
+            }
+        }
+    });
+}
 function scrollToAnchor(id){
     var Tag = $("a[name='"+ id +"']");
     $('ul#menu_posts').animate({scrollTop: Tag.offset().top - 50});
