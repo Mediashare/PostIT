@@ -28,7 +28,7 @@ code.hljs, .hljs-subst { color: #d2d0c8; }
 .markdown-body h5, .markdown-body .retro-h5 { font-size: 1.121rem; }
 .markdown-body h6, .markdown-body .retro-h6 { font-size: .88rem; }
 .markdown-body small, .markdown-body .retro-small { font-size: .707em; }
-.markdwon-body .code-toolbar { margin-bottom: 0.5rem!important; }
+.markdwon-body .code-toolbar { margin-bottom: 0.75rem !important; }
 
 /* https://github.com/mrmrs/fluidity */
 .markdown-body img, .markdown-body canvas, .markdown-body iframe, .markdown-body video, .markdown-body svg, .markdown-body select, .markdown-body textarea { max-width: 100%; }
