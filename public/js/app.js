@@ -2,7 +2,7 @@
 $("#file").change(function() {
     $('#file_error').html('');
     file = this.files[0];
-    if(file.size > 2097152){
+    if(file.size > 5242880){
         $('#file_error').append('La taille de votre image dépace la limite autorisé de 2 Mo.')
         this.value = "";
     } else {
