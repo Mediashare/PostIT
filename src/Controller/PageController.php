@@ -28,7 +28,7 @@ class PageController extends AbstractController {
             $page = new Page();
             $page->setContent('');
             $page->setUrl('/');
-            $page->setAuthor($this->getUser());
+            //$page->setAuthor($this->getUser());
         endif;
 
         if ($request->isMethod('POST') && $request->get('content')):
