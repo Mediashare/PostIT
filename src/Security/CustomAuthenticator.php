@@ -69,7 +69,7 @@ class CustomAuthenticator extends AbstractFormLoginAuthenticator implements Pass
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user):
-            $user = $this->entityManager->getRepository(User::class)->findOneBy(['user' => $credentials['email']]);
+            $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['email']]);
         endif;
         
         if (!$user) {
