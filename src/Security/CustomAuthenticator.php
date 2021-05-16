@@ -48,7 +48,7 @@ class CustomAuthenticator extends AbstractFormLoginAuthenticator implements Pass
     public function getCredentials(Request $request)
     {
         $credentials = [
-            'email' => $request->request->get('email'),
+            'email' => strtolower($request->request->get('email')),
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
@@ -67,7 +67,7 @@ class CustomAuthenticator extends AbstractFormLoginAuthenticator implements Pass
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => \strtolower($credentials['email'])]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
         if (!$user):
             $user = $this->entityManager->getRepository(User::class)->findOneBy(['user' => $credentials['email']]);
         endif;
