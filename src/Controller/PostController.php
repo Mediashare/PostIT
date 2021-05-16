@@ -62,8 +62,8 @@ class PostController extends AbstractController {
                 $post = new Post();
                 $post->setTitle($title);
                 $post->setContent($content);
-                if (is_string($request->get('online')) && $request->get('online') !== "false"):
-                    $online = true; else: $online = $request->get('online') ? true : false;
+                if (!$request->get('online') || $request->get('online') === "false"):
+                    $online = false; else: $online = true;
                 endif;
                 $post->setOnline($online);
                 // Generate Slug
