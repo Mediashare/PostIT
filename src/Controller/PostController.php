@@ -62,7 +62,12 @@ class PostController extends AbstractController {
                 $post = new Post();
                 $post->setTitle($title);
                 $post->setContent($content);
-                $post->setOnline($request->get('online') ? true : false);
+                if (is_string($request->get('online')):
+                    $online = $request->get('online') ? "false" : true;
+                else:
+                    $online = $request->get('online') ? true : false;
+                endif;
+                $post->setOnline($online);
                 // Generate Slug
                 $post->setSlug($post->getTitle());
                 while ($duplication = $this->getPost(['slug' => $post->getSlug()])):
