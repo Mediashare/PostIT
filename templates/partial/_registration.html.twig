@@ -7,4 +7,15 @@
     {{ form_row(registrationForm.plainPassword, {
         label: 'Password'
     }) }}
+    <div class="form-group text-right">
+        <label for="captcha">Captcha</label>
+        <div class="row">
+            <div class="col-4">
+                <img src="{{ captcha }}" class="text-center mt-3">
+            </div>
+            <div class="col-8">
+                <input type="text" required id="captcha" name="captcha" class="form-control mt-2 border text-right">
+            </div>
+        </div>
+    </div>
 {{ form_end(registrationForm) }}
