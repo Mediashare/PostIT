@@ -31,13 +31,19 @@ function CodeMirorInit(render_path, content, mode = 'markdown') {
     return myCodeMirror;
 }
 
+var renderPreview = false;
+
 // Render TextArea Content
 function renderPreview(render_path, content) {
-    $('textarea#content_mirror').val(content);
-    $.post(render_path, {content: content}, function (data) {
-        $('.render-preview').html(data);
-        document.querySelectorAll('.markdown-body pre code').forEach((block) => {
-            Prism.highlightElement(block);
+    if (renderPreview === false) {
+        renderPreview = true;
+        $('textarea#content_mirror').val(content);
+        $.post(render_path, {content: content}, function (data) {
+            $('.render-preview').html(data);
+            document.querySelectorAll('.markdown-body pre code').forEach((block) => {
+                Prism.highlightElement(block);
+            });
+            renderPreview = false;
         });
-    });
+    } else { setTimeout(renderPreview(render_path, myCodeMirror.getValue()), 1000) }
 }
