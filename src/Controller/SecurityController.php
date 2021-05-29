@@ -5,11 +5,13 @@ use App\Entity\User;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Mime\Address;
+use Gregwar\Captcha\CaptchaBuilder;
 use App\Security\CustomAuthenticator;
 use App\Controller\AbstractController;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -88,7 +90,7 @@ class SecurityController extends AbstractController {
         return $this->redirectToRoute('index');
     }
     
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomAuthenticator $authenticator, EmailVerifier $emailVerifier): Response {
+    public function register(Session $session, Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomAuthenticator $authenticator, EmailVerifier $emailVerifier): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -97,6 +99,10 @@ class SecurityController extends AbstractController {
                 if ($request->get('registration_form')['plainPassword']['first'] !== $request->get('registration_form')['plainPassword']['second']):
                     $this->addFlash('verify_email_error', 'Password not confirmed.');    
                 endif;
+                return $this->redirectToRoute('account');
+            endif;
+            if ($session->get('captcha') !== strtolower($request->get('captcha'))):
+                $this->addFlash('verify_email_error', 'Captcha was not validated.');    
                 return $this->redirectToRoute('account');
             endif;
             // encode the plain password
@@ -138,8 +144,14 @@ class SecurityController extends AbstractController {
                 'main' // firewall name in security.yaml
             );
         endif;
+
+        $captcha = new CaptchaBuilder();
+        $captcha = $captcha->build();
+        $session->set('captcha', strtolower($captcha->getPhrase()));
+
         return $this->render('partial/_registration.html.twig', [
             'registrationForm' => $form->createView(),
+            'captcha' => $captcha->inline(),
         ]);
     }
     
