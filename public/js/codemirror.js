@@ -45,5 +45,5 @@ function renderPreview(render_path, content) {
             });
             renderPreview = false;
         });
-    } else { setTimeout(renderPreview(render_path, myCodeMirror.getValue()), 1000) }
+    }
 }
