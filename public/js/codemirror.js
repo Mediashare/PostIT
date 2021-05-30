@@ -31,19 +31,19 @@ function CodeMirorInit(render_path, content, mode = 'markdown') {
     return myCodeMirror;
 }
 
-var renderPreview = false;
+var markdownify_loader = false;
 
 // Render TextArea Content
 function renderPreview(render_path, content) {
-    if (renderPreview === false) {
-        renderPreview = true;
+    if (markdownify_loader === false) {
+        markdownify_loader = true;
         $('textarea#content_mirror').val(content);
         $.post(render_path, {content: content}, function (data) {
             $('.render-preview').html(data);
             document.querySelectorAll('.markdown-body pre code').forEach((block) => {
                 Prism.highlightElement(block);
             });
-            renderPreview = false;
+            markdownify_loader = false;
         });
     }
 }
