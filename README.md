@@ -12,11 +12,31 @@ composer dump-env prod # Or dev
 nano .env.local.php # Edit configuration file
 bin/console doctrine:schema:update --force # Create database and tables
 ```
-## Use API
 
-### ``Curl``
+## Use API
+### <span class="text-success">Créer</span>
+Pour la publication vous aurez besoin de renseignez [votre clef API](https://mediashare.fr/user/edit#inputApikey) dans le header de la requete.
 
 ```bash
 echo "# LoremIpsum is beautiful" > LoremIpsum.md
-curl -F "title=Lorem Ipsum" -F "content=@./LoremIpsum.md" {{ url('upload') }}
+curl \
+	-H "ApiKey: {YOUR_APIKEY}" \
+    -F "title=Lorem Ipsum" \
+    -F "content=@./LoremIpsum.md" \
+    -F "online=true" \
+    https://mediashare.fr/upload
+```
+
+### <span class="text-primary">Liste</span>
+Récupérer la liste des posts en ligne.
+
+```bash
+curl https://mediashare.fr/api/posts
+```
+
+### <span class="text-info">Lire</span>
+Récupérer un post via son `ID` particulier en ligne.
+
+```bash
+curl https://mediashare.fr/api/post/{ID}
 ```
