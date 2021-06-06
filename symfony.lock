@@ -1,5 +1,11 @@
 {
     "gregwar/captcha": {
         "version": "v1.1.9"
+    },
+    "symfony/password-hasher": {
+        "version": "v5.3.0"
+    },
+    "symfony/polyfill-php81": {
+        "version": "v1.23.0"
     }
 }
