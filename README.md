@@ -20,7 +20,7 @@ Pour la publication vous aurez besoin de renseignez [votre clef API](https://med
 ```bash
 echo "# LoremIpsum is beautiful" > LoremIpsum.md
 curl \
-	-H "ApiKey: {YOUR_APIKEY}" \
+    -H "ApiKey: {YOUR_APIKEY}" \
     -F "title=Lorem Ipsum" \
     -F "content=@./LoremIpsum.md" \
     -F "online=true" \
