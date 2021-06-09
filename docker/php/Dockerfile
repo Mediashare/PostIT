@@ -6,10 +6,13 @@ RUN pecl install apcu
 
 RUN apt-get update && \
 apt-get install -y \
-libzip-dev
+libzip-dev libpng-dev libfreetype6-dev libjpeg-dev libmcrypt-dev libjpeg62-turbo-dev
 
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+RUN docker-php-ext-install gd
 RUN docker-php-ext-install zip
 RUN docker-php-ext-enable apcu
+
 
 # RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 #     && php -r "if (hash_file('sha384', 'composer-setup.php') === '572cb359b56ad9ae52f9c23d29d4b19a040af10d6635642e646a7caa7b96de717ce683bd797a92ce99e5929cc51e7d5f') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
