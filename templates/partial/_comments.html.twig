@@ -4,17 +4,19 @@
             <h4 class="card-title m-0">Comments</h4>
         </div>
         <div class="card-content">
-            {% if app.user %}
-                <form id="form_comment" action="{{ path('comment', {'slug': post.slug}) }}" method="POST" class="d-flex">
-                    <button type="submit" class="btn-comment list-group-item bg-main post_link d-flex float-left text-center text-white" title="Search">
-                        <i class="fa fa-comment"></i>
-                    </button>
-                    <textarea name="comment" id="input_comment" class="form-control bg-main d-flex float-right" placeholder="Comment..." required></textarea>
-                </form>
-            {% else %}
-                <p class="lead m-1">
-                    You must <a href="{{ path('account') }}" title="Login page">login</a> to send a comment.
-                </p>
+            {% if post.online == true %}
+                {% if app.user %}
+                    <form id="form_comment" action="{{ path('comment', {'slug': post.slug}) }}" method="POST" class="d-flex">
+                        <button type="submit" class="btn-comment list-group-item bg-main post_link d-flex float-left text-center text-white" title="Search">
+                            <i class="fa fa-comment"></i>
+                        </button>
+                        <textarea name="comment" id="input_comment" class="form-control bg-main d-flex float-right" placeholder="Comment..." required></textarea>
+                    </form>
+                {% else %}
+                    <p class="lead m-1">
+                        You must <a href="{{ path('account') }}" title="Login page">login</a> to send a comment.
+                    </p>
+                {% endif %}
             {% endif %}
         </div>
         <div class="card-content">

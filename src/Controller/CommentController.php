@@ -2,11 +2,15 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use Symfony\Component\Mime\Address;
 use App\Controller\AbstractController;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class CommentController extends AbstractController {
-    public function new(Request $request, string $slug) {
+    public function new(Request $request, string $slug, MailerInterface $mailer) {
         $post = $this->getPost(['slug' => $slug, 'online' => true]);
         if (!$post): 
             $this->addFlash('error', 'Post not found.');
@@ -27,6 +31,22 @@ class CommentController extends AbstractController {
             $this->getEm()->flush();
         endif;
         
+        // Email to author
+        $email = (new TemplatedEmail())
+            ->from(new Address($this->getParameter('mailer.from'), $this->getParameter('mailer.from_name')))
+            ->to(new Address($post->getAuthor()->getEmail(), $post->getAuthor()->getUsername()))
+            ->subject('New comment for ' . $post->getTitle())
+            // path of the Twig template to render
+            ->htmlTemplate('mail/comment.html.twig')
+            // pass variables (name => value) to the template
+            ->context([
+                'user' => $this->getUser(),
+                'author' => $post->getAuthor(),
+                'post' => $post,
+                'comment' => $comment
+            ]);
+        $mailer->send($email);
+
         return $this->redirectToRoute('post', ['slug' => $post->getSlug(), '_fragment' => 'comment_'.$comment->getId() ?? '']);
     }
 
