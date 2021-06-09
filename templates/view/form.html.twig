@@ -53,4 +53,9 @@
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
         renderPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
     </script>
+    <script>
+        $( ".CodeMirror-scroll" ).scroll(function(event) {
+            $("#editor_preview").scrollTop($(this).scrollTop());
+        });
+    </script>
 {% endblock %}
