@@ -12,7 +12,9 @@
     <div class="col-12 mt-3 mb-3">
         <div class="markdown-body shadow-lg rounded">
             {# {{ page.markdown|raw }} #}
-            {{ render(controller('App\\Controller\\ApiController::markdownify', {'content': page.markdown})) }}
+            {{ render(controller('App\\Controller\\ApiController::markdownify', {
+                'content': page.markdown
+            })) }}
         </div>
     </div>
 {% endblock %}

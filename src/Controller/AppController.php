@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AbstractController;
+use App\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -12,10 +13,12 @@ class AppController extends AbstractController {
         $page = $this->getPage(['url' => '/'], ['createDate' => 'DESC']);
         if ($page && $page->getMarkdown()): 
             return $this->render('app/page.html.twig', ['page' => $page]);
-        else:
+        elseif ($post = $this->getPost(['online' => true], ['createDate' => 'DESC'])):
             // If have not Page
-            $post = $this->getPost(['online' => true], ['createDate' => 'DESC']); // Get last post
+            // Get last post
             return $this->render('app/post.html.twig', ['post' => $post]);
+        else:
+            return $this->redirectToRoute('account');
         endif;
     }
 

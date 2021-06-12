@@ -14,7 +14,9 @@
         <div id="editor_preview" class="markdown-body shadow-lg rounded">
             {% if post.markdown is defined %}
                 {# {{ post.markdown|raw }} #}
-                {{ render(controller('App\\Controller\\ApiController::markdownify', {'content': post.markdown})) }}
+                {{ render(controller('App\\Controller\\ApiController::markdownify', {
+                    'content': post.markdown
+                })) }}
             {% endif %}
             {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
         </div>
