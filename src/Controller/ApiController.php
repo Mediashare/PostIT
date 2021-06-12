@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 class ApiController extends AbstractController {
     public function markdownify(Request $request, Twig $twig) {
         $text = new Text();
-        $markdown = $text->markdownify($request->get('content') ?? '');
-        return new Response($twig->view($markdown), 200);
+        $markdown = $text->markdownify($twig->view($request->get('content') ?? ''));
+        return new Response($markdown, 200);
     }
     
     public function posts(): Response {

@@ -8,13 +8,15 @@ use Twig\Loader\ArrayLoader;
 use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use App\Controller\AbstractController;
 
-Class Twig {
+Class Twig extends AbstractController {
     static public $cache = false;
     static public $debug = true;
     static public $functions = [
         ["method" => "path"],
         ["method" => "url"],
+        ["method" => "user"],
     ];
 
     public function __construct(UrlGeneratorInterface $router) {
@@ -22,7 +24,6 @@ Class Twig {
     }
 
     public function view(string $template, ?array $parameters = []) {
-        // $loader = new FilesystemLoader(__DIR__.'/../../templates');
         $loader = new \Twig\Loader\ArrayLoader([
             'index.html' => $template
         ]);
@@ -41,7 +42,6 @@ Class Twig {
             );
         endforeach;
 
-        // $template = $twig->load($template);
         return $twig->render('index.html', $parameters);
     }
     
@@ -54,6 +54,12 @@ Class Twig {
     public function url() {
         return new TwigFunction('url', function (?string $route_name = null, ?array $parameters = []) {
             return $this->router->generate($route_name, $parameters, UrlGenerator::ABSOLUTE_URL);
+        });
+    }
+    
+    public function user() {
+        return new TwigFunction('user', function () {
+            return $this->getUser();
         });
     }
 }
