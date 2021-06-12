@@ -5,14 +5,15 @@ namespace App\Controller;
 use App\Service\Text;
 use App\Service\Serialize;
 use App\Controller\AbstractController;
+use App\Service\Twig;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends AbstractController {
-    public function markdownify(Request $request) {
+    public function markdownify(Request $request, Twig $twig) {
         $text = new Text();
         $markdown = $text->markdownify($request->get('content') ?? '');
-        return new Response($markdown, 200);
+        return new Response($twig->view($markdown), 200);
     }
     
     public function posts(): Response {

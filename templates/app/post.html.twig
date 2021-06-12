@@ -13,7 +13,8 @@
     <div class="col-12 mt-3">
         <div id="editor_preview" class="markdown-body shadow-lg rounded">
             {% if post.markdown is defined %}
-                {{ post.markdown|raw }}
+                {# {{ post.markdown|raw }} #}
+                {{ render(controller('App\\Controller\\ApiController::markdownify', {'content': post.markdown})) }}
             {% endif %}
             {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
         </div>
