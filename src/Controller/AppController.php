@@ -22,7 +22,6 @@ class AppController extends AbstractController {
         endif;
     }
 
-
     public function cookies(?Request $request, Session $session) {
         if ($session->get('allow_cookie') !== true):
             $cookie = true;
