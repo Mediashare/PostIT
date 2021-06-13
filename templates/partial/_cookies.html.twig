@@ -1,0 +1,35 @@
+{% if cookie %}
+    <link rel="stylesheet" href="{{ preload(asset('css/toastr.css'), { as: 'css', importance: 'high' }) }}">
+    <script src="{{ preload(asset('js/toastr.js'), { as: 'script' }) }}"></script>
+    <style> .toast-info { background-color: #2F96B4; } </style>
+    <script>
+        toastr.info(
+            'En cliquant sur OK ou en poursuivant la navigation sur mon merveilleux site, vous acceptez les CGU / politique de confidentialité et les cookies nécessaires au bon fonctionnement de celui-ci. <a href="" title="Condiditions générales d\'utilisations">En savoir plus</a> <a onclick="check_cookie();" class="btn btn-success btn-sm float-right">Ok</a>', 
+            'Politique de confidentialité',
+            { 
+                "positionClass": 'toast-bottom-full-width',
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": 0,
+                "extendedTimeOut": 0,
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "tapToDismiss": false
+            }
+        );
+    </script>
+    <script>
+        function check_cookie() {
+            $('div#toast-container').hide();
+            $.get('{{ path("cookies") }}');
+        }
+    </script>
+{% endif %}

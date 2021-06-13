@@ -3,9 +3,9 @@
 namespace App\Controller;
 
 use App\Controller\AbstractController;
-use App\Entity\Post;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AppController extends AbstractController {
     public function index(Request $request) {
@@ -20,6 +20,18 @@ class AppController extends AbstractController {
         else:
             return $this->redirectToRoute('account');
         endif;
+    }
+
+
+    public function cookies(?Request $request, Session $session) {
+        if ($session->get('allow_cookie') !== true):
+            $cookie = true;
+            if ($request->getPathInfo() === '/cookies'):
+                $session->set('allow_cookie', true);
+                return $this->redirectToRoute('app_index');
+            endif;
+        else: $cookie = false; endif;
+        return $this->render('partial/_cookies.html.twig', ['cookie' => $cookie]);
     }
 
     public function pageNotFound(Request $request) {
