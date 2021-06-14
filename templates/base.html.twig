@@ -19,18 +19,11 @@
         
         {# Css #}
         <meta name="viewport" content="width=device-width, initial-scale=0.8">
-        <link rel="stylesheet" href="{{ preload(asset('font/recursive.css'), { as: 'css', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/bootstrap.min.css'), { as: 'style', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/retro.css'), { as: 'style', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/menu.css'), { as: 'style' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/custom.css'), { as: 'style' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('fontawesome/css/all.min.css'), { as: 'style', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(asset('css/prism.css?version=1'), { as: 'style' }) }}">
+        <link rel="stylesheet" href="{{ preload(path('assets_css'), { as: 'css', importance: 'high' }) }}">
         {% block stylesheets %}{% endblock %}
         
         {# Javascripts #}
-        <script src="{{ preload(asset('js/jquery.min.js'), { as: 'script', importance: 'high' }) }}"></script>
-        <script src="{{ preload(asset('js/bootstrap.min.js'), { as: 'script' }) }}"></script>
+        <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>
         <script src="{{ preload(asset('js/prism.js'), { as: 'script' }) }}"></script>
         
         {# Google Analytics #}
@@ -49,11 +42,11 @@
             {% block container %}{% endblock %}
         </div>
 
-        {# Javascripts #}
-        <script src="{{ preload(asset('js/app.js'), { as: 'script' }) }}"></script>
         {# Google Adsense #}
         <script data-ad-client="ca-pub-5281743992366973" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        {# Cookies #}
         {{ render(controller('App\\Controller\\AppController::cookies')) }}
+        
         {% block javascripts %}{% endblock %}
     </body>
 </html>

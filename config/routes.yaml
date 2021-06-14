@@ -24,6 +24,13 @@ cookies:
    path: /cookies
    controller: App\Controller\AppController::cookies
 
+assets_css:
+   path: /assets/css
+   controller: App\Controller\AssetsController::css
+assets_js:
+   path: /assets/js
+   controller: App\Controller\AssetsController::js 
+
 page:
    path: /{url}
    controller: App\Controller\PageController::show 
