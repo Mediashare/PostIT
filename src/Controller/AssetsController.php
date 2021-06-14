@@ -15,7 +15,7 @@ class AssetsController extends AbstractController {
         foreach ($files as $file):
             $minifier->add($webpath.$file);
         endforeach;
-        return new Response($minifier->minify(), 200, ['Content-Type' => 'text/css']);
+        return new Response($minifier->minify(), 200, ['Cache-Control' => 'public, max-age=31536000', 'Content-Type' => 'text/css']);
     }
     public function js() {
         $webpath = $this->getParameter('kernel.project_dir') . '/public/';
@@ -24,6 +24,6 @@ class AssetsController extends AbstractController {
         foreach ($files as $file):
             $minifier->add($webpath.$file);
         endforeach;
-        return new Response($minifier->minify(), 200, ['Content-Type' => 'text/javascript']);
+        return new Response($minifier->minify(), 200, ['Cache-Control' => 'public, max-age=31536000', 'Content-Type' => 'application/javascript']);
     }
 }
