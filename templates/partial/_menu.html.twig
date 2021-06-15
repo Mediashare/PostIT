@@ -63,9 +63,11 @@
             </a>
         {% endif %}
         {% if app.user and request.get('_route') starts with 'profile' %}
-            <a href="{{ path('profile_edit', {'username': app.user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
-                <i class="fa fa-user-cog"></i>
-            </a>
+            {% if app.user == user or app.user.isAdmin %}
+                <a href="{{ path('profile_edit', {'username': user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+                    <i class="fa fa-user-cog"></i>
+                </a>
+            {% endif %}
         {% endif %}
     </div>
 </div>

@@ -3,18 +3,20 @@ namespace App\Controller;
 
 use App\Entity\Page;
 use App\Entity\Post;
+use App\Entity\User;
 use App\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PartialController extends AbstractController {
-    public function menu(Request $request, ?Post $post, ?Page $page) {
+    public function menu(Request $request, ?Post $post, ?Page $page, ?User $user) {
         $posts = $this->getPosts([], ['createDate' => 'DESC']);
         return $this->render('partial/_menu.html.twig', [
-            'posts' => $posts,
+            'request' => $request,
             'currentPost' => $post,
             'page' => $page,
-            'request' => $request
+            'user' => $user,
+            'posts' => $posts,
         ]);
     }
 
