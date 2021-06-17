@@ -19,6 +19,9 @@
         
         {# Css #}
         <meta name="viewport" content="width=device-width, initial-scale=0.8">
+        <link rel="stylesheet" href="{{ preload(asset('font/latin-400.woff2'), { as: 'font', importance: 'high' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('font/latin-500.woff2'), { as: 'font', importance: 'high' }) }}">
+        <link rel="stylesheet" href="{{ preload(asset('fontawesome/webfont/fa-solid-900.woff2'), { as: 'font', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(path('assets_css'), { as: 'css', importance: 'high' }) }}">
         {% block stylesheets %}{% endblock %}
         
