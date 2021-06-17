@@ -24,7 +24,7 @@
                 {% for comment in post.comments|reverse %}
                     <li id="comment_{{ comment.id }}" class="list-group-item bg-main text-left p-2"> 
                         <strong class="comment">{{ comment.content }}</strong> 
-                        <div class="text-right">
+                        <div class="float-right">
                             <a href="{{ path('profile', {'username': comment.author.slug}) }}" title="Profile {{ comment.author.username }}">
                                 <img src="{{ preload(asset('images/avatars/' ~ comment.author.avatar), { as: 'image' }) }}" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px">
                             </a>

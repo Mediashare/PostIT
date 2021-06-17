@@ -83,6 +83,11 @@ class User implements UserInterface
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ChatMessage::class, mappedBy="author", orphanRemoval=true)
+     */
+    private $chatMessages;
+
     public function __toString(): string {
         return $this->getUsername() ?? 'Anonyme';
     }
@@ -92,6 +97,7 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
         $this->setApikey(\sha1(\microtime().$this->getId()));
         $this->comments = new ArrayCollection();
+        $this->chatMessages = new ArrayCollection();
     }
 
     public function setId(string $id): self {
@@ -321,6 +327,36 @@ class User implements UserInterface
     {
         $text = new Text();
         $this->slug = $text->slugify($slug);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ChatMessage[]
+     */
+    public function getChatMessages(): Collection
+    {
+        return $this->chatMessages;
+    }
+
+    public function addChatMessage(ChatMessage $chatMessage): self
+    {
+        if (!$this->chatMessages->contains($chatMessage)) {
+            $this->chatMessages[] = $chatMessage;
+            $chatMessage->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChatMessage(ChatMessage $chatMessage): self
+    {
+        if ($this->chatMessages->removeElement($chatMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($chatMessage->getAuthor() === $this) {
+                $chatMessage->setAuthor(null);
+            }
+        }
 
         return $this;
     }

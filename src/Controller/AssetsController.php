@@ -19,7 +19,7 @@ class AssetsController extends AbstractController {
     }
     public function js() {
         $webpath = $this->getParameter('kernel.project_dir') . '/public/';
-        $files = ['js/jquery.min.js', 'js/bootstrap.min.js', 'js/app.js'];
+        $files = ['js/jquery.min.js', 'js/bootstrap.min.js', 'js/date.js', 'js/app.js'];
         $minifier = new JS();
         foreach ($files as $file):
             $minifier->add($webpath.$file);

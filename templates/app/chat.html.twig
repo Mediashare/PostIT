@@ -1,0 +1,103 @@
+{% extends 'view/page.html.twig' %}
+
+{% block title %}Discussion{% endblock %}
+{% block title_og %}Discussion{% endblock %}
+{% block description %}Salon de conversation{% endblock %}
+{% block description_og %}Salon de conversation{% endblock %}
+{% block type_og %}chat{% endblock %}
+
+{% block stylesheets %}
+    <style>
+    
+    /* Chat */
+    ul#messages {
+        overflow-x: auto;
+        max-height: 82vh;
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="col-12 mt-3 mb-3">
+        <div class="card bg-main shadow-lg">
+            <div class="card-header">
+                <h4 class="card-title m-0">Discussion</h4>
+            </div>
+            <div class="card-content">
+                <ul id="messages" class="list-group bg-main">
+                    {% for message in messages %}
+                        <li id="message_{{ message.id }}" class="list-group-item card bg-main text-left p-2 m-2 shadow-lg"> 
+                            <strong class="comment">{{ message.content }}</strong> 
+                            <div class="float-right">
+                                <a href="{{ path('profile', {'username': message.author.slug}) }}" title="Profile {{ message.author.username }}">
+                                    <img src="{{ preload(asset('images/avatars/' ~ message.author.avatar), { as: 'image' }) }}" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px">
+                                </a>
+                                <p class="comment_info">
+                                    <em>{{ message.createDate | date('d/m/Y H:i:s')}}</em> - 
+                                    <a href="{{ path('profile', {'username': message.author.slug}) }}" title="Profile {{ message.author.username }}" class="username">
+                                        <span class="text-info">{{ message.author.username }}</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card-content">
+                {% if app.user %}
+                    <div class="d-flex">
+                        <button type="button" onclick="new_message()" class="btn-comment list-group-item bg-main post_link d-flex float-left text-center text-white" title="Search">
+                            <i class="fa fa-comment"></i>
+                        </button>
+                        <textarea name="message" id="input_message" class="form-control bg-main d-flex float-right" placeholder="Message..." required></textarea>
+                    </div>
+                {% else %}
+                    <p class="lead m-1">
+                        You must <a href="{{ path('account') }}" title="Login page">login</a> to send a message.
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(window).bind('keydown', function(event) {
+            if (event.ctrlKey || event.metaKey) {
+                if (event.which == "13") {
+                    event.preventDefault();
+                    new_message();
+                }
+            }
+        });
+        function new_message() {
+            var message = $('textarea#input_message').val();
+            if (message) {
+                $.post("{{ path('chat_form') }}", {message: message}, function (data) {
+                    add_message(data.message);
+                    $('textarea#input_message').val("");
+                });
+            }
+        }
+
+        function add_message(message) {
+            var date = new Date(message.createDate);
+            date = dateFormat(date);
+            var message = '<li id="message_'+ message.id +'" class="list-group-item card bg-main text-left p-2 m-2 shadow-lg"><strong class="comment">'+message.content+'</strong><div class="float-right"><a href="'+message.author.profile+'" title="Profile '+message.author.username+'"><img src="/images/avatars/'+message.author.avatar+'" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px"></a><p class="comment_info"><em>'+date+'</em> - <a href="'+message.author.profile+'" title="Profile '+message.author.username+'" class="username"> <span class="text-info">'+message.author.username+'</span> </a> </p> </div> </li>';
+            $('ul#messages').prepend(message)
+        }
+
+        var refresh = function () {
+            $.get('{{ path("chat_messages") }}', function (data) {
+                $(data.messages).each(function (index, message){
+                    if ($('li#message_'+message.id).length === 0) {
+                        add_message(message);
+                    }
+                })
+                setTimeout(refresh, 5000)
+            })
+        }
+        refresh();
+    </script>
+{% endblock %}

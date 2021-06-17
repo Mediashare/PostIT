@@ -11,6 +11,9 @@
     <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="New Post">
         <i class="fa fa-plus"></i>
     </a>
+    {# <a href="{{ path('chat') }}" class="list-group-item bg-main post_link float-left text-center text-warning {% if request.get('_route') == 'chat' %}active{% endif %}" title="New Post">
+        <i class="fa fa-comments"></i>
+    </a> #}
     {% if app.user is defined and app.user %}
         <a href="{{ path('profile') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
             <i class="fa fa-user"></i>

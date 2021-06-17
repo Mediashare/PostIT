@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ChatMessage;
 use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
@@ -54,5 +55,9 @@ class AbstractController extends Controller {
 
     public function getUsers(?array $parameters = [], ?array $order = []) {
         return $this->getRepository(User::class)->findBy($parameters, $order);
+    }
+
+    public function getChatMessages(?array $parameters = [], ?array $order = ['createDate' => 'DESC']) {
+        return $this->getRepository(ChatMessage::class)->findBy($parameters, $order);
     }
 }

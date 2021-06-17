@@ -5,21 +5,7 @@ index:
 markdownify:
    path: /markdownify
    controller: App\Controller\ApiController::markdownify
-
-sitemap:
-   path: /sitemap
-   controller: App\Controller\SitemapController::sitemap
-
-routing_post:
-   resource: 'routes/post.yaml'
-routing_user:
-   resource: 'routes/user.yaml'
-routing_api:
-   resource: 'routes/api.yaml'
-routing_admin:
-   prefix: '/admin'
-   resource: 'routes/admin.yaml'
-
+   
 cookies:
    path: /cookies
    controller: App\Controller\AppController::cookies
@@ -30,6 +16,23 @@ assets_css:
 assets_js:
    path: /assets/js
    controller: App\Controller\AssetsController::js 
+   
+
+routing_post:
+   resource: 'routes/post.yaml'
+routing_user:
+   resource: 'routes/user.yaml'
+routing_api:
+   resource: 'routes/api.yaml'
+routing_chat:
+   resource: 'routes/chat.yaml'
+routing_admin:
+   prefix: '/admin'
+   resource: 'routes/admin.yaml'
+
+sitemap:
+   path: /sitemap
+   controller: App\Controller\SitemapController::sitemap
 
 page:
    path: /{url}
