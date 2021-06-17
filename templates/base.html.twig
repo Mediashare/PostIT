@@ -24,7 +24,6 @@
         
         {# Javascripts #}
         <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>
-        <script src="{{ preload(asset('js/prism.js'), { as: 'script' }) }}"></script>
         
         {# Google Analytics #}
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
@@ -42,11 +41,10 @@
             {% block container %}{% endblock %}
         </div>
 
-        {# Google Adsense #}
-        <script data-ad-client="ca-pub-5281743992366973" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         {# Cookies #}
         {{ render(controller('App\\Controller\\AppController::cookies')) }}
         
+        <script src="{{ preload(asset('js/prism.js'), { as: 'script' }) }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
