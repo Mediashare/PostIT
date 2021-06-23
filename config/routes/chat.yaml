@@ -1,9 +1,0 @@
-chat:
-   path: /discussion
-   controller: App\Controller\ChatController::show
-chat_messages:
-   path: /chat/api/messages
-   controller: App\Controller\ChatController::messages
-chat_form:
-   path: /chat/api/form
-   controller: App\Controller\ChatController::form

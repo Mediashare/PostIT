@@ -23,9 +23,8 @@ routing_post:
 routing_user:
    resource: 'routes/user.yaml'
 routing_api:
+   prefix: '/api'
    resource: 'routes/api.yaml'
-routing_chat:
-   resource: 'routes/chat.yaml'
 routing_admin:
    prefix: '/admin'
    resource: 'routes/admin.yaml'
