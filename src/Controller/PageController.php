@@ -28,7 +28,7 @@ class PageController extends AbstractController {
             $page = new Page();
             $page->setContent('');
             $page->setUrl('/');
-            //$page->setAuthor($this->getUser());
+            // $page->setAuthor($this->getUser());
         endif;
 
         if ($request->isMethod('POST') && $request->get('content')):
@@ -48,7 +48,7 @@ class PageController extends AbstractController {
     public function delete(string $id) {
         $page = $this->getPage(['id' => $id]);
         if (!$page): return $this->redirectToRoute('admin'); endif;
-        if (!$this->getUser() || ($this->getUser() != $page->getAuthor() && !$this->getUser()->isAdmin())):
+        if (!$this->getUser() || !$this->getUser()->isAdmin()):
             return $this->redirectToRoute('page', ['url' => $page->getUrl()]);
         endif;
 
