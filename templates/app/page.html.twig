@@ -1,12 +1,12 @@
 {% extends 'view/page.html.twig' %}
 
-{% block title %}{{ page.title ?? null }}{% endblock %}
-{% block title_og %}{{ page.title ?? null }}{% endblock %}
-{% block description %}{{ page.description ?? null }}{% endblock %}
-{% block description_og %}{{ page.description ?? null }}{% endblock %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block title_og %}{{ page.title }}{% endblock %}
+{% block description %}{{ page.description }}{% endblock %}
+{% block description_og %}{{ page.description }}{% endblock %}
 {% block type_og %}article{% endblock %}
-{% block author %}{{ page.author ?? null }}{% endblock %}
-{% block author_og %}{{ page.author ?? null }}{% endblock %}
+{% block author %}{{ page.author ?? 'Mediashare' }}{% endblock %}
+{% block author_og %}{{ page.author ?? 'Mediashare' }}{% endblock %}
 
 {% block content %}
     <div class="col-12 mt-3 mb-3">
