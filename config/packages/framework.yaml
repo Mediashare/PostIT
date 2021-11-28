@@ -11,6 +11,7 @@ framework:
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
         cookie_secure: auto
         cookie_samesite: lax
+        cookie_lifetime: 604800
     
     error_controller: App\Controller\AppController::pageNotFound
 
