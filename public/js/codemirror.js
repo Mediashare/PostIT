@@ -44,6 +44,7 @@ function renderPreview(render_path, content) {
             data : {content: content}
           }).done(function(data, statusText, xhr){
             var status = xhr.status; 
+            console.log(status);
             if (status < 300) {
                 $('.render-preview').html(data);
                 document.querySelectorAll('.markdown-body pre code').forEach((block) => {
