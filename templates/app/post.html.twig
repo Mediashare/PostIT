@@ -2,8 +2,13 @@
 
 {% block title %}{{ post.title ?? null }}{% endblock %}
 {% block title_og %}{{ post.title ?? null }}{% endblock %}
-{% block description %}{{ post.content ?? null }}{% endblock %}
-{% block description_og %}{{ post.content ?? null }}{% endblock %}
+
+{% if post.markdown %}
+    {% set description = post.markdown|striptags|slice(0, 247) ~ '...' %}
+{% else %} {% set description = null %} {% endif %}
+
+{% block description %}{{ description ?? null }}{% endblock %}
+{% block description_og %}{{ description ?? null }}{% endblock %}
 
 {% block type_og %}article{% endblock %}
 {% block author %}{{ post.author ?? 'Anonyme' }}{% endblock %}
