@@ -73,7 +73,7 @@ Class Twig extends AbstractController {
     public function module() {
         return new TwigFunction('module', function (string $module_name) {
             $module = $this->em->getRepository(Module::class)->findOneBy(['name' => $module_name]);
-            return $module->getContent();
+            return $module;
         });
     }
 }
