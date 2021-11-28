@@ -38,11 +38,18 @@ function renderPreview(render_path, content) {
     if (markdownify_loader === false) {
         markdownify_loader = true;
         $('textarea#content_mirror').val(content);
-        $.post(render_path, {content: content}, function (data) {
-            $('.render-preview').html(data);
-            document.querySelectorAll('.markdown-body pre code').forEach((block) => {
-                Prism.highlightElement(block);
-            });
+        $.ajax({
+            url  : render_path,
+            type : 'POST',
+            data : {content: content}
+          }).done(function(data, statusText, xhr){
+            var status = xhr.status; 
+            if (status < 300) {
+                $('.render-preview').html(data);
+                document.querySelectorAll('.markdown-body pre code').forEach((block) => {
+                    Prism.highlightElement(block);
+                });
+            }
             markdownify_loader = false;
         });
     }
