@@ -88,6 +88,9 @@
     "erusev/parsedown": {
         "version": "1.7.4"
     },
+    "erusev/parsedown-extra": {
+        "version": "0.8.1"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },

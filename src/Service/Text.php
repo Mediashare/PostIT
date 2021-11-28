@@ -1,12 +1,12 @@
 <?php
 namespace App\Service;
 
-use Parsedown;
 use Cocur\Slugify\Slugify;
+use ParsedownExtra;
 
 Class Text {
     public function Markdownify (?string $text): ?string {
-        $parsedown = new Parsedown();
+        $parsedown = new ParsedownExtra();
         // $parsedown->setSafeMode(true);
         $markdown = $parsedown->text($text);
         $markdown = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $markdown);
