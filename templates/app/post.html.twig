@@ -5,9 +5,10 @@
 
 {% if post.markdown %}
     {% set description = post.markdown|striptags|slice(0, 247) ~ '...' %}
-    {% block description %}{{ description }}{% endblock %}
-    {% block description_og %}{{ description }}{% endblock %}
 {% endif %}
+
+{% block description %}{{ description ?? '' }}{% endblock %}
+{% block description_og %}{{ description ?? '' }}{% endblock %}
 
 {% block type_og %}article{% endblock %}
 {% block author %}{{ post.author ?? 'Anonyme' }}{% endblock %}
