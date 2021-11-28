@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ModuleRepository;
+use App\Service\Text;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,6 +69,11 @@ class Module
         $this->content = $content;
 
         return $this;
+    }
+
+    public function getMarkdown(): ?string {
+        $text = new Text();
+        return $text->markdownify($this->getContent()) ?? '';
     }
 
     public function getCreateDate(): ?\DateTime

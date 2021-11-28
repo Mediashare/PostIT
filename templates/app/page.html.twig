@@ -13,7 +13,7 @@
         <div class="markdown-body shadow-lg rounded">
             {# {{ page.markdown|raw }} #}
             {{ render(controller('App\\Controller\\ApiController::markdownify', {
-                'content': page.markdown
+                'content': page.content
             })) }}
         </div>
     </div>

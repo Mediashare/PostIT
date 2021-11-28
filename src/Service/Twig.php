@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Controller\AbstractController;
 use App\Entity\Module;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
 Class Twig extends AbstractController {
@@ -24,10 +25,12 @@ Class Twig extends AbstractController {
 
     public function __construct(
         UrlGeneratorInterface $router,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        Text $text
         ) {
             $this->router = $router;
             $this->em = $em;
+            $this->text = $text;
     }
 
     public function view(string $template, ?array $parameters = []) {
@@ -72,8 +75,8 @@ Class Twig extends AbstractController {
     
     public function module() {
         return new TwigFunction('module', function (string $module_name) {
-            $module = $this->em->getRepository(Module::class)->findOneBy(['name' => $module_name]);
-            return $module;
+            $module =  $this->em->getRepository(Module::class)->findOneBy(['name' => $module_name]);
+            return $this->text->markdownify($this->view($module->getContent()));
         });
     }
 }

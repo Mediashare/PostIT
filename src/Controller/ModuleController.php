@@ -23,7 +23,7 @@ class ModuleController extends AbstractController {
             return $this->redirectToRoute('admin');
         endif;
 
-        return $this->render('admin/module.html.twig', ['page' => $module]);
+        return $this->render('admin/module.html.twig', ['module' => $module]);
     }
 
     public function delete(string $id) {

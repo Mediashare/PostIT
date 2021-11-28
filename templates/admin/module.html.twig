@@ -4,7 +4,7 @@
 
 {% block form_header %}
     <div class="col-lg-9 p-0">
-        <input type="text" name="name" id="input_name" class="w-100 rounded form-control" placeholder="module_name*" required="true" {% if page is defined %}value="{{ page.name ?? 'module_name' }}"{% endif %} autofocus>
+        <input type="text" name="name" id="input_name" class="w-100 rounded form-control" placeholder="module_name*" required="true" {% if module is defined %}value="{{ mdoule.name ?? 'module_name' }}"{% endif %} autofocus>
     </div>
     <div class="col-lg-3 p-0">
         <div class="float-left w-50 border-top">
