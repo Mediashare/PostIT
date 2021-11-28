@@ -49,6 +49,7 @@
     <script>
         {% if page is defined and page %} {% set content = page.content %}
         {% elseif post is defined and post %} {% set content = post.content %}
+        {% elseif module is defined and module %} {% set content = module.content %}
         {% else %} {% set content = "# Hello world\n" %} {% endif %}
         var myCodeMirror = CodeMirorInit('{{ path("markdownify") }}', "{{- content|escape("js") -}}");
         renderPreview('{{ path("markdownify") }}', myCodeMirror.getValue());
