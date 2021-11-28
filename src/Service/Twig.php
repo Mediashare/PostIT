@@ -9,6 +9,8 @@ use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Controller\AbstractController;
+use App\Entity\Module;
+use Doctrine\ORM\EntityManagerInterface;
 
 Class Twig extends AbstractController {
     static public $cache = false;
@@ -17,10 +19,15 @@ Class Twig extends AbstractController {
         ["method" => "path"],
         ["method" => "url"],
         ["method" => "user"],
+        ["method" => "module"],
     ];
 
-    public function __construct(UrlGeneratorInterface $router) {
-        $this->router = $router;
+    public function __construct(
+        UrlGeneratorInterface $router,
+        EntityManagerInterface $em
+        ) {
+            $this->router = $router;
+            $this->em = $em;
     }
 
     public function view(string $template, ?array $parameters = []) {
@@ -60,6 +67,13 @@ Class Twig extends AbstractController {
     public function user() {
         return new TwigFunction('user', function () {
             return $this->getUser();
+        });
+    }
+    
+    public function module() {
+        return new TwigFunction('module', function (string $module_name) {
+            $module = $this->em->getRepository(Module::class)->findOneBy(['name' => $module_name]);
+            return $module->getContent();
         });
     }
 }
