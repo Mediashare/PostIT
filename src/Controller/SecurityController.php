@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class SecurityController extends AbstractController {
@@ -91,7 +92,7 @@ class SecurityController extends AbstractController {
         return $this->redirectToRoute('index');
     }
     
-    public function register(Session $session, Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomAuthenticator $authenticator, EmailVerifier $emailVerifier): Response {
+    public function register(Session $session, Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomAuthenticator $authenticator, EmailVerifier $emailVerifier, SluggerInterface $slugger): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -121,7 +122,7 @@ class SecurityController extends AbstractController {
                 $this->addFlash('verify_email_error', 'This email already exist.');
                 return $this->redirectToRoute('account');
             endif;
-            if ($this->getUser(['username' => $user->getUsername()])):
+            if ($this->getUser(['username' => $user->getUsername()]) || $this->getUser(['slug' => $slugger->slug($user->getUsername())])):
                 $this->addFlash('verify_email_error', 'This username already exist.');
                 return $this->redirectToRoute('account');
             endif;
