@@ -16,6 +16,8 @@
         <meta property="og:type" content="{% block type_og %}article{% endblock %}">
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
         <meta property="og:image" content="{% block image_og %}{{ asset('images/logo.png') }}{% endblock %}">
+        {# Ads #}
+        <meta name="propeller" content="d173ce71c0f768c750b9b383a26540e5">
         
         {# Css #}
         <meta name="viewport" content="width=device-width, initial-scale=0.8">
@@ -24,22 +26,6 @@
         <link rel="stylesheet" href="{{ preload(asset('fontawesome/webfont/fa-solid-900.woff2'), { as: 'font', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(path('assets_css'), { as: 'css', importance: 'high' }) }}">
         {% block stylesheets %}{% endblock %}
-        
-        {# Javascripts #}
-        <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>
-        
-        {# Google Adsense #}
-        <script data-ad-client="ca-pub-5281743992366973" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        
-        {# Google Analytics #}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'UA-101987237-1');
-        </script>
-
     </head>
     <body>
         <div class="container-fluid">
@@ -50,7 +36,21 @@
         {# Cookies #}
         {{ render(controller('App\\Controller\\AppController::cookies')) }}
         
+        {# Javascripts #}
+        <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>
         <script src="{{ preload(asset('js/prism.js'), { as: 'script' }) }}"></script>
+        
+        {# Google Adsense #}
+        <script data-ad-client="ca-pub-5281743992366973" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+        {# Google Analytics #}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-101987237-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-101987237-1');
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
