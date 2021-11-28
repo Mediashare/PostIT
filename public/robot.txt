@@ -1,0 +1,30 @@
+# Robots Rule! - Sometimes... #
+User-agent:  *
+Allow: /
+
+# disallow all files in these directories
+Disallow: /admin
+
+# disallow all files with ? in url
+# Disallow: /*?*
+
+User-agent: Mediapartners-Google
+Allow: /
+ 
+User-agent: Adsbot-Google
+Allow: /
+ 
+User-agent: Googlebot-Image
+Allow: /
+ 
+User-agent: Googlebot-Mobile
+Allow: /
+ 
+User-agent: ia_archiver-web.archive.org
+Disallow: /
+
+User-agent: Twitterbot
+Disallow: /admin
+Allow: /
+
+Sitemap: https://mediashare/sitemap
