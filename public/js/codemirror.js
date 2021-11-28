@@ -43,11 +43,9 @@ function renderPreview(render_path, content) {
             type : 'POST',
             data : {content: content}
           }).done(function(data, statusText, xhr){
-            var status = xhr.status; 
-            console.log(status);
-            if (status < 300) {
+            if (xhr.status < 300) {
                 $('.render-preview').html(data);
-                document.querySelectorAll('.markdown-body pre code').forEach((block) => {
+                    document.querySelectorAll('.markdown-body pre code').forEach((block) => {
                     Prism.highlightElement(block);
                 });
             }

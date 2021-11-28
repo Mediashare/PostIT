@@ -33,13 +33,15 @@
             {% block container %}{% endblock %}
         </div>
 
-        {# Cookies #}
-        {{ render(controller('App\\Controller\\AppController::cookies')) }}
+        
         
         {# Javascripts #}
         <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>
         <script src="{{ preload(asset('js/prism.js'), { as: 'script' }) }}"></script>
         
+        {# Cookies #}
+        {{ render(controller('App\\Controller\\AppController::cookies')) }}
+
         {# Google Adsense #}
         <script data-ad-client="ca-pub-5281743992366973" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
