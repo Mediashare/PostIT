@@ -12,6 +12,7 @@ use App\Controller\AbstractController;
 use App\Entity\Module;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 
 Class Twig extends AbstractController {
     static public $cache = false;
@@ -76,7 +77,10 @@ Class Twig extends AbstractController {
     public function module() {
         return new TwigFunction('module', function (string $module_name) {
             $module =  $this->em->getRepository(Module::class)->findOneBy(['name' => $module_name]);
-            return $this->text->markdownify($this->view($module->getContent()));
+            if (!$module):
+                throw new Exception('Module '.$module_name.' not found!');
+            endif;
+            return $this->text->markdownify($this->view($module->getContent() ?? ""));
         });
     }
 }
