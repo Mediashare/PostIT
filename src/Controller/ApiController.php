@@ -16,13 +16,14 @@ class ApiController extends AbstractController {
             $markdown = $text->markdownify($twig->view($request->get('content') ?? ''));
             return new Response($markdown);
         } catch (\Twig\Error\Error $e) {
-            return new Response($e->getRawMessage(), 200);
+            // dd($e);
+            return new Response($text->markdownify('<blockquote class="error">'.$e->getMessage().'</blockquote>'), 200);
         }
     }
     
     public function posts(): Response {
         $em = $this->getDoctrine()->getManager();
-        $posts = $this->getPosts(['online' => true], ['createDate' => 'desc']);
+        $posts = $this->getPosts(['online' => true], ['updateDate' => 'desc']);
         $serizalizer = new Serialize();
         $posts = $serizalizer->posts($posts, $type = 'array');
         

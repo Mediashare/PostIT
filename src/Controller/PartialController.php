@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PartialController extends AbstractController {
     public function menu(Request $request, ?Post $post, ?Page $page, ?User $user) {
-        $posts = $this->getPosts([], ['createDate' => 'DESC']);
+        $posts = $this->getPosts([], ['updateDate' => 'DESC']);
         return $this->render('partial/_menu.html.twig', [
             'request' => $request,
             'currentPost' => $post,

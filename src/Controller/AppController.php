@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class AppController extends AbstractController {
     public function index(Request $request) {
         // Get Page
-        $page = $this->getPage(['url' => '/'], ['createDate' => 'DESC']);
+        $page = $this->getPage(['url' => '/'], ['updateDate' => 'DESC']);
         if ($page && $page->getMarkdown()): 
             return $this->render('app/page.html.twig', ['page' => $page]);
-        elseif ($post = $this->getPost(['online' => true], ['createDate' => 'DESC'])):
+        elseif ($post = $this->getPost(['online' => true], ['updateDate' => 'DESC'])):
             // If have not Page
             // Get last post
             return $this->render('app/post.html.twig', ['post' => $post]);

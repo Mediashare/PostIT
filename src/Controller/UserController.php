@@ -20,7 +20,8 @@ class UserController extends AbstractController {
         endif;
         
         return $this->render('app/profile.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'templates' => $user->getTemplates()
         ]);
     }
 

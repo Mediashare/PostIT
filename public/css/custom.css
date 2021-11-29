@@ -31,6 +31,7 @@ input { border-color: var(--main-bg-color)!important; background-color: var(--ma
 textarea { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 1.5em!important; }
 select, select option { height: 100%!important; border: none!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; font-size: 1.5em!important; }
 div.code-toolbar > pre > code::selection, div.code-toolbar > pre > code > span::selection { background: #67617b; }
+blockquote.error { border-left: 3px solid #dc3545; }
 
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }

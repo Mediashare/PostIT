@@ -10,7 +10,7 @@ class SitemapController extends AbstractController {
         $urls[$this->generateUrl('post_new')] = ['url' => $this->generateUrl('post_new', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
         $urls[$this->generateUrl('account')] = ['url' => $this->generateUrl('account', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
         
-        foreach ($this->getPages([], ['createDate' => 'DESC']) as $page):
+        foreach ($this->getPages([], ['updateDate' => 'DESC']) as $page):
             $urls[$page->getUrl()] = [
                 'url' => $request->isSecure() ? 
                     'https://' . $request->headers->get('host').$page->getUrl() : 
@@ -21,7 +21,7 @@ class SitemapController extends AbstractController {
             ];
         endforeach;
         
-        foreach ($this->getPosts(['online' => true], ['createDate' => 'DESC']) as $post):
+        foreach ($this->getPosts(['online' => true], ['updateDate' => 'DESC']) as $post):
             $urls[$this->generateUrl('post', ['slug' => $post->getSlug()])] = [
                 'url' => $this->generateUrl('post', ['slug' => $post->getSlug()], false), 
                 'lastmod' => $post->getUpdateDate(), 

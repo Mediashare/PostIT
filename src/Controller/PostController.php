@@ -19,7 +19,7 @@ class PostController extends AbstractController {
 
     public function form(Request $request, ?string $slug = null) {
         if ($slug):
-            $post = $this->getPost(['slug' => $slug], ['createDate' => 'DESC']);
+            $post = $this->getPost(['slug' => $slug], ['updateDate' => 'DESC']);
             if (!$post):
                 return $this->redirectToRoute('post_new');
             elseif (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):

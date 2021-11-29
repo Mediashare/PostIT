@@ -9,9 +9,9 @@ class PageController extends AbstractController {
     public function show(?Request $request, ?string $url, ?string $id) {
         // Get Page
         if ($url):
-            $page = $this->getPage(['url' => $url ? '/'.$url : $request->getRequestUri()], ['createDate' => 'DESC']);
+            $page = $this->getPage(['url' => $url ? '/'.$url : $request->getRequestUri()], ['updateDate' => 'DESC']);
         elseif ($id):
-            $page = $this->getPage(['id' => $id], ['createDate' => 'DESC']);
+            $page = $this->getPage(['id' => $id], ['updateDate' => 'DESC']);
         endif;
         // If have not Page
         if (empty($page) || !$page->getMarkdown()):
@@ -23,7 +23,7 @@ class PageController extends AbstractController {
     }
     
     public function form(Request $request, ?string $id = null) {
-        $page = $this->getPage(['id' => $id], ['createDate' => 'DESC']);
+        $page = $this->getPage(['id' => $id], ['updateDate' => 'DESC']);
         if (!$page):
             $page = new Page();
             $page->setContent('');

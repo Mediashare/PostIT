@@ -74,12 +74,12 @@ Class Twig extends AbstractController {
     }
     
     public function template() {
-        return new TwigFunction('template', function (string $template_name) {
-            Twig::$debug = true;
+        return new TwigFunction('template', function (?string $template_name = null) {
             $template =  $this->em->getRepository(Template::class)->findOneBy(['name' => $template_name]);
-            if ($template): $content = $template->getContent();
-            else: $content = "Template " . $template_name . " not found!"; endif;
-            return $this->text->markdownify($this->view($content));
+            if (!$template): 
+                return "Template " . $template_name . " not found!"; 
+            endif;
+            return $this->text->markdownify($this->view($template->getContent()));
         });
     }
 }
