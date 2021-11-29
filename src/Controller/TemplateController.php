@@ -17,10 +17,12 @@ class TemplateController extends AbstractController {
 
         if ($request->isMethod('POST') && $request->get('content')):
             $template->setName($request->get('name'));
-            while ($duplication = $this->getTemplate(['name' => $template->getName()])):
-                if (!isset($slug_counter)): $slug_counter = 0; endif;
-                $slug_counter++;
-                $template->setName($template->getName().'-'.$slug_counter);
+            while ($duplication = $this->getTemplate(['name' => $template->getName(), 'user' => $this->getUser()])):
+                if ($duplication->getId() !== $template->getId()):
+                    if (!isset($slug_counter)): $slug_counter = 0; endif;
+                    $slug_counter++;
+                    $template->setName($template->getName().'-'.$slug_counter);
+                else: break; endif;
             endwhile;
             $template->setContent($request->get('content'));
             $template->setUpdateDate(new \DateTime());
