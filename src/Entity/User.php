@@ -92,6 +92,10 @@ class User implements UserInterface
         return $this->getUsername() ?? 'Anonyme';
     }
 
+    public function getUserIdentifier(): string {
+        return $this->getUsername();
+    }
+
     public function __construct() {
         $this->setId(\uniqid());
         $this->posts = new ArrayCollection();
