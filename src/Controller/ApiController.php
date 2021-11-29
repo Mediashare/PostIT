@@ -21,20 +21,18 @@ class ApiController extends AbstractController {
         }
     }
     
-    public function posts(): Response {
+    public function posts(Serialize $serializer): Response {
         $em = $this->getDoctrine()->getManager();
         $posts = $this->getPosts(['online' => true], ['updateDate' => 'desc']);
-        $serizalizer = new Serialize();
-        $posts = $serizalizer->posts($posts, $type = 'array');
+        $posts = $serializer->posts($posts, $type = 'array');
         
         return $this->json(['status' => 'success', 'posts' => $posts ?? []]);
     }
 
-    public function post(string $id): Response {
+    public function post(Serialize $serializer, string $id): Response {
         $em = $this->getDoctrine()->getManager();
         $post = $this->getPost(['online' => true, 'id' => $id]);
-        $serizalizer = new Serialize();
-        $post = $serizalizer->post($post, $type = 'array');
+        $post = $serializer->post($post, $type = 'array');
         
         return $this->json(['status' => 'success', 'post' => $post ?? []]);
     }

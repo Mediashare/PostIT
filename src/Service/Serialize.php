@@ -89,6 +89,8 @@ Class Serialize {
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'slug' => $user->getSlug(),
+            'avatar' => $user->getAvatar(),
+            'signature' => $user->getSignature(),
             'posts' => $this->posts($user->getPosts() ?? [], 'array'),
             'comments' => $this->comments($user->getComments() ?? [], 'array')
         ];

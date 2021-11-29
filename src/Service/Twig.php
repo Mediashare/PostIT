@@ -69,7 +69,8 @@ Class Twig extends AbstractController {
     
     public function user() {
         return new TwigFunction('user', function () {
-            return $this->getUser();
+            $serializer = new Serialize();
+            return $serializer->user($this->getUser(), $type = 'array');
         });
     }
     
