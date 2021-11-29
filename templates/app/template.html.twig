@@ -1,14 +1,14 @@
 {% extends 'view/form.html.twig' %}
 
-{% block title %}{{ module.name ?? 'module_name' }}{% endblock %}
+{% block title %}{{ template.name ?? 'template_name' }}{% endblock %}
 
 {% block form_header %}
     <div class="col-lg-9 p-0">
-        <input type="text" name="name" id="input_name" class="w-100 rounded form-control" placeholder="module_name*" required="true" {% if module is defined %}value="{{ module.name ?? 'module_name' }}"{% endif %} autofocus>
+        <input type="text" name="name" id="input_name" class="w-100 rounded form-control" placeholder="template_name*" required="true" {% if template is defined %}value="{{ template.name ?? 'template_name' }}"{% endif %} autofocus>
     </div>
     <div class="col-lg-3 p-0">
         <div class="float-left w-50 border-top">
-            <a tabindex="-1" class="btn btn-cancel" title="Cancel" href="{{ path('admin') }}">
+            <a tabindex="-1" class="btn btn-cancel" title="Cancel" href="{{ path('profile') }}">
                 <i class="fa fa-times"></i>
             </a>
         </div>

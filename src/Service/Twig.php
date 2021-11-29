@@ -9,7 +9,7 @@ use Twig\Loader\FilesystemLoader;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Controller\AbstractController;
-use App\Entity\Module;
+use App\Entity\Template;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -20,7 +20,7 @@ Class Twig extends AbstractController {
         ["method" => "path"],
         ["method" => "url"],
         ["method" => "user"],
-        ["method" => "module"],
+        ["method" => "template"],
     ];
 
     public function __construct(
@@ -73,12 +73,12 @@ Class Twig extends AbstractController {
         });
     }
     
-    public function module() {
-        return new TwigFunction('module', function (string $module_name) {
+    public function template() {
+        return new TwigFunction('template', function (string $template_name) {
             Twig::$debug = true;
-            $module =  $this->em->getRepository(Module::class)->findOneBy(['name' => $module_name]);
-            if ($module): $content = $module->getContent();
-            else: $content = "Module " . $module_name . " not found!"; endif;
+            $template =  $this->em->getRepository(Template::class)->findOneBy(['name' => $template_name]);
+            if ($template): $content = $template->getContent();
+            else: $content = "Template " . $template_name . " not found!"; endif;
             return $this->text->markdownify($this->view($content));
         });
     }

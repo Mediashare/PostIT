@@ -1,0 +1,9 @@
+template_form:
+    path: /template/{id}
+    controller: App\Controller\TemplateController::form
+    defaults: 
+        id: null
+
+template_delete:
+    path: /template/delete/{id}
+    controller: App\Controller\TemplateController::delete

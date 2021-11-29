@@ -19,7 +19,9 @@ class UserController extends AbstractController {
             return $this->redirectToRoute('index');
         endif;
         
-        return $this->render('app/profile.html.twig', ['user' => $user]);
+        return $this->render('app/profile.html.twig', [
+            'user' => $user
+        ]);
     }
 
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {

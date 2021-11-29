@@ -12,7 +12,6 @@ profile_apikey_reset:
     path: /user/apikey/reset
     controller: App\Controller\UserController::apikey
 
-
 account:
     path: /account
     controller: App\Controller\SecurityController::account

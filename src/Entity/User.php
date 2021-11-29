@@ -83,6 +83,11 @@ class User implements UserInterface
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Template::class, mappedBy="user")
+     */
+    private $templates;
+
     public function __toString(): string {
         return $this->getUsername() ?? 'Anonyme';
     }
@@ -92,6 +97,7 @@ class User implements UserInterface
         $this->posts = new ArrayCollection();
         $this->setApikey(\sha1(\microtime().$this->getId()));
         $this->comments = new ArrayCollection();
+        $this->templates = new ArrayCollection();
     }
 
     public function setId(string $id): self {
@@ -321,6 +327,36 @@ class User implements UserInterface
     {
         $text = new Text();
         $this->slug = $text->slugify($slug);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Template[]
+     */
+    public function getTemplates(): Collection
+    {
+        return $this->templates;
+    }
+
+    public function addTemplate(Template $template): self
+    {
+        if (!$this->templates->contains($template)) {
+            $this->templates[] = $template;
+            $template->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTemplate(Template $template): self
+    {
+        if ($this->templates->removeElement($template)) {
+            // set the owning side to null (unless already changed)
+            if ($template->getUser() === $this) {
+                $template->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends AbstractController {
     public function dashboard() {
-        $modules = $this->getModules([], ['createDate' => 'DESC']);
         $pages = $this->getPages([], ['createDate' => 'DESC']);
         $posts = $this->getPosts([], ['createDate' => 'DESC']);
         $comments = $this->getComments([], ['createDate' => 'DESC']);
@@ -17,7 +16,6 @@ class AdminController extends AbstractController {
             'comments' => $comments,
             'users' => $users,
             'pages' => $pages,
-            'modules' => $modules
         ]);
     }
 }

@@ -6,8 +6,7 @@ use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Comment;
-use App\Entity\Module;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Template;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 
@@ -57,11 +56,11 @@ class AbstractController extends Controller {
         return $this->getRepository(User::class)->findBy($parameters, $order);
     }
 
-    public function getModules(?array $parameters = [], ?array $order = []) {
-        return $this->getRepository(Module::class)->findBy($parameters, $order);
+    public function getTemplates(?array $parameters = [], ?array $order = []) {
+        return $this->getRepository(Template::class)->findBy($parameters, $order);
     }
 
-    public function getModule(array $parameters = [], ?array $order = []) {
-        return $this->getRepository(Module::class)->findOneBy($parameters, $order);
+    public function getTemplate(array $parameters = [], ?array $order = []) {
+        return $this->getRepository(Template::class)->findOneBy($parameters, $order);
     }
 }

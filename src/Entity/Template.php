@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ModuleRepository;
+use App\Repository\TemplateRepository;
 use App\Service\Text;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ModuleRepository::class)
+ * @ORM\Entity(repositoryClass=TemplateRepository::class)
  */
-class Module
+class Template
 {
     /**
      * @ORM\Id
@@ -37,6 +37,11 @@ class Module
      * @ORM\Column(type="datetime")
      */
     private $updateDate;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="templates")
+     */
+    private $user;
 
     public function __construct() {
         $this->setCreateDate(new \DateTime());
@@ -96,6 +101,18 @@ class Module
     public function setUpdateDate(\DateTime $updateDate): self
     {
         $this->updateDate = $updateDate;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
