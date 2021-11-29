@@ -84,7 +84,8 @@ Class Serialize {
     }
 
 
-    public function user($user, ?string $type = 'json') {
+    public function user(?User $user = null, ?string $type = 'json') {
+        if (!$user): return []; endif;
         $user = [
             'id' => $user->getId(),
             'username' => $user->getUsername(),
