@@ -8,14 +8,16 @@ use App\Entity\Comment;
 Class Serialize {
     public function posts($posts, ?string $type = 'json') {
         foreach ($posts ?? [] as $index => $post):
-            $posts[$index] = [
-                'id' => $post->getId(),
-                'title' => $post->getTitle(),
-                'slug' => $post->getSlug(),
-                'createDate' => $post->getCreateDate(),
-                'comments' => count($post->getComments()),
-                'author' => $this->author($post->getAuthor() ?? [], 'array'),
-            ];
+            if ($post):
+                $posts[$index] = [
+                    'id' => $post->getId(),
+                    'title' => $post->getTitle(),
+                    'slug' => $post->getSlug(),
+                    'createDate' => $post->getCreateDate(),
+                    'comments' => count($post->getComments()),
+                    'author' => $this->author($post->getAuthor() ?? [], 'array'),
+                ];
+            endif;
         endforeach;
 
         if ($type === 'array'):
