@@ -1,29 +1,31 @@
-<div class="card bg-main shadow-lg rounded mt-3">
-    <div class="card-header">
-        <h4 class="card-title">
-            Templates
-        </h4>
+{% if app.user and (app.user == comment.author or app.user.isAdmin) %}
+    <div class="card bg-main shadow-lg rounded mt-3">
+        <div class="card-header">
+            <h4 class="card-title">
+                Templates
+            </h4>
+        </div>
+        <div class="card-content" style="max-height: 50vh;overflow: auto;">
+            <ul class="list-group text-right bg-main">
+                {% for template in templates|reverse %}
+                    <li class="list-group-item bg-main post_link"> 
+                        <span class="float-left">
+                            <a href="{{ path('template_form', {'id': template.id}) }}" class="text-warning">Edit</a> -
+                            <a href="{{ path('template_delete', {'id': template.id}) }}" class="text-danger">Delete</a>
+                        </span>
+                        <strong>{{ template.name }}</strong> 
+                        <br>
+                        <span class="float-right">
+                            <em>{{ template.createDate|date('d/m/Y') }}</em>
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('template_form') }}" class="btn btn-outline-success">
+                Créer un nouveau template
+            </a>
+        </div>
     </div>
-    <div class="card-content" style="max-height: 50vh;overflow: auto;">
-        <ul class="list-group text-right bg-main">
-            {% for template in templates|reverse %}
-                <li class="list-group-item bg-main post_link"> 
-                    <span class="float-left">
-                        <a href="{{ path('template_form', {'id': template.id}) }}" class="text-warning">Edit</a> -
-                        <a href="{{ path('template_delete', {'id': template.id}) }}" class="text-danger">Delete</a>
-                    </span>
-                    <strong>{{ template.name }}</strong> 
-                    <br>
-                    <span class="float-right">
-                        <em>{{ template.createDate|date('d/m/Y') }}</em>
-                    </span>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="card-footer">
-        <a href="{{ path('template_form') }}" class="btn btn-outline-success">
-            Créer un nouveau template
-        </a>
-    </div>
-</div>
+{% endif %}
