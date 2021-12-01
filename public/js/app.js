@@ -53,7 +53,7 @@ if (current.length > 0) {
 }
 function scrollToAnchor(id){
     var Tag = $("a[name='"+ id +"']");
-    $('ul#menu_posts').animate({scrollTop: Tag.offset().top - $('div#menu div#menu_header').height()});
+    $('ul#menu_posts').animate({scrollTop: Tag.offset().top - Tag.height()});
 }
 function searchDisplay() {
     var input = $('#menu_search');
