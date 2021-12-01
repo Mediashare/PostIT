@@ -48,6 +48,10 @@
                 }
             }
         });
-        {% if post and post.slug %} scrollToAnchor('{{ post.slug }}'); {% endif %}
+        {% if post and post.slug %}
+            $(document).ready(function () {
+                scrollToAnchor('{{ post.slug }}');
+            });
+        {% endif %}
     </script>
 {% endblock %}
