@@ -29,7 +29,7 @@ class TemplateController extends AbstractController {
             $template->setUser($this->getUser());
             $this->getEm()->persist($template);
             $this->getEm()->flush();
-            return $this->redirectToRoute('profile');
+            return $this->redirectToRoute('profile_templates');
         endif;
 
         return $this->render('app/template.html.twig', ['template' => $template]);
@@ -37,7 +37,7 @@ class TemplateController extends AbstractController {
 
     public function delete(string $id) {
         $template = $this->getTemplate(['id' => $id, 'user' => $this->getUser()]);
-        if (!$template): return $this->redirectToRoute('profile'); endif;
+        if (!$template): return $this->redirectToRoute('profile_templates'); endif;
         if (!$this->getUser() || !$this->getUser()->isAdmin()):
             return $this->redirectToRoute('app');
         endif;
@@ -45,6 +45,6 @@ class TemplateController extends AbstractController {
         $this->getEm()->remove($template);
         $this->getEm()->flush();
 
-        return $this->redirectToRoute('profile');
+        return $this->redirectToRoute('profile_templates');
     }
 }

@@ -3,40 +3,24 @@
 {% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
-    <div class="col-12 mt-3">
+    <div id="profile" class="col-12 mt-3">
         {{ render(controller('App\\Controller\\PartialController::signature', {'username': user.username ?? null})) }}
-        <div class="card bg-main shadow-lg rounded mt-1">
-            <div class="card-header">
-                <h4 class="card-title">
-                    Posts
-                </h4>
-            </div>
-            <div class="card-content" style="max-height: 50vh;overflow: auto;">
-                <ul class="list-group text-right bg-main">
-                    {% for post in user.posts|reverse %}
-                        {% if post.online or app.user and (app.user == user or app.user.isAdmin) %}
-                            <li class="list-group-item bg-main post_link"> 
-                                <span class="float-left">
-                                    <a href="{{ path('post', {'slug': post.slug}) }}" class="btn btn-primary p-1">Show</a>
-                                    {% if app.user and (app.user == user or app.user.isAdmin) %} 
-                                        - <a href="{{ path('post_edit', {'slug': post.slug}) }}" class="btn btn-warning p-1">Edit</a>
-                                        <a href="{{ path('post_delete', {'slug': post.slug}) }}" class="btn btn-danger p-1">Delete</a>
-                                    {% endif %}
-                                </span>
-                                <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 
-                                <br>
-                                <span class="float-right">
-                                    <em>{{ post.createDate|date('d/m/Y') }}</em>
-                                    {% if post.author %}
-                                    - <a href="{{ path('profile', {'username': post.author.slug}) }}" title="Profile {{ post.author }}" class="username text-info">{{ post.author }}</a>
-                                    {% endif %}
-                                </span>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+        {% for post in user.posts|reverse %}
+            {% if post.online or app.user and (app.user == user or app.user.isAdmin) %}
+                <a href="{{ path('post', {'slug': post.slug}) }}" class="post_link">    
+                    <div class="card shadow-lg mt-3"> 
+                        <div class="card-body">
+                            <strong>{{ post.title }}</strong> 
+                            <br>
+                            {% if post.author %}
+                                <span class="username text-info">{{ post.author }}</span>
+                            {% endif %}
+                            <em class="text-white">- {{ post.createDate|date('d/m/Y') }}</em>
+                        </div>
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
         {% include 'partial/_templates.html.twig' %}
     </div>
 {% endblock %}

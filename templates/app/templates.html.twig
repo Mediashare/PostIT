@@ -1,0 +1,25 @@
+{% extends 'view/page.html.twig' %}
+
+{% block title %}Templates{% endblock %}
+
+{% block content %}
+    <div id="templates" class="col-12 mt-3">
+        <a href="{{ path('template_form') }}" class="btn btn-success p-1">
+            Créer un nouveau template
+        </a>
+        {% for template in templates|reverse %}
+            <div class="card shadow-lg mt-3"> 
+                <a href="{{ path('template_form', {'id': template.id}) }}" class="post_link">    
+                    <div class="card-body">
+                        <strong>{{ template.name }}</strong> 
+                        <br>
+                        <em class="text-white">{{ template.createDate|date('d/m/Y') }}</em>
+                    </div>
+                </a>
+                <div class="card-footer markdown-body">
+                    {{ template.markdown|raw }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

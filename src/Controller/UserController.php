@@ -25,6 +25,23 @@ class UserController extends AbstractController {
         ]);
     }
 
+    public function templates(?string $username = null) {
+        if (!$username): 
+            $user = $this->getUser(); 
+        else:
+            $user = $this->getUser(['slug' => $username]);
+        endif;
+        if (!$user):
+            $this->addFlash('error', 'User not found.');
+            return $this->redirectToRoute('index');
+        endif;
+        $templates = $this->getTemplates(['user' => $user], ['updateDate' => 'DESC']);
+        return $this->render('app/templates.html.twig', [
+            'user' => $user,
+            'templates' => $templates
+        ]);
+    }
+
     public function edit(Request $request, ?string $username = null, UserPasswordEncoderInterface $passwordEncoder, SluggerInterface $slugger) {
         if ($username):
             $user = $this->getUser(['slug' => $username]);

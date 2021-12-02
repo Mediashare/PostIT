@@ -33,7 +33,8 @@ select, select option { height: 100%!important; border: none!important; backgrou
 div.code-toolbar > pre > code::selection, div.code-toolbar > pre > code > span::selection { background: #67617b; }
 blockquote.error { border-left: 3px solid #dc3545; }
 .card { background-color: var(--main-bg-color); }
-
+div#profile a.post_link div.card:hover, div#templates a.post_link div.card-body:hover { color: #ffffff!important;text-decoration: none;box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;background-color: #877ac1; }
+.username { color: #94d2dc!important; }
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }
 .btn-cancel { background-color: var(--main-bg-color); color: #d94d23; width: 100%; padding: 12px; }

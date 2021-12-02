@@ -70,6 +70,9 @@
                 <a href="{{ path('profile_edit', {'username': user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
                     <i class="fa fa-user-cog"></i>
                 </a>
+                <a href="{{ path('profile_templates', {'username': user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning {% if request.get('_route') == 'profile_templates' %}active{% endif %}" title="Templates">
+                    <i class="fa fa-code"></i>
+                </a>
             {% endif %}
         {% endif %}
     </div>
