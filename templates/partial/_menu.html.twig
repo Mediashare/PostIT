@@ -76,7 +76,7 @@
 </div>
     
 {# Responsive #}
-<button class="btn btn-burger btn-burger-open btn-xl btn-circle bg-white" onclick="openMenuBurger();{% if currentPost is defined and currentPost.slug %}scrollToAnchor('{{ currentPost.slug }}');{% endif %}">
+<button class="btn btn-burger btn-burger-open btn-xl btn-circle bg-white" onclick="openMenuBurger();{% if currentPost is defined and currentPost %}scrollToAnchor('{{ currentPost.slug }}');{% endif %}">
     <i class="fa fa-hamburger"></i>
 </button>
 <button class="btn btn-burger btn-burger-close btn-xl btn-circle bg-white d-none" onclick="closeMenuBurger();">

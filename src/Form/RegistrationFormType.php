@@ -20,19 +20,21 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'form-control text-right mb-3 border'],
-                'label_attr' => ['class' => 'float-right']
+                'label_attr' => ['class' => 'float-right'],
+                'label' => 'Username *'
             ])
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control text-right mb-3 border'],
-                'label_attr' => ['class' => 'float-right']
+                'label_attr' => ['class' => 'float-right'],
+                'label' => 'Email *'
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'form-control mb-3 border text-right', 'minlength' => 6], 'label_attr' => ['class' => 'float-right']            ],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => ['label' => 'Mot de passe *'],
+                'second_options' => ['label' => 'Répéter votre mot de passe *'],
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([

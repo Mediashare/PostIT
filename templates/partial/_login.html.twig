@@ -11,12 +11,12 @@
     {% endif %}
 
     <div class="form-group">
-        <label for="inputEmail">Email / Username</label>
+        <label for="inputEmail">Email / Username *</label>
         <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control border" required autofocus>    
     </div>
     <div class="form-group">
-        <label for="inputPassword">Password</label>
+        <label for="inputPassword">Mot de passe *</label>
         <input type="password" name="password" id="inputPassword" class="form-control border" required>
-        <small><a href="{{ path('account_password_forget') }}">Password forget?</a></small>
+        <small><a href="{{ path('account_password_forget') }}">Mot de passe oublié ?</a></small>
     </div>
 </form>
