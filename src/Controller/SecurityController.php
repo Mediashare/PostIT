@@ -39,7 +39,7 @@ class SecurityController extends AbstractController {
                 $template = (new TemplatedEmail())
                     ->from(new Address($this->getParameter('mailer.from'), $this->getParameter('mailer.from_name')))
                     ->to($user->getEmail())
-                    ->subject('Password recovery')
+                    ->subject('Nouveau mot de passe')
                     ->htmlTemplate('mail/password_recovery.html.twig');
                 $emailVerifier->sendEmailConfirmation('account_password_recovery', $user, $template);
                 $this->addFlash('success', 'Email for recovery password is send.');
@@ -134,7 +134,7 @@ class SecurityController extends AbstractController {
                 (new TemplatedEmail())
                     ->from(new Address($this->getParameter('mailer.from'), $this->getParameter('mailer.from_name')))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Confirmer votre email')
                     ->htmlTemplate('mail/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email

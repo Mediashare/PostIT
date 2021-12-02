@@ -35,7 +35,7 @@ class CommentController extends AbstractController {
         $email = (new TemplatedEmail())
             ->from(new Address($this->getParameter('mailer.from'), $this->getParameter('mailer.from_name')))
             ->to(new Address($post->getAuthor()->getEmail(), $post->getAuthor()->getUsername()))
-            ->subject('New comment for ' . $post->getTitle())
+            ->subject('Nouveau commentaire')
             // path of the Twig template to render
             ->htmlTemplate('mail/comment.html.twig')
             // pass variables (name => value) to the template

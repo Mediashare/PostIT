@@ -5,7 +5,7 @@ use Cocur\Slugify\Slugify;
 use ParsedownExtra;
 
 Class Text {
-    public function Markdownify (?string $text): ?string {
+    public function markdownify (?string $text): ?string {
         $parsedown = new ParsedownExtra();
         // $parsedown->setSafeMode(true);
         $markdown = $parsedown->text($text);
@@ -16,7 +16,7 @@ Class Text {
         return $markdown ?? '';
     }
 
-    public function Slugify (?string $text): ?string {
+    public function slugify (?string $text): ?string {
         $slugify = new Slugify();
         $slug = $slugify->slugify($text);
         return $slug ?? '';
