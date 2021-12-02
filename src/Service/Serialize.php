@@ -1,9 +1,7 @@
 <?php
 namespace App\Service;
 
-use App\Entity\Post;
 use App\Entity\User;
-use App\Entity\Comment;
 
 Class Serialize {
     public function posts($posts, ?string $type = 'json') {
@@ -14,6 +12,8 @@ Class Serialize {
                     'title' => $post->getTitle(),
                     'slug' => $post->getSlug(),
                     'createDate' => $post->getCreateDate(),
+                    'updateDate' => $post->getUpdateDate(),
+                    'views' => $post->getViews(),
                     'comments' => count($post->getComments()),
                     'author' => $this->author($post->getAuthor() ?? [], 'array'),
                 ];
@@ -37,6 +37,8 @@ Class Serialize {
                 'content' => $post->getContent(),
                 'html' => $post->getMarkdown(),
                 'createDate' => $post->getCreateDate(),
+                'updateDate' => $post->getUpdateDate(),
+                'views' => $post->getViews(),
                 'comments' => $this->comments($post->getComments() ?? [], 'array'),
                 'author' => $this->author($post->getAuthor() ?? [], 'array'),
             ];

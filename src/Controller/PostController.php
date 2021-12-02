@@ -14,6 +14,11 @@ class PostController extends AbstractController {
             (!$this->getUser() || $this->getUser() !== $post->getAuthor())):
             return $this->redirectToRoute('index');
         endif;
+
+        $post->setViews($post->getViews() + 1);
+        $this->getEm()->persist($post);
+        $this->getEm()->flush();
+
         return $this->render('app/post.html.twig', ['post' => $post]);
     }
 

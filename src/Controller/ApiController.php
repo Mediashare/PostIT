@@ -32,6 +32,11 @@ class ApiController extends AbstractController {
     public function post(Serialize $serializer, string $id): Response {
         $em = $this->getDoctrine()->getManager();
         $post = $this->getPost(['online' => true, 'id' => $id]);
+
+        $post->setViews($post->getViews() + 1);
+        $this->getEm()->persist($post);
+        $this->getEm()->flush();
+        
         $post = $serializer->post($post, $type = 'array');
         
         return $this->json(['status' => 'success', 'post' => $post ?? []]);
