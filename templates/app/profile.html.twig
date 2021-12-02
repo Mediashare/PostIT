@@ -17,10 +17,10 @@
                         {% if post.online or app.user and (app.user == user or app.user.isAdmin) %}
                             <li class="list-group-item bg-main post_link"> 
                                 <span class="float-left">
-                                    <a href="{{ path('post', {'slug': post.slug}) }}" class="text-primary">Show</a>
+                                    <a href="{{ path('post', {'slug': post.slug}) }}" class="btn btn-primary p-1">Show</a>
                                     {% if app.user and (app.user == user or app.user.isAdmin) %} 
-                                        - <a href="{{ path('post_edit', {'slug': post.slug}) }}" class="text-warning">Edit</a> -
-                                        <a href="{{ path('post_delete', {'slug': post.slug}) }}" class="text-danger">Delete</a>
+                                        - <a href="{{ path('post_edit', {'slug': post.slug}) }}" class="btn btn-warning p-1">Edit</a>
+                                        <a href="{{ path('post_delete', {'slug': post.slug}) }}" class="btn btn-danger p-1">Delete</a>
                                     {% endif %}
                                 </span>
                                 <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 

@@ -29,11 +29,8 @@
     </head>
     <body>
         <div class="container-fluid">
-            {% include 'partial/_flash.html.twig' %}
             {% block container %}{% endblock %}
         </div>
-
-        
         
         {# Javascripts #}
         <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>

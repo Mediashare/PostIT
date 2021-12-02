@@ -1,28 +1,26 @@
-<div class="col-12 mt-3">
-    <div class="card bg-main shadow-lg rounded">
-        <div class="card-header">
-            <h4 class="card-title">
-                Posts
-            </h4>
-        </div>
-        <div class="card-content" style="max-height: 50vh;overflow: auto;">
-            <ul class="list-group text-right bg-main">
-                {% for post in posts %}
-                    <li class="list-group-item bg-main post_link"> 
-                        <span class="float-left">
-                            <a href="{{ path('post', {'slug': post.slug}) }}" class="text-primary">Show</a> -
-                            <a href="{{ path('post_edit', {'slug': post.slug}) }}" class="text-warning">Edit</a> -
-                            <a href="{{ path('post_delete', {'slug': post.slug}) }}" class="text-danger">Delete</a>
-                        </span>
-                        <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 
-                        <br>
-                        <span class="float-right">
-                            {% if not post.isOnline %}<em class="text-muted">(Draft)</em>{% endif %}
-                            <em>{{ post.createDate|date('d/m/Y') }}</em> - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>
-                        </span>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
+<div class="card bg-main shadow-lg rounded mt-3">
+    <div class="card-header">
+        <h4 class="card-title">
+            Posts
+        </h4>
+    </div>
+    <div class="card-content" style="max-height: 50vh;overflow: auto;">
+        <ul class="list-group text-right bg-main">
+            {% for post in posts %}
+                <li class="list-group-item bg-main post_link"> 
+                    <span class="float-left">
+                        <a href="{{ path('post', {'slug': post.slug}) }}" class="btn btn-primary p-1">Show</a>
+                        <a href="{{ path('post_edit', {'slug': post.slug}) }}" class="btn btn-warning p-1">Edit</a>
+                        <a href="{{ path('post_delete', {'slug': post.slug}) }}" class="btn btn-danger p-1">Delete</a>
+                    </span>
+                    <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 
+                    <br>
+                    <span class="float-right">
+                        {% if not post.isOnline %}<em class="text-muted">(Draft)</em>{% endif %}
+                        <em>{{ post.createDate|date('d/m/Y') }}</em> - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 </div>

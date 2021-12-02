@@ -3,6 +3,7 @@
 {% block container %}
     <div class="row">
         <div id="content" class="col-lg-9 shadow-lg rounded p-0">
+            {% include 'partial/_flash.html.twig' %}
             {% block content %}{% endblock %}
             {% block comments %}{% endblock %}
         </div>

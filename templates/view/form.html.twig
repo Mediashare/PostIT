@@ -15,6 +15,7 @@
             {% block form_header %}{% endblock %}
         </div>
         <div class="row">
+            {% include 'partial/_flash.html.twig' %}
             {% block editor %}
                 <div class="col-lg-6 p-0">
                     <div id="codemirror" class="shadow-lg rounded"></div>
