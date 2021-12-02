@@ -17,6 +17,7 @@
                         <a href="{{ path('post', {'slug': post.slug}) }}" title="{{ post.title }}"><strong>{{ post.title }}</strong></a> 
                         <br>
                         <span class="float-right">
+                            {% if not post.isOnline %}<em class="text-muted">(Draft)</em>{% endif %}
                             <em>{{ post.createDate|date('d/m/Y') }}</em> - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>
                         </span>
                     </li>
