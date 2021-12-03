@@ -32,7 +32,7 @@ class PartialController extends AbstractController {
             endif;
         elseif ($user && $user->getAvatar()):
             $image = $user->getAvatar();
-            $image = $request->getUriForPath('/images/' . $image);
+            $image = $request->getUriForPath('/images/avatars/' . $image);
         endif;
 
         return $this->render('partial/_og_image.html.twig', ['image' => $image ?? null]);
