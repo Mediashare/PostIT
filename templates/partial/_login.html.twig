@@ -4,12 +4,6 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    {% if app.user is defined and app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
     <div class="form-group">
         <label for="inputEmail">Email / Username *</label>
         <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control border" required autofocus>    

@@ -32,7 +32,7 @@
                                 {% if app.user and (app.user == comment.author or app.user.isAdmin) %}<a href="{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}" class="btn btn-danger p-1">Delete</a> |{% endif %}
                                 <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - 
                                 <a href="{{ path('profile', {'username': comment.author.slug}) }}" title="Profile {{ comment.author.username }}" class="username">
-                                    <span class="text-info">{{ comment.author.username }}</span>
+                                    <span class="username">{{ comment.author.username }}</span>
                                 </a>
                             </p>
                         </div>

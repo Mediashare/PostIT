@@ -14,7 +14,7 @@
                         <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger p-1">Delete</a>
                     </span>
                     <a href="{{ path('profile', {'username': user.slug,}) }}">
-                        <strong>{{ user.username }}</strong> 
+                        <strong class="username">{{ user.username }}</strong> 
                     </a>
                     <br>
                     <span class="float-right">
