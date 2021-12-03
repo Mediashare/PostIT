@@ -15,7 +15,7 @@
                     <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}"><strong>{{ comment.content }}</strong></a> 
                     <br>
                     <span class="float-right">
-                        <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - <span class="text-info">{{ comment.author }}</span>
+                        <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - <span class="username">{{ comment.author }}</span>
                     </span>
                 </li>
             {% endfor %}
