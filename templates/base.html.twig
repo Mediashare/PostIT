@@ -17,7 +17,7 @@
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
         {# SEO OG:IMAGE #}
         {% if post is defined and post %} {% set image = post.image %}
-        {% elseif user is defined and user %} {% set image = '/images/avatars/' ~ user.avatar %} {% endif %}
+        {% elseif user is defined and user %} {% set image = absolute_url(asset('/images/avatars/' ~ user.avatar)) %} {% endif %}
         <meta property="og:image" content="{% block image_og %}{{ image ?? absolute_url(asset('images/logo.png')) }}{% endblock %}">
 
         {# Ads #}
