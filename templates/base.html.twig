@@ -15,12 +15,11 @@
         <meta property="og:description" content="{% block description_og %}Mediashare est une entité promouvant le partage de ressource sur Internet.{% endblock %}">
         <meta property="og:type" content="{% block type_og %}article{% endblock %}">
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
-        {% if post is defined and post %}
-            {% set image = post.image %}
-        {% elseif user is defined and user %}
-            {% set image = '/images/avatars/' ~ user.avatar %}
-        {% endif %}
+        {# SEO OG:IMAGE #}
+        {% if post is defined and post %} {% set image = post.image %}
+        {% elseif user is defined and user %} {% set image = '/images/avatars/' ~ user.avatar %} {% endif %}
         <meta property="og:image" content="{% block image_og %}{{ image ?? absolute_url(asset('images/logo.png')) }}{% endblock %}">
+
         {# Ads #}
         <meta name="propeller" content="d173ce71c0f768c750b9b383a26540e5">
         
