@@ -15,7 +15,7 @@
         <meta property="og:description" content="{% block description_og %}Mediashare est une entité promouvant le partage de ressource sur Internet.{% endblock %}">
         <meta property="og:type" content="{% block type_og %}article{% endblock %}">
         <meta property="og:author" content="{% block author_og %}Mediashare{% endblock %}">
-        {{ render(controller('App\\Controller\\PartialController::og_image', {'post': post ?? null, 'user': user ?? null})) }}
+        {{ render(controller('App\\Controller\\PartialController::og_image', {'request': app.request, 'post': post ?? null, 'user': user ?? null})) }}
 
         {# Ads #}
         <meta name="propeller" content="d173ce71c0f768c750b9b383a26540e5">

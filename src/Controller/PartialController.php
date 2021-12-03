@@ -22,7 +22,7 @@ class PartialController extends AbstractController {
         ]);
     }
 
-    public function og_image(?Post $post = null, ?User $user = null) {
+    public function og_image(Request $request, ?Post $post = null, ?User $user = null) {
         if ($post):
             $text = new Text();
             $crawler = new Crawler($text->markdownify($post->getContent()));
@@ -32,6 +32,7 @@ class PartialController extends AbstractController {
             endif;
         elseif ($user && $user->getAvatar()):
             $image = $user->getAvatar();
+            $image = $request->getUriForPath('/images/' . $image);
         endif;
 
         return $this->render('partial/_og_image.html.twig', ['image' => $image ?? null]);
