@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
@@ -112,6 +113,15 @@ class Post
     public function getMarkdown(): ?string {
         $text = new Text();
         return $text->markdownify($this->getContent()) ?? '';
+    }
+
+    public function getImage(): ?string {
+        $crawler = new Crawler($this->getMarkdown());
+        if ($crawler->filter('img')->count() > 0):
+            $image = $crawler->filter('img')->eq(0);
+            $image = $image->attr('src') ?? null;
+        endif;
+        return $image ?? null;
     }
 
     public function getSlug(): ?string {
