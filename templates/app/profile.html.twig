@@ -3,8 +3,8 @@
 {% block title %}{{ user.username }}{% endblock %}
 {% block title_og %}{{ user.username }}{% endblock %}
 
-{% block description %}{{ user.signature }}{% endblock %}
-{% block description_og %}{{ user.signature }}{% endblock %}
+{% block description %}{{ user.signature ?? 'Mediashare est une entité promouvant le partage de ressource sur Internet.' }}{% endblock %}
+{% block description_og %}{{ user.signature ?? 'Mediashare est une entité promouvant le partage de ressource sur Internet.' }}{% endblock %}
 
 {% block author %}{{ user.username }}{% endblock %}
 {% block author_og %}{{ user.username }}{% endblock %}
