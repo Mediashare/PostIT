@@ -1,6 +1,13 @@
 {% extends 'view/page.html.twig' %}
 
 {% block title %}{{ user.username }}{% endblock %}
+{% block title_og %}{{ user.username }}{% endblock %}
+
+{% block description %}{{ user.signatures }}{% endblock %}
+{% block description_og %}{{ user.signatures }}{% endblock %}
+
+{% block author %}{{ user.username }}{% endblock %}
+{% block author_og %}{{ user.username }}{% endblock %}
 
 {% block content %}
     <div id="profile" class="col-12 mt-3">
