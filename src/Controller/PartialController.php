@@ -5,6 +5,8 @@ use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Controller\AbstractController;
+use App\Service\Text;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,6 +20,21 @@ class PartialController extends AbstractController {
             'user' => $user,
             'posts' => $posts,
         ]);
+    }
+
+    public function og_image(?Post $post = null, ?User $user = null) {
+        if ($post):
+            $text = new Text();
+            $crawler = new Crawler($text->markdownify($post->getContent()));
+            if ($crawler->filter('img')->count() > 0):
+                $image = $crawler->filter('img')->eq(0);
+                $image = $image->attr('src');
+            endif;
+        elseif ($user && $user->getAvatar()):
+            $image = $user->getAvatar();
+        endif;
+
+        return $this->render('partial/_og_image.html.twig', ['image' => $image ?? null]);
     }
 
     public function signature(?string $username = null) {
