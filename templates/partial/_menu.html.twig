@@ -38,7 +38,7 @@
                 <br>
                 <span class="float-right">
                     {% if not post.isOnline %}<em class="text-muted">(Draft)</em>{% endif %}
-                    <em>{{ post.createDate|date('d/m/Y') }}</em>{% if post.author %} - <span class="text-info">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
+                    <em>{{ post.createDate|date('d/m/Y') }}</em>{% if post.author %} - <span class="username">{{ post.author ?? 'Anomyme' }}</span>{% endif %}
                 </span>
             </a>
         {% endif %}
