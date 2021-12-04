@@ -113,3 +113,11 @@ function modalDelete(id, url) {
     $('#' + id + ' a.delete').attr('href', url);
     $('#' + id).modal();
 }
+
+// Menu dropdown
+function newPost() {
+    if ($('#new_post').hasClass('active')) {
+        $('#new_post').removeClass('active');
+    } else { $('#new_post').addClass('active'); }
+    $('#new_post_dropdown').toggle('show');
+}

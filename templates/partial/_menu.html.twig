@@ -1,28 +1,42 @@
 <div id="menu_header" class="d-lg-flex bg-main shadow-lg rounded">
-    <a href="/" class="list-group-item bg-main post_link float-left text-center text-primary {% if request.get('_route') == 'index' %}active{% endif %}" title="Homepage">
+    <a href="/" class="list-group-item bg-main post_link float-left text-center text-primary {% if request.get('_route') == 'index' %}active{% endif %}" title="Accueil">
         <i class="fa fa-home"></i>
     </a>
-    <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-white text-center btn-search" title="Search a publication">
+    <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-white text-center btn-search" title="Rechercher une publication">
         <i class="fa fa-search"></i>
     </a>
-    <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-danger text-center btn-search-close" title="Close search">
+    <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-danger text-center btn-search-close" title="Fermer la recherche">
         <i class="fa fa-times"></i>
     </a>
-    <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="New Post">
+    <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle article">
         <i class="fa fa-plus"></i>
     </a>
-    {# <a href="{{ path('chat') }}" class="list-group-item bg-main post_link float-left text-center text-warning {% if request.get('_route') == 'chat' %}active{% endif %}" title="New Post">
-        <i class="fa fa-comments"></i>
-    </a> #}
+    {# <a id="new_post" onclick="newPost();" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle publication">
+        <i class="fa fa-plus"></i>
+    </a>
+    <div id="new_post_dropdown" class="dropdown shadow-lg hide">
+        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle article">
+            <i class="fa fa-paragraph"></i>
+        </a>
+        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouveau lien">
+            <i class="fa fa-link"></i>
+        </a>
+        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle vidéo">
+            <i class="fa fa-video"></i>
+        </a>
+        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle image">
+            <i class="fa fa-image"></i>
+        </a>
+    </div> #}
     {% if app.user is defined and app.user %}
-        <a href="{{ path('profile') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+        <a href="{{ path('profile') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Profile{% endif %}">
             <i class="fa fa-user"></i>
         </a>
         <a href="{{ path('logout') }}" class="list-group-item bg-main post_link float-left text-center text-danger" title="Logout">
             <i class="fa fa-sign-out-alt"></i>
         </a>
     {% else %}
-        <a href="{{ path('account') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'account' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+        <a href="{{ path('account') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'account' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Authentification{% endif %}">
             <i class="fa fa-user"></i>
         </a>
     {% endif %}
@@ -51,14 +65,14 @@
                 <i class="fa fa-cogs"></i>
             </a>
             {% if page and (request.get('_route') == 'page' or request.get('_route') == 'index') %}
-                <a href="{{ path('page_form', {'id': page.id}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Page">
+                <a href="{{ path('page_form', {'id': page.id}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Modifier la pages">
                     <i class="fa fa-edit"></i>
                 </a>
             {% endif %}
         {% endif %}
 
         {% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}
-            <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Edit Post">
+            <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Modifier la publication">
                 <i class="fa fa-edit"></i>
             </a>
             <a onclick="modalDelete('modal-post', '{{ path('post_delete', {'slug': currentPost.slug}) }}')" class="list-group-item bg-main post_link float-left text-center text-danger" title="Delete Post">
@@ -67,7 +81,7 @@
         {% endif %}
         {% if app.user and request.get('_route') starts with 'profile' %}
             {% if app.user == user or app.user.isAdmin %}
-                <a href="{{ path('profile_edit', {'username': user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Account{% endif %}">
+                <a href="{{ path('profile_edit', {'username': user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile_edit' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Profile{% endif %}">
                     <i class="fa fa-user-cog"></i>
                 </a>
                 <a href="{{ path('profile_templates', {'username': user.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning {% if request.get('_route') == 'profile_templates' %}active{% endif %}" title="Templates">

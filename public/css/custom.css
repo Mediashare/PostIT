@@ -18,6 +18,10 @@ a {cursor: pointer;}
 .border-top { border-top: 1px solid #4d4184 !important; }
 .btn-circle { width: 30px; height: 30px; padding: 6px 0px; border-radius: 15px; text-align: center; font-size: 12px; line-height: 1.42857; }
 .btn-circle.btn-xl { width: 70px; height: 70px; padding: 22px 22px; border-radius: 35px; font-size: 24px; line-height: 1.33; }
+.hidden, .hide { display: none; }
+/* Menu */
+div.dropdown { position: absolute; top: 55px; left: 55px; z-index: 1; }
+div.dropdown a { background-color: #615d76; }
 
 /* Content */
 div#content { width: 75vw; height: 100vh; overflow: auto; }
