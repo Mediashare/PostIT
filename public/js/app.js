@@ -126,7 +126,7 @@ function newPost() {
 $('#input_url').keyup(function () {
     var url = $('#input_url').val();
     if (validURL(url)) {
-        $.get('{{ path("api_link_metadata") }}', {'url': url}, function (data) {
+        $.get(api_link_metadata, {'url': url}, function (data) {
             if (data.status === 'success') {
                 console.log($('#title').text().length);
                 if (data.link.title)

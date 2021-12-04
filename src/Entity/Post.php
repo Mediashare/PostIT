@@ -103,6 +103,19 @@ class Post
         return $this;
     }
 
+    public function getImage(): ?string {
+        if ($this->getArticle()):
+            $crawler = new Crawler($this->getArticle()->getMarkdown());
+            if ($crawler->filter('img')->count() > 0):
+                $image = $crawler->filter('img')->eq(0);
+                $image = $image->attr('src') ?? null;
+            endif;
+        elseif ($this->getLink()):
+            $image = $this->getLink()->getImage();
+        endif;
+        return $image ?? null;
+    }
+
     public function getSlug(): ?string {
         return $this->slug;
     }
