@@ -72,7 +72,7 @@
             <a href="{{ path('post_edit', {'slug': currentPost.slug}) }}" class="list-group-item bg-main post_link float-left text-center text-warning" title="Modifier la publication">
                 <i class="fa fa-edit"></i>
             </a>
-            <a onclick="modalDelete('modal-post', '{{ path('post_delete', {'slug': currentPost.slug}) }}')" class="list-group-item bg-main post_link float-left text-center text-danger" title="Delete Post">
+            <a onclick="modalDelete('modal-post', '{{ path('post_delete', {'slug': currentPost.slug}) }}')" class="list-group-item bg-main post_link float-left text-center text-danger" title="DeSupprimer la publication">
                 <i class="fa fa-trash"></i>
             </a>
         {% endif %}
