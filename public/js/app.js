@@ -128,7 +128,6 @@ $('#input_url').keyup(function () {
     if (validURL(url)) {
         $.get(api_link_metadata, {'url': url}, function (data) {
             if (data.status === 'success') {
-                console.log($('#title').text().length);
                 if (data.link.title)
                     $('#title').html(data.link.title);
                     if ($('#input_title').val().length < 1)
