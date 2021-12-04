@@ -64,25 +64,6 @@
             <a onclick="modalDelete('modal-post', '{{ path('post_delete', {'slug': currentPost.slug}) }}')" class="list-group-item bg-main post_link float-left text-center text-danger" title="Delete Post">
                 <i class="fa fa-trash"></i>
             </a>
-            <div id="modal-post" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content bg-main rounded shadow-lg">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Suppression</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Êtes-vous sûr de vouloir supprimer cet élément ?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <a class="btn btn-danger delete">Supprimer</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         {% endif %}
         {% if app.user and request.get('_route') starts with 'profile' %}
             {% if app.user == user or app.user.isAdmin %}
@@ -104,3 +85,26 @@
 <button class="btn btn-burger btn-burger-close btn-xl btn-circle bg-white d-none" onclick="closeMenuBurger();">
     <i class="fa fa-times"></i>
 </button>
+
+{# Modal #}
+{% if not currentPost is null and app.user is defined and app.user and (app.user == currentPost.author or app.user.isAdmin) %}
+    <div id="modal-post" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content bg-main rounded shadow-lg">
+                <div class="modal-header">
+                    <h5 class="modal-title">Suppression</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Êtes-vous sûr de vouloir supprimer cet élément ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a class="btn btn-danger delete">Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
