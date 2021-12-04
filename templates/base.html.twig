@@ -19,6 +19,7 @@
         {% if post is defined and post %} {% set image = post.image %}
         {% elseif user is defined and user %} {% set image = absolute_url(asset('/images/avatars/' ~ user.avatar)) %} {% endif %}
         <meta property="og:image" content="{% block image_og %}{{ image ?? absolute_url(asset('images/logo.png')) }}{% endblock %}">
+        <meta name="twitter:card" content="summary_large_image">
 
         {# Ads #}
         <meta name="propeller" content="d173ce71c0f768c750b9b383a26540e5">
