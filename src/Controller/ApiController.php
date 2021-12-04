@@ -49,6 +49,11 @@ class ApiController extends AbstractController {
         $link = new Link();
         $link->setUrl($request->get('url'));
         $link = $scrapper->getMetadata($link);
+        
+        if (!$link):
+            return $this->json(['status' => 'error', 'link' => []]);
+        endif;
+
         return $this->json([
             'status' => 'success',
             'link' => [

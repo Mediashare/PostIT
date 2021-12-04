@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 
 Class Scrapper {
-    public function getMetadata(Link $link): Link {
+    public function getMetadata(Link $link): ?Link {
         try {
             $client = new Client();
             $response = $client->get($link->getUrl());
@@ -23,7 +23,7 @@ Class Scrapper {
                     $error['response'] = $e->getResponse(); 
                 }
             }
-            throw new Exception($e->getMessage(), 1);
+            return false;
         }
 
         $crawler = new Crawler($response->getBody()->getContents());
