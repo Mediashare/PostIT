@@ -127,13 +127,13 @@ function getLinkMetadata() {
     var url = $('#input_url').val();
     if (validURL(url)) {
         $.post(api_link_metadata, {'url': url}, function (data) {
+            console.log(data)
             if (data.status === 'success') {
                 if (data.link.title)
                     $('#title').html(data.link.title);
                     if ($('#input_title').val().length < 1)
                         $('#input_title').val(data.link.title);
                 if (data.link.description)
-                    console.log(data.link.description)
                     if ($('#description').length < 1) {
                         $('.card_link').append('<div id="description" class="card-body"><p class="text-white">'+ data.link.description +'</p></div>');
                     } else {
