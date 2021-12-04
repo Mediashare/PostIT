@@ -45,4 +45,3 @@ security:
         - { path: ^/new, roles: ROLE_USER }
         - { path: ^/link, roles: ROLE_USER }
         - { path: ^/article, roles: ROLE_USER }
-        - 
