@@ -123,7 +123,7 @@ function newPost() {
 }
 
 // Post Link
-$('#input_url').keyup(function () {
+function getLinkMetadata() {
     var url = $('#input_url').val();
     if (validURL(url)) {
         $.get(api_link_metadata, {'url': url}, function (data) {
@@ -149,7 +149,7 @@ $('#input_url').keyup(function () {
             }
         });
     }
-});
+}
 
 function validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol

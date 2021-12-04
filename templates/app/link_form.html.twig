@@ -28,7 +28,7 @@
     </div>
 
     <div class="col-lg-12 p-0">
-        <input type="url" name="url" id="input_url" class="w-100 rounded form-control" placeholder="Url..." required="true" {% if post is defined %}value="{{ post.link.url ?? null }}"{% endif %} autofocus>
+        <input type="url" name="url" id="input_url" onkeyup="getLinkMetadata();" class="w-100 rounded form-control" placeholder="Url..." required="true" {% if post is defined %}value="{{ post.link.url ?? null }}"{% endif %} autofocus>
     </div>
 {% endblock %}
 
@@ -36,4 +36,12 @@
     <div class="col-12 d-flex mx-auto">
         {% include 'partial/_link.html.twig' %}
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('#input_url').keyup(function () {
+            getLinkMetadata();
+        });
+    </script>
 {% endblock %}
