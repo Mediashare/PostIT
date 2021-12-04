@@ -9,9 +9,9 @@
             {% for user in users %}
                 <li class="list-group-item bg-main post_link" > 
                     <span class="float-left">
-                        <a href="{{ path('profile', {'username': user.slug,}) }}" class="btn btn-primary p-1">Voir</a>
-                        <a href="{{ path('profile_edit', {'username': user.slug,}) }}" class="btn btn-warning p-1">Modifier</a>
-                        <a onclick="modalDelete('modal-user-{{ user.id }}', '{{ path('user_delete', {'id': user.id}) }}');" class="btn btn-danger p-1">Supprimer</a>
+                        <a href="{{ path('profile', {'username': user.slug,}) }}" class="btn btn-primary p-1 shadow-lg">Voir</a>
+                        <a href="{{ path('profile_edit', {'username': user.slug,}) }}" class="btn btn-warning p-1 shadow-lg">Modifier</a>
+                        <a onclick="modalDelete('modal-user-{{ user.id }}', '{{ path('user_delete', {'id': user.id}) }}');" class="btn btn-danger p-1 shadow-lg">Supprimer</a>
                     </span>
                     <a href="{{ path('profile', {'username': user.slug,}) }}">
                         <strong class="username">{{ user.username }}</strong> 

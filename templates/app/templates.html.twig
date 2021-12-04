@@ -20,7 +20,7 @@
                     {{ template.markdown|raw }}
                 </div>
                 <div class="card-footer text-right shadow-lg">
-                    <a onclick="modalDelete('modal-template-{{ template.id }}', '{{ path('template_delete', {'id': template.id}) }}')" class="btn btn-danger p-1">
+                    <a onclick="modalDelete('modal-template-{{ template.id }}', '{{ path('template_delete', {'id': template.id}) }}')" class="btn btn-danger p-1 shadow-lg">
                         Supprimer
                     </a>
                     <div id="modal-template-{{ template.id }}" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">

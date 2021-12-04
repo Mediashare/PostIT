@@ -9,8 +9,8 @@
             {% for comment in comments %}
                 <li class="list-group-item bg-main post_link" > 
                     <span class="float-left">
-                        <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}" class="btn btn-primary p-1">Voir</a>
-                        <a onclick="modalDelete('modal-comment-{{ comment.id }}', '{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}');" class="btn btn-danger p-1">Supprimer</a>
+                        <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}" class="btn btn-primary p-1 shadow-lg">Voir</a>
+                        <a onclick="modalDelete('modal-comment-{{ comment.id }}', '{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}');" class="btn btn-danger p-1 shadow-lg">Supprimer</a>
                     </span>
                     <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}"><strong>{{ comment.content }}</strong></a> 
                     <br>

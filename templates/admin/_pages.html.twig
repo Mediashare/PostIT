@@ -9,9 +9,9 @@
             {% for page in pages %}
                 <li class="list-group-item bg-main post_link"> 
                     <span class="float-left">
-                        <a href="{{ page.url }}" class="btn btn-primary p-1">Voir</a>
-                        <a href="{{ path('page_form', {'id': page.id}) }}" class="btn btn-warning p-1">Modifier</a>
-                        <a onclick="modalDelete('modal-page-{{ page.id }}', '{{ path('page_delete', {'id': page.id}) }}');" class="btn btn-danger p-1">Supprimer</a>
+                        <a href="{{ page.url }}" class="btn btn-primary p-1 shadow-lg">Voir</a>
+                        <a href="{{ path('page_form', {'id': page.id}) }}" class="btn btn-warning p-1 shadow-lg">Modifier</a>
+                        <a onclick="modalDelete('modal-page-{{ page.id }}', '{{ path('page_delete', {'id': page.id}) }}');" class="btn btn-danger p-1 shadow-lg">Supprimer</a>
                     </span>
                     <a href="{{ page.url }}"><strong>{{ page.url }}</strong></a> 
                     <br>
