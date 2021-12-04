@@ -19,6 +19,7 @@
 {% block content %}
     <div class="col-12 mt-3">
         <div id="editor_preview" class="markdown-body shadow-lg rounded">
+            <div class="clearfix"></div>
             {% if post.article and post.article.content is defined %}
                 {{ render(controller('App\\Controller\\ApiController::markdownify', {
                     'content': post.article.content
@@ -27,6 +28,13 @@
                 {% include 'partial/_link.html.twig' %}
             {% endif %}
             {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
+            <div class="float-right">
+                {% if post.views >= 500 %}
+                    <span class="mr-2"><i class="fa fa-eye text-muted"></i> {{ post.views }}</span>
+                {% endif %}
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.uri }}" target="_blank"><i class="fab fa-facebook-f facebook mr-2"></i></a>
+                <a href="https://twitter.com/intent/tweet?text={{ app.request.uri }}" target="_blank"><i class="fab fa-twitter twitter mr-2"></i></a>
+            </div>
         </div>
     </div>
 {% endblock %}
