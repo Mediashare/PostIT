@@ -20,6 +20,7 @@
                     {{ template.markdown|raw }}
                 </div>
                 <div class="card-footer text-right shadow-lg">
+                    <a href="{{ path('template_form', {'id': template.id}) }}" class="btn btn-warning">Modifier</a>
                     <a onclick="modalDelete('modal-template-{{ template.id }}', '{{ path('template_delete', {'id': template.id}) }}')" class="btn btn-danger p-1 shadow-lg">
                         Supprimer
                     </a>
