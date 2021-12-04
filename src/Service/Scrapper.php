@@ -3,8 +3,10 @@
 namespace App\Service;
 
 use App\Entity\Link;
-use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\ServerException;
 use Symfony\Component\DomCrawler\Crawler;
 
 Class Scrapper {
@@ -12,18 +14,13 @@ Class Scrapper {
         try {
             $client = new Client();
             $response = $client->get($link->getUrl());
-        } catch(\GuzzleHttp\Exception\RequestException $e) {
+        } catch(ClientException | ServerException | ConnectException $e) {
             $error = null;
             // you can catch here 400 response errors and 500 response errors
             // You can either use logs here use Illuminate\Support\Facades\Log;
             $error['error'] = $e->getMessage();
             $error['request'] = $e->getRequest();
-            if($e->hasResponse()){
-                if ($e->getResponse()->getStatusCode() == '400'){
-                    $error['response'] = $e->getResponse(); 
-                }
-            }
-            return false;
+            return null;
         }
 
         $crawler = new Crawler($response->getBody()->getContents());
