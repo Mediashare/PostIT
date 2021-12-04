@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="{{ preload(asset('font/latin-400.woff2'), { as: 'font', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('font/latin-500.woff2'), { as: 'font', importance: 'high' }) }}">
         <link rel="stylesheet" href="{{ preload(asset('fontawesome/webfont/fa-solid-900.woff2'), { as: 'font', importance: 'high' }) }}">
-        <link rel="stylesheet" href="{{ preload(path('assets_css'), { as: 'css', importance: 'high' }) }}">
+        <link rel="stylesheet" href="{{ preload(path('assets_css'), { as: 'css', importance: 'high' }) }}?version=1">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -38,7 +38,7 @@
         </div>
         
         {# Javascripts #}
-        <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}"></script>
+        <script src="{{ preload(path('assets_js'), { as: 'script', importance: 'high' }) }}?version=1"></script>
         <script src="{{ preload(asset('js/prism.js'), { as: 'script' }) }}"></script>
         
         {# Cookies #}
