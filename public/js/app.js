@@ -126,7 +126,7 @@ function newPost() {
 function getLinkMetadata() {
     var url = $('#input_url').val();
     if (validURL(url)) {
-        $.get(api_link_metadata, {'url': url}, function (data) {
+        $.post(api_link_metadata, {'url': url}, function (data) {
             if (data.status === 'success') {
                 if (data.link.title)
                     $('#title').html(data.link.title);
