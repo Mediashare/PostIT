@@ -6,7 +6,7 @@
     <div class="col-lg-9 p-0">
         <input type="text" name="url" id="input_url" class="w-100 rounded form-control" placeholder="Url..." required="true" {% if page is defined %}value="{{ page.url ?? '/' }}"{% endif %} autofocus>
     </div>
-    <div class="col-lg-3 p-0">
+    <div class="col-lg-3 p-0 shadow-lg">
         <div class="float-left w-50 border-top">
             <a tabindex="-1" class="btn btn-cancel" title="Cancel" href="{{ path('admin') }}"
             >
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="col-md-6 p-0 shadow-lg">
-        <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" {% if page is defined %}value="{{ page.title }}"{% endif %} autofocus>
+        <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Titre..." required="true" {% if page is defined %}value="{{ page.title }}"{% endif %} autofocus>
     </div>
     <div class="col-md-6 p-0 shadow-lg">
         <input type="text" name="description" id="input_description" class="w-100 rounded form-control" placeholder="Description..." {% if page is defined %}value="{{ page.description }}"{% endif %} autofocus>

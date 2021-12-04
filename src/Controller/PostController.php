@@ -14,48 +14,27 @@ class PostController extends AbstractController {
             (!$this->getUser() || $this->getUser() !== $post->getAuthor())):
             return $this->redirectToRoute('index');
         endif;
-
+        
         $post->setViews($post->getViews() + 1);
         $this->getEm()->persist($post);
         $this->getEm()->flush();
-
+        
         return $this->render('app/post.html.twig', ['post' => $post]);
     }
 
-    public function form(Request $request, ?string $slug = null) {
-        if ($slug):
-            $post = $this->getPost(['slug' => $slug], ['updateDate' => 'DESC']);
-            if (!$post):
-                return $this->redirectToRoute('post_new');
-            elseif (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
-                return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
-            endif;
-        else: 
-            $post = new Post(); 
-            if ($this->getUser()): $post->setAuthor($this->getUser()); endif;
-        endif;
-
-        if ($request->isMethod('POST') && $request->get('title') && $request->get('content')):
-            // Init parameters
-            if ($post->getTitle() != $request->get('title')):
-                $post->setTitle($request->get('title'));
-                // Generate Slug
-                $post->setSlug($post->getTitle());
-                while ($duplication = $this->getPost(['slug' => $post->getSlug()])):
-                    if (!isset($slug_counter)): $slug_counter = 0; endif;
-                    $slug_counter++;
-                    $post->setSlug($post->getTitle().'-'.$slug_counter);
-                endwhile;
-            endif;
-            $post->setContent($request->get('content'));
-            $post->setOnline($request->get('online') ? true : false);
-            $post->setUpdateDate(new \DateTime());
-            $this->getEm()->persist($post);
-            $this->getEm()->flush();
+    public function edit(string $slug) {
+        $post = $this->getPost(['slug' => $slug], ['updateDate' => 'DESC']);
+        if (!$post):
+            return $this->redirectToRoute('app');
+        elseif (!$this->getUser() || ($this->getUser() != $post->getAuthor() && !$this->getUser()->isAdmin())):
             return $this->redirectToRoute('post', ['slug' => $post->getSlug()]);
         endif;
-        
-        return $this->render('app/post_form.html.twig', ['post' => $post]);
+
+        if ($post->getArticle()): 
+            return $this->redirectToRoute('article_form', ['slug' => $post->getSlug()]);
+        elseif ($post->getLink()): 
+            // return $this->redirectToRoute('article_form', ['slug' => $post->getSlug()]);
+        endif;
     }
 
     public function upload(Request $request) {

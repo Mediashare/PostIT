@@ -17,11 +17,29 @@
 {% block content %}
     <div class="col-12 mt-3">
         <div id="editor_preview" class="markdown-body shadow-lg rounded">
-            {% if post.markdown is defined %}
-                {# {{ post.markdown|raw }} #}
+            {% if post.article and post.article.content is defined %}
                 {{ render(controller('App\\Controller\\ApiController::markdownify', {
-                    'content': post.content
+                    'content': post.article.content
                 })) }}
+            {% elseif post.link and post.link.url %}
+                <a href="{{ post.link.url }}" target="_blank" class="card card_link shadow-lg rounded m-5">
+                    <div class="card-header">
+                        <h1 class="card-title">
+                            <i class="fa fa-external-link-alt"></i>
+                            {{ post.title }}
+                        </h1>
+                    </div>
+                    {% if post.link.description %}
+                        <div class="card-body">
+                            <p class="text-white">{{ post.link.description }}</p>
+                        </div>
+                    {% endif %}
+                    {% if post.link.image %}
+                        <div class="card-footer">
+                            <img src="{{ post.link.image }}" alt="{{ post.title }}" class="d-flex mx-auto">
+                        </div>
+                    {% endif %}
+                </a>
             {% endif %}
             {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
         </div>

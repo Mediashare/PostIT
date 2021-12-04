@@ -4,7 +4,7 @@
 
 {% block form_header %}
     <div class="col-lg-8 p-0">
-        <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Title..." required="true" {% if post is defined %}value="{{ post.title }}"{% endif %} autofocus>
+        <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Titre..." required="true" {% if post is defined %}value="{{ post.title }}"{% endif %} autofocus>
     </div>
     <div class="col-lg-1 p-0">
         <div class="custom-control custom-switch mt-3 ml-3">
@@ -12,7 +12,7 @@
             <label class="custom-control-label w-100" for="online">Online</label>
         </div>
     </div>
-    <div class="col-lg-3 p-0 d-flex">
+    <div class="col-lg-3 p-0 d-flex shadow-lg">
         <div class="w-100 border-top">
             <a tabindex="-1" class="btn btn-cancel" title="Cancel"
                 {% if post.slug %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}

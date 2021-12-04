@@ -8,26 +8,23 @@
     <a onclick="searchDisplay();" class="list-group-item bg-main post_link float-left text-danger text-center btn-search-close" title="Fermer la recherche">
         <i class="fa fa-times"></i>
     </a>
-    <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle article">
-        <i class="fa fa-plus"></i>
-    </a>
-    {# <a id="new_post" onclick="newPost();" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle publication">
+    <a id="new_post" onclick="newPost();" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'article_form' %}active{% endif %}" title="Nouvelle publication">
         <i class="fa fa-plus"></i>
     </a>
     <div id="new_post_dropdown" class="dropdown shadow-lg hide">
-        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle article">
+        <a href="{{ path('article_form') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'article_form' %}active{% endif %}" title="Nouvelle article">
             <i class="fa fa-paragraph"></i>
         </a>
-        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouveau lien">
+        <a href="{{ path('link_form') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'link_form' %}active{% endif %}" title="Nouveau lien">
             <i class="fa fa-link"></i>
         </a>
-        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle vidéo">
+        {# <a href="{{ path('article_form') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'article_form' %}active{% endif %}" title="Nouvelle vidéo">
             <i class="fa fa-video"></i>
         </a>
-        <a href="{{ path('post_new') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'post_new' %}active{% endif %}" title="Nouvelle image">
+        <a href="{{ path('article_form') }}" class="list-group-item bg-main post_link float-left text-center text-success {% if request.get('_route') == 'article_form' %}active{% endif %}" title="Nouvelle image">
             <i class="fa fa-image"></i>
-        </a>
-    </div> #}
+        </a> #}
+    </div>
     {% if app.user is defined and app.user %}
         <a href="{{ path('profile') }}" class="list-group-item bg-main post_link float-left text-center text-info {% if request.get('_route') == 'profile' %}active{% endif %}" title="{% if app.user is defined and app.user %}{{ app.user.username }}{% else %}Profile{% endif %}">
             <i class="fa fa-user"></i>

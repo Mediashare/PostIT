@@ -28,11 +28,6 @@ class Post
     private $title;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
@@ -67,6 +62,16 @@ class Post
      */
     private $views;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Article::class, inversedBy="post", cascade={"persist", "remove"})
+     */
+    private $article;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Link::class, inversedBy="post", cascade={"persist", "remove"})
+     */
+    private $link;
+
     public function __toString() {
         return $this->getTitle();
     }
@@ -96,32 +101,6 @@ class Post
     {
         $this->title = $title;
         return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    public function getMarkdown(): ?string {
-        $text = new Text();
-        return $text->markdownify($this->getContent()) ?? '';
-    }
-
-    public function getImage(): ?string {
-        $crawler = new Crawler($this->getMarkdown());
-        if ($crawler->filter('img')->count() > 0):
-            $image = $crawler->filter('img')->eq(0);
-            $image = $image->attr('src') ?? null;
-        endif;
-        return $image ?? null;
     }
 
     public function getSlug(): ?string {
@@ -223,5 +202,65 @@ class Post
         $this->views = $views;
 
         return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getLink(): ?Link
+    {
+        return $this->link;
+    }
+
+    public function setLink(?Link $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+
+
+    // DEPRECATED
+
+    /**
+     * @ORM\Column(type="text", nullable="true")
+     */
+    private $content;
+
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getMarkdown(): ?string {
+        $text = new Text();
+        return $text->markdownify($this->getContent()) ?? '';
+    }
+
+    public function getImage(): ?string {
+        $crawler = new Crawler($this->getMarkdown());
+        if ($crawler->filter('img')->count() > 0):
+            $image = $crawler->filter('img')->eq(0);
+            $image = $image->attr('src') ?? null;
+        endif;
+        return $image ?? null;
     }
 }

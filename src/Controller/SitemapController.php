@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SitemapController extends AbstractController {
     public function sitemap(Request $request) {
         $urls[$this->generateUrl('index')] = ['url' => $this->generateUrl('index', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
-        $urls[$this->generateUrl('post_new')] = ['url' => $this->generateUrl('post_new', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
+        $urls[$this->generateUrl('article_new')] = ['url' => $this->generateUrl('article_new', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
         $urls[$this->generateUrl('account')] = ['url' => $this->generateUrl('account', [], false), 'lastmod' => new \DateTime(), 'changefreq' => 'monthly', 'priority' => 1];
         
         foreach ($this->getPages([], ['updateDate' => 'DESC']) as $page):

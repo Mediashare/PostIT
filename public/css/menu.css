@@ -5,6 +5,9 @@ ul#menu_posts a.post_link:hover, div#menu_header a:hover, div#menu_footer a:hove
 ul#menu_posts a.active, div#menu_header a.active, div#menu_footer a.active { color: #ffffff!important; background-color: #4d4184; border-color: #4d4184; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 ul#menu_posts a.active:hover { color: #ffffff; }
 .btn-search-close { display: none; }
+/* Dropdown */
+div.dropdown { position: absolute; top: 60px; left: 60px; z-index: 3; }
+div.dropdown a { background-color: #615d76; }
 
 /* Responsive */
 ul#menu_posts { display: flex; }

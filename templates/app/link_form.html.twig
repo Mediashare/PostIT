@@ -1,0 +1,29 @@
+{% extends 'view/form.html.twig' %}
+
+{% block title %}{{ post.title ?? 'Nouveau lien' }}{% endblock %}
+
+{% block form_header %}
+    <div class="col-lg-9 p-0">
+        <input type="text" name="title" id="input_title" class="w-100 rounded form-control" placeholder="Titre..." required="true" {% if post is defined %}value="{{ post.title }}"{% endif %} autofocus>
+    </div>
+    <div class="col-lg-3 p-0 d-flex shadow-lg">
+        <div class="w-100 border-top">
+            <a tabindex="-1" class="btn btn-cancel" title="Cancel"
+                {% if post.slug %}href="{{ path('post', {'slug': post.slug}) }}"{% else %}href="{{ path('index') }}"{% endif %}
+            >
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="w-100 border-top">
+            <button tabindex="-1" type="submit" class="btn btn-submit" title="Submit">
+                <i class="fa fa-check"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="col-lg-12 p-0">
+        <input type="url" name="url" id="input_url" class="w-100 rounded form-control" placeholder="Url..." required="true" {% if post is defined %}value="{{ post.article.url ?? null }}"{% endif %} autofocus>
+    </div>
+{% endblock %}
+
+{% block editor %}{% endblock %}

@@ -1,25 +1,32 @@
 post:
     path: /post/{slug}
     controller: App\Controller\PostController::show
-post_new:
-    path: /new
-    controller: App\Controller\PostController::form
-    defaults:
-        slug: null
-post_edit:
-    path: /edit/{slug}
-    controller: App\Controller\PostController::form
-
 post_delete:
     path: /delete/{slug}
     controller: App\Controller\PostController::delete
+
+post_edit:
+    path: /edit/{slug}
+    controller: App\Controller\PostController::edit
+
+article_form:
+    path: /article/{slug}
+    controller: App\Controller\ArticleController::form
+    defaults:
+        slug: null
+        
+link_form:
+    path: /link/{slug}
+    controller: App\Controller\LinkController::form
+    defaults:
+        slug: null
 
 upload:
     path: /upload
     controller: App\Controller\PostController::upload
 
 comment:
-    path: /comment/{slug}
+    path: /comment/{slug} # slug of post
     controller: App\Controller\CommentController::new
 comment_delete:
     path: /comment/{slug}/delete/{id}
