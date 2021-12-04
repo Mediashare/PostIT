@@ -21,6 +21,8 @@ a {cursor: pointer;}
 .hidden, .hide { display: none; }
 .twitter {color: #1d9bf0;}
 .facebook {color: #297be6;}
+.rounded {border-radius: 0.3em;}
+
 /* Content */
 div#content { width: 75vw; height: 100vh; overflow: auto; }
 div#content > div.row { max-width: 75vw; margin: auto; }
