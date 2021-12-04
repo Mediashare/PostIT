@@ -1,0 +1,18 @@
+<a href="{{ post.link.url ?? null }}" target="_blank" class="card card_link shadow-lg rounded m-5 d-flex mx-auto">
+    <div class="card-header">
+        <h1 class="card-title">
+            <i class="fa fa-external-link-alt"></i>
+            <span id="title" class="text-white">{{ post.title ?? null }}</span>
+        </h1>
+    </div>
+    {% if post.link.description ?? null %}
+        <div id="description" class="card-body">
+            <p class="text-white">{{ post.link.description }}</p>
+        </div>
+    {% endif %}
+    {% if post.link.image ?? null %}
+        <div id="image" class="card-footer">
+            <img src="{{ post.link.image }}" alt="{{ post.title }}" class="d-flex mx-auto">
+        </div>
+    {% endif %}
+</a>

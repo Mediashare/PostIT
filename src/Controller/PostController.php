@@ -33,7 +33,7 @@ class PostController extends AbstractController {
         if ($post->getArticle()): 
             return $this->redirectToRoute('article_form', ['slug' => $post->getSlug()]);
         elseif ($post->getLink()): 
-            // return $this->redirectToRoute('article_form', ['slug' => $post->getSlug()]);
+            return $this->redirectToRoute('link_form', ['slug' => $post->getSlug()]);
         endif;
     }
 

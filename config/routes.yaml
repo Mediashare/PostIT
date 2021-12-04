@@ -12,6 +12,10 @@ assets_js:
 markdownify:
    path: /markdownify
    controller: App\Controller\ApiController::markdownify
+
+api_link_metadata:
+    path: /api/link/metadata
+    controller: App\Controller\ApiController::linkMetadata
    
 routing_api:
    prefix: '/api'

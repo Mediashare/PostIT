@@ -37,6 +37,11 @@ class Link
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $title;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +101,18 @@ class Link
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Service\Text;
 use App\Service\Serialize;
 use App\Controller\AbstractController;
+use App\Entity\Link;
+use App\Service\Scrapper;
 use App\Service\Twig;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,5 +43,19 @@ class ApiController extends AbstractController {
         $post = $serializer->post($post, $type = 'array');
         
         return $this->json(['status' => 'success', 'post' => $post ?? []]);
+    }
+
+    public function linkMetadata(Request $request, Scrapper $scrapper): JsonResponse {
+        $link = new Link();
+        $link->setUrl($request->get('url'));
+        $link = $scrapper->getMetadata($link);
+        return $this->json([
+            'status' => 'success',
+            'link' => [
+                'title' => $link->getTitle(),
+                'description' => $link->getDescription(),
+                'image' => $link->getImage()
+            ]
+        ]);
     }
 }

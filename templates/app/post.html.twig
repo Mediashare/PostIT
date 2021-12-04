@@ -3,8 +3,10 @@
 {% block title %}{{ post.title ?? null }}{% endblock %}
 {% block title_og %}{{ post.title ?? null }}{% endblock %}
 
-{% if post.markdown %}
-    {% set description = post.markdown|striptags|slice(0, 247) ~ '...' %}
+{% if post.article %}
+    {% set description = post.article.markdown|striptags|slice(0, 247) ~ '...' %}
+{% elseif post.link %}
+    {% set description = post.link.description|striptags|slice(0, 247) ~ '...' %}
 {% endif %}
 
 {% block description %}{{ description ?? '' }}{% endblock %}
@@ -22,24 +24,7 @@
                     'content': post.article.content
                 })) }}
             {% elseif post.link and post.link.url %}
-                <a href="{{ post.link.url }}" target="_blank" class="card card_link shadow-lg rounded m-5">
-                    <div class="card-header">
-                        <h1 class="card-title">
-                            <i class="fa fa-external-link-alt"></i>
-                            {{ post.title }}
-                        </h1>
-                    </div>
-                    {% if post.link.description %}
-                        <div class="card-body">
-                            <p class="text-white">{{ post.link.description }}</p>
-                        </div>
-                    {% endif %}
-                    {% if post.link.image %}
-                        <div class="card-footer">
-                            <img src="{{ post.link.image }}" alt="{{ post.title }}" class="d-flex mx-auto">
-                        </div>
-                    {% endif %}
-                </a>
+                {% include 'partial/_link.html.twig' %}
             {% endif %}
             {{ render(controller('App\\Controller\\PartialController::signature', {'username': post.author.username ?? null})) }}
         </div>
