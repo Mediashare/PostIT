@@ -107,3 +107,9 @@ function closeMenuBurger() {
     $('button.btn-burger-close').addClass('d-none');
     $('button.btn-burger-open').removeClass('d-none');
 }
+
+// Modal for delete
+function modalDelete(id, url) {
+    $('#' + id + ' a.delete').attr('href', url);
+    $('#' + id).modal();
+}

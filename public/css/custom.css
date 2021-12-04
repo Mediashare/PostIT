@@ -8,6 +8,7 @@ html, body { font-family: 'Recursive', monospace; }
 body { height: 100vh; background-color: var(--main-bg-color); color: var(--main-text-color); word-wrap: normal; }
 strong { color: white; font-weight: 500; }
 code:not([class*="language-"]) { background-color: #333; padding: 0.2em; border-radius: 0.2em; }
+a {cursor: pointer;}
 
 /* Macro */
 .d-none { display: none!important; }
@@ -35,6 +36,7 @@ blockquote.error { border-left: 3px solid #dc3545; }
 .card { background-color: var(--main-bg-color); }
 div#profile a.post_link div.card:hover, div#templates a.post_link div.card-body:hover { color: #ffffff!important;text-decoration: none;box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;background-color: #877ac1; }
 .username { color: #94d2dc!important; }
+
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }
 .btn-cancel { background-color: var(--main-bg-color); color: #d94d23; width: 100%; padding: 12px; }

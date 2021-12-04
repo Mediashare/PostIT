@@ -9,8 +9,8 @@
             {% for comment in comments %}
                 <li class="list-group-item bg-main post_link" > 
                     <span class="float-left">
-                        <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}" class="btn btn-primary p-1">Show</a>
-                        <a href="{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}" class="btn btn-danger p-1">Delete</a>
+                        <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}" class="btn btn-primary p-1">Voir</a>
+                        <a onclick="modalDelete('modal-comment-{{ comment.id }}', '{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}');" class="btn btn-danger p-1">Supprimer</a>
                     </span>
                     <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}"><strong>{{ comment.content }}</strong></a> 
                     <br>
@@ -18,6 +18,25 @@
                         <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - <span class="username">{{ comment.author }}</span>
                     </span>
                 </li>
+                <div id="modal-comment-{{ comment.id }}" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content bg-main rounded shadow-lg">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Suppression</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Êtes-vous sûr de vouloir supprimer cet élément ?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            <a class="btn btn-danger delete">Supprimer</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             {% endfor %}
         </ul>
     </div>
