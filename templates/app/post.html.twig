@@ -32,8 +32,8 @@
                 {% if post.views >= 500 %}
                     <span class="mr-2"><i class="fa fa-eye text-muted"></i> {{ post.views }}</span>
                 {% endif %}
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.uri }}" target="_blank"><i class="fab fa-facebook-f facebook mr-2"></i></a>
-                <a href="https://twitter.com/intent/tweet?text={{ app.request.uri }}" target="_blank"><i class="fab fa-twitter twitter mr-2"></i></a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ app.request.uri }}" class="btn" target="_blank"><i class="fab fa-facebook-f facebook mr-2"></i></a>
+                <a href="https://twitter.com/intent/tweet?text={{ app.request.uri }}" class="btn" target="_blank"><i class="fab fa-twitter twitter mr-2"></i></a>
             </div>
         </div>
     </div>

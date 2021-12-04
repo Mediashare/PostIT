@@ -24,13 +24,19 @@ Class Scrapper {
         }
 
         $crawler = new Crawler($response->getBody()->getContents());
+        
         $link->setTitle($crawler->filter("title")->text() ?? null);
-        $link->setDescription($crawler->filter("meta[name='description']")->eq(0)->attr('content')?? null);
-        $image = $crawler->filter("img")->eq(0)->attr('src') ?? null;
-        if (str_starts_with($image, '/')):
-            $image = 'http://' . parse_url($link->getUrl(), PHP_URL_HOST) . $image;
+
+        if ($crawler->filter("meta[name='description']")->count() > 0):
+            $link->setDescription($crawler->filter("meta[name='description']")->eq(0)->attr('content') ?? null);
         endif;
-        $link->setImage($image);
+
+        $image = $crawler->filter("img")->count();
+        if ($image > 0 && str_starts_with($image = $crawler->filter("img")->eq(0)->attr('src'), '/')):
+            $image = 'http://' . parse_url($link->getUrl(), PHP_URL_HOST) . $image;
+        elseif (!$image): $image = null; endif;
+        $link->setImage($image ?? null);
+        
         return $link;
     }
 }
