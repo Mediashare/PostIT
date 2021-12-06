@@ -5,6 +5,8 @@ L'open-sourcing et le partage des connaissances font partie de l'ADN de Mediasha
 
 **PostIT** est un CMS libre de droit, basé sur l'usage de **[Markdown](https://docs.framasoft.org/fr/grav/markdown.html)**, **[Twig](https://twig.symfony.com/doc/3.x/)** et de **[Symfony](https://symfony.com/)**.
 
+**[Demo](https://mediashare.fr)**
+
 ## Installation
 ```bash
 git clone https://github.com/Mediashare/PostIT && cd PostIT
