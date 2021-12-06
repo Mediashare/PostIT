@@ -25,9 +25,9 @@ upload:
     path: /upload
     controller: App\Controller\PostController::upload
 
-comment:
-    path: /comment/{slug} # slug of post
-    controller: App\Controller\CommentController::new
-comment_delete:
-    path: /comment/{slug}/delete/{id}
-    controller: App\Controller\CommentController::delete
+message:
+    path: /message/{slug} # slug of post
+    controller: App\Controller\MessageController::new
+message_delete:
+    path: /message/{slug}/delete/{id}
+    controller: App\Controller\MessageController::delete

@@ -64,9 +64,9 @@ class User implements UserInterface
     private $token;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="author", orphanRemoval=true)
      */
-    private $comments;
+    private $messages;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -98,9 +98,9 @@ class User implements UserInterface
 
     public function __construct() {
         $this->setId(\uniqid());
-        $this->posts = new ArrayCollection();
         $this->setApikey(\sha1(\microtime().$this->getId()));
-        $this->comments = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->messages = new ArrayCollection();
         $this->templates = new ArrayCollection();
     }
 
@@ -268,30 +268,30 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection|Message[]
      */
-    public function getComments(): Collection
+    public function getMessages(): Collection
     {
-        return $this->comments;
+        return $this->messages;
     }
 
-    public function addComment(Comment $comment): self
+    public function addMessage(Message $message): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setAuthor($this);
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeMessage(Message $message): self
     {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
             // set the owning side to null (unless already changed)
-            if ($comment->getAuthor() === $this) {
-                $comment->setAuthor(null);
+            if ($message->getAuthor() === $this) {
+                $message->setAuthor(null);
             }
         }
 

@@ -127,12 +127,6 @@ class UserController extends AbstractController {
             $this->addFlash('error', 'No user found.');
             return $this->redirectToRoute('admin');
         endif;
-        foreach ($user->getPosts() as $post):
-            $this->getEm()->remove($post);
-        endforeach;
-        foreach ($user->getComments() as $comment):
-            $this->getEm()->remove($comment);
-        endforeach;
         
         $this->getEm()->remove($user);
         $this->getEm()->flush();

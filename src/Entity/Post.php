@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Entity\User;
 use App\Service\Text;
-use App\Entity\Comment;
+use App\Entity\Message;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\Collection;
@@ -53,9 +53,9 @@ class Post
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="post", orphanRemoval=true)
      */
-    private $comments;
+    private $messages;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -79,7 +79,7 @@ class Post
     public function __construct() {
         $this->setId(\uniqid());
         $this->setCreateDate(new \DateTime());
-        $this->comments = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -175,30 +175,30 @@ class Post
     }
 
     /**
-     * @return Collection|Comment[]
+     * @return Collection|Message[]
      */
-    public function getComments(): Collection
+    public function getMessages(): Collection
     {
-        return $this->comments;
+        return $this->messages;
     }
 
-    public function addComment(Comment $comment): self
+    public function addMessage(Message $message): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setPost($this);
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setPost($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeMessage(Message $message): self
     {
-        if ($this->comments->contains($comment)) {
-            $this->comments->removeElement($comment);
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
             // set the owning side to null (unless already changed)
-            if ($comment->getPost() === $this) {
-                $comment->setPost(null);
+            if ($message->getPost() === $this) {
+                $message->setPost(null);
             }
         }
 

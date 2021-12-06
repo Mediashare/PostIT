@@ -14,7 +14,7 @@ Class Serialize {
                     'createDate' => $post->getCreateDate(),
                     'updateDate' => $post->getUpdateDate(),
                     'views' => $post->getViews(),
-                    'comments' => count($post->getComments()),
+                    'messages' => count($post->getMessages()),
                     'author' => $this->author($post->getAuthor() ?? [], 'array'),
                 ];
             elseif (is_array($post)):
@@ -40,7 +40,7 @@ Class Serialize {
                 'createDate' => $post->getCreateDate(),
                 'updateDate' => $post->getUpdateDate(),
                 'views' => $post->getViews(),
-                'comments' => $this->comments($post->getComments() ?? [], 'array'),
+                'messages' => $this->messages($post->getMessages() ?? [], 'array'),
                 'author' => $this->author($post->getAuthor() ?? [], 'array'),
             ];
         endif;
@@ -52,29 +52,29 @@ Class Serialize {
         return $post;
     }
 
-    public function comments($comments, ?string $type = 'json') {
-        foreach ($comments as $index => $comment):
-            $comments[$index] = $this->comment($comment, 'array');
+    public function messages($messages, ?string $type = 'json') {
+        foreach ($messages as $index => $message):
+            $messages[$index] = $this->message($message, 'array');
         endforeach;
         if ($type === 'array'):
-            return $comments;
+            return $messages;
         elseif ($type === 'json'):
-            return json_encode($comments);
+            return json_encode($messages);
         endif;
     }
 
-    public function comment($comment, ?string $type = 'json') {
-        if (!is_array($comment) && $type === 'array'):
+    public function message($message, ?string $type = 'json') {
+        if (!is_array($message) && $type === 'array'):
             return [
-                'id' => $comment->getId(),
-                'content' => $comment->getContent(),
-                'author' => $this->author($comment->getAuthor() ?? [], 'array'),
-                'createDate' => $comment->getCreateDate()
+                'id' => $message->getId(),
+                'content' => $message->getContent(),
+                'author' => $this->author($message->getAuthor() ?? [], 'array'),
+                'createDate' => $message->getCreateDate()
             ];
         elseif ($type === 'json'):
-            return json_encode($comment);
+            return json_encode($message);
         endif;
-        return $comment;
+        return $message;
     }
 
 
@@ -100,7 +100,7 @@ Class Serialize {
             'avatar' => $user->getAvatar(),
             'signature' => $user->getSignature(),
             'posts' => $this->posts($user->getPosts() ?? [], 'array'),
-            'comments' => $this->comments($user->getComments() ?? [], 'array')
+            'messages' => $this->messages($user->getMessages() ?? [], 'array')
         ];
         if ($type === 'array'):
             return $user;
@@ -122,7 +122,7 @@ Class Serialize {
     }
 
     public function arrayToObject(array $array, ?string $class_name = null) {
-        $entities = ['Page', 'Post', 'Comment', 'User'];
+        $entities = ['Page', 'Post', 'message', 'User'];
         foreach ([$class_name] ?? $entities as $class_name):
             $serialized = unserialize(sprintf('O:%d:"%s"%s', strlen('App\Entity\\' . $class_name), 'App\Entity\\' . $class_name, strstr(serialize($serialized ?? $array), ':')));
         endforeach;

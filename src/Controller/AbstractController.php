@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Entity\Post;
 use App\Entity\User;
-use App\Entity\Comment;
+use App\Entity\Message;
 use App\Entity\Template;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
@@ -41,12 +41,12 @@ class AbstractController extends Controller {
         return $this->getRepository(Post::class)->findBy($parameters, $order);
     }
 
-    public function getComment(array $parameters, ?array $order = ['createDate' => 'DESC']): ?Comment {
-        return $this->getRepository(Comment::class)->findOneBy($parameters, $order);
+    public function getMessage(array $parameters, ?array $order = ['createDate' => 'DESC']): ?Message {
+        return $this->getRepository(Message::class)->findOneBy($parameters, $order);
     }
 
-    public function getComments(?array $parameters = [], ?array $order = ['createDate' => 'DESC']): ?array {
-        return $this->getRepository(Comment::class)->findBy($parameters, $order);
+    public function getMessages(?array $parameters = [], ?array $order = ['createDate' => 'DESC']): ?array {
+        return $this->getRepository(Message::class)->findBy($parameters, $order);
     }
 
     public function getUser(?array $parameters = null, ?array $order = []): ?User {

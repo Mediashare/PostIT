@@ -39,30 +39,35 @@
     </div>
 {% endblock %}
 
-{% block comments %}
+{% block messages %}
     {% if post %}
-        <div class="col-12 mt-3 mb-3">
-            {% include 'partial/_comments.html.twig' %}
-        </div>
+        {% include 'partial/_messages.html.twig' %}
     {% endif %}
 {% endblock %}
 
 {% block javascripts %}
     <script>
-        {# Comment Macro #}
+        {# Message Macro #}
         $(window).bind('keydown', function(event) {
-            if ($('form#form_comment textarea#input_comment').val().length > 0 &&
-                (event.ctrlKey || event.metaKey)) {
+            console.log(event);
+            if ($('form#form_chat textarea#message').val().length > 0 && !event.shiftKey) {
                 if (event.which == "13") {
                     event.preventDefault();
-                    $('form#form_comment').submit();
+                    $('form#form_chat').submit();
                 }
             }
         });
-        {% if post and post.slug %}
-            $(document).ready(function () {
+
+        $(document).ready(function () {
+            {% if post and post.slug %}
                 scrollToAnchor('{{ post.slug }}');
+            {% endif %}
+
+            $('#content').height($(window).height() - $('form#form_chat').height());
+            $('form#form_chat').on('resize', function () {
+                $('#content').height($(window).height() - $('textarea#message').height());
             });
-        {% endif %}
+        });
+
     </script>
 {% endblock %}

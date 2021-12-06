@@ -30,8 +30,9 @@ a:hover { text-decoration: none!important; }
 a.username:hover { font-weight: 600; color: #73daea!important; }
 .markdown-body { overflow: auto; padding: 1rem; }
 .signature { margin: auto!important; }
-.comment, .signature { white-space: pre-line; }
-.comment_info { margin: 0; display: inline-block; vertical-align: middle; line-height: 50px; }
+.message { margin: 0 1rem; }
+.message, .signature { white-space: pre-line; }
+.message_info { margin: 0; display: inline-block; vertical-align: middle; line-height: 50px; }
 input { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 2.5em!important; height: 50px!important; }
 textarea { border-color: var(--main-bg-color)!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; padding-left: 1rem!important; padding-right: 1rem!important; font-size: 1.5em!important; }
 select, select option { height: 100%!important; border: none!important; background-color: var(--main-bg-color)!important; color: var(--main-text-color)!important; font-size: 1.5em!important; }
@@ -41,16 +42,20 @@ blockquote.error { border-left: 3px solid #dc3545; }
 div#profile a.post_link div.card:hover, div#templates a.post_link div.card-body:hover, a.card_link div.card-header:hover { color: #ffffff!important;text-decoration: none;box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;background-color: #877ac1; }
 .username { color: #94d2dc!important; }
 
+/* Chat */
+form#form_chat { position: fixed; bottom: 0; }
+textarea#message { overflow: hidden; height: 40px; }
+
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }
 .btn-cancel { background-color: var(--main-bg-color); color: #d94d23; width: 100%; padding: 12px; }
 .btn-submit { background-color: var(--main-bg-color); color: #0aff0a; width: 100%; padding: 12px; }
-.btn-comment { background-color: var(--main-bg-color); padding: 15px; min-width: 55px; }
-.btn-comment > i { position: absolute; top: 50%; left: 47%; transform: translate(-50%, -50%); }
+.btn-message { background-color: var(--main-bg-color); padding: 15px; min-width: 55px; }
+.btn-message > i { position: absolute; top: 50%; left: 47%; transform: translate(-50%, -50%); }
 .btn-trash:hover { color: #face0a; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 .btn-cancel:hover { color: #ff3c00; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 .btn-submit:hover { color: #0aff0a; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
-.btn-comment:hover { background-color: #877ac1; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
+.btn-message:hover { background-color: #877ac1; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; }
 
 /* Avatar */
 .avatar { border-radius: 50%!important; width: 120px; height: 120px; }

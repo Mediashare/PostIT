@@ -1,24 +1,24 @@
 <div class="card bg-main shadow-lg rounded mt-3">
     <div class="card-header">
         <h4 class="card-title">
-            Comments
+            Messages
         </h4>
     </div>
     <div class="card-content" style="max-height: 50vh;overflow: auto;">
         <ul class="list-group text-right bg-main">
-            {% for comment in comments %}
+            {% for message in messages %}
                 <li class="list-group-item bg-main post_link" > 
                     <span class="float-left">
-                        <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}" class="btn btn-primary p-1 shadow-lg">Voir</a>
-                        <a onclick="modalDelete('modal-comment-{{ comment.id }}', '{{ path('comment_delete', {'slug': comment.post.slug, 'id': comment.id}) }}');" class="btn btn-danger p-1 shadow-lg">Supprimer</a>
+                        <a href="{{ path('post', {'slug': message.post.slug, '_fragment': 'message_' ~ message.id}) }}" class="btn btn-primary p-1 shadow-lg">Voir</a>
+                        <a onclick="modalDelete('modal-message-{{ message.id }}', '{{ path('message_delete', {'slug': message.post.slug, 'id': message.id}) }}');" class="btn btn-danger p-1 shadow-lg">Supprimer</a>
                     </span>
-                    <a href="{{ path('post', {'slug': comment.post.slug, '_fragment': 'comment_' ~ comment.id}) }}"><strong>{{ comment.content }}</strong></a> 
+                    <a href="{{ path('post', {'slug': message.post.slug, '_fragment': 'message_' ~ message.id}) }}"><strong>{{ message.content }}</strong></a> 
                     <br>
                     <span class="float-right">
-                        <em>{{ comment.createDate|date('d/m/Y H:i:s') }}</em> - <span class="username">{{ comment.author }}</span>
+                        <em>{{ message.createDate|date('d/m/Y H:i:s') }}</em> - <span class="username">{{ message.author }}</span>
                     </span>
                 </li>
-                <div id="modal-comment-{{ comment.id }}" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div id="modal-message-{{ message.id }}" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content bg-main rounded shadow-lg">
                         <div class="modal-header">
