@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Controller\AbstractController;
+use App\Entity\Article;
+use App\Entity\Link;
+use App\Service\Scrapper;
 use Symfony\Component\HttpFoundation\Request;
 
 class PostController extends AbstractController {    
@@ -42,10 +45,21 @@ class PostController extends AbstractController {
         if ($user):
             $title = $request->get('title');
             $content = $request->get('content') ?? $this->getFileContent($request->files->get('content'));
-            if ($title && $content):
+            $url = $request->get('url');
+            if ($title && ($url || $content)):
                 $post = new Post();
                 $post->setTitle($title);
-                $post->setContent($content);
+                if ($content):
+                    $article = new Article();
+                    $article->setContent($content);
+                    $post->setArticle($article);
+                elseif ($url):
+                    $link = new Link();
+                    $link->setUrl($url);
+                    $scrapper = new Scrapper();
+                    $link = $scrapper->getMetadata($link);
+                    $post->setLink($link);
+                endif;
                 if (!$request->get('online') || $request->get('online') === "false"):
                     $online = false; else: $online = true;
                 endif;
