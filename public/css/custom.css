@@ -44,7 +44,7 @@ div#profile a.post_link div.card:hover, div#templates a.post_link div.card-body:
 
 /* Chat */
 form#form_chat { position: fixed; bottom: 0; }
-textarea#message { overflow: hidden; height: 40px; }
+textarea#message { overflow: auto; height: 40px; max-height: 100vh; }
 
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }
