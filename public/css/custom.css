@@ -31,6 +31,7 @@ a:hover { text-decoration: none!important; }
 a.username:hover { font-weight: 600; color: #73daea!important; }
 .markdown-body { overflow: auto; padding: 1rem; }
 .signature { margin: auto!important; }
+.messages, .message, .messages .message p { display: inline-block; }
 .message { margin: 0 1rem; }
 .message, .signature { white-space: pre-line; }
 .message_info { margin: 0; display: inline-block; vertical-align: middle; line-height: 50px; }

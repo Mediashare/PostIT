@@ -19,12 +19,10 @@
 
 <div class="col-12 mt-3">
     {% for message in post.messages %}
-        <div id="message_{{ message.id }}" class="card shadow-lg mb-3">
-            <div class="card-content">
-                <div class="message">
-                    {{ render(controller('App\\Controller\\ApiController::markdownify', {'content': message.content}))}}
-                </div> 
-            </div>
+        <div id="message_{{ message.id }}" class="card shadow-lg mb-3 messages">
+            <div class="message">
+                {{ render(controller('App\\Controller\\ApiController::markdownify', {'content': message.content}))}}
+            </div> 
             <div class="card-footer text-right">
                 <a href="{{ path('profile', {'username': message.author.slug}) }}" title="Profile {{ message.author.username }}">
                     <img src="{{ preload(asset('images/avatars/' ~ message.author.avatar), { as: 'image' }) }}" class="img-fluid float-right ml-1 avatar_min" width="50px" height="50px">
