@@ -47,13 +47,13 @@ img.shadow-lg{ filter: drop-shadow(2px 3px 10px rgba(0, 0, 0, .5)); box-shadow: 
 
 /* Chat */
 form#form_chat { position: fixed; bottom: 0; }
-textarea#message { overflow: auto; height: 40px; max-height: 100vh; }
+textarea#message { overflow: auto; height: 40px; max-height: 100vh;min-width: 100vw; }
 
 /* New Post Creation */
 .btn-trash { background-color: var(--main-bg-color); color: #face0a; width: 100%; padding: 12px; }
 .btn-cancel { background-color: var(--main-bg-color); color: #d94d23; width: 100%; padding: 12px; }
 .btn-submit { background-color: var(--main-bg-color); color: #0aff0a; width: 100%; padding: 12px; }
-.btn-message { background-color: var(--main-bg-color); padding: 15px; min-width: 55px; }
+.btn-message { background-color: var(--main-bg-color); padding: 15px; min-width: 55px; min-height: 40px; }
 .btn-message > i { position: absolute; top: 50%; left: 47%; transform: translate(-50%, -50%); }
 .btn-trash:hover { color: #face0a; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.275) !important; }
 .btn-cancel:hover { color: #ff3c00; box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.275) !important; }
